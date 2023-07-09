@@ -1,3 +1,44 @@
 <resources>
     <string name="app_name">WonderWoman</string>
+    <!--  딜리버리  -->
+    <string name="realtime_delivery">실시간 딜리버리</string>
+    <string name="liner">라이너</string>
+    <string name="small">소형</string>
+    <string name="regular">중형</string>
+    <string name="large">대형</string>
+    <string name="overnight">오버나이트</string>
+    <string name="chatting">채팅중</string>
+    <string name="progressing">진행중</string>
+    <string name="complete">완료</string>
+    <string name="request">요 청</string>
+    <string name="dispatch">출동</string>
+    <string name="goout">출동하기 -></string>
+
+    <!--  게시글 작성  -->
+    <string name="write">글쓰기</string>
+    <string name="title">제목</string>
+    <string name="category">유형 선택</string>
+    <string name="location">게시물 표시 위치</string>
+    <string name="count">개수</string>
+    <string name="size">크기</string>
+    <string name="type">종류</string>
+    <string name="significant">특이사항</string>
+    <string name="wing">날개형</string>
+    <string name="absorption">흡수형</string>
+    <string name="cotton">순면</string>
+    <string name="organic">유기농</string>
+
+
+    <!--  마이페이지  -->
+    <string name="mypage">마이페이지</string>
+    <string name="mydelivery">내 딜리버리</string>
+    <string name="myrequest">내 요청</string>
+    <string name="mydispatch">내 출동</string>
+    <string name="scrap">스크랩</string>
+    <string name="mypost">내가 쓴 글</string>
+    <string name="guide">이용안내</string>
+    <string name="terms">이용약관                </string>
+    <string name="privacypolicy">개인정보 처리방침</string>
+    <string name="faq">FAQ</string>
+
 </resources>
