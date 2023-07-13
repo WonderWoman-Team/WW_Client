@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "491831579256",
+    "project_id": "wonderwoman-eeff2",
+    "storage_bucket": "wonderwoman-eeff2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491831579256:android:b73ae3733bdc9d449e538d",
+        "android_client_info": {
+          "package_name": "com.soyaa.wonderwoman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491831579256-og7o8s2d5ejtmkdgujsevqpau9ovpos7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaZ4_qjv-AYez5zqGqTMVkVAelJvGpgd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491831579256-og7o8s2d5ejtmkdgujsevqpau9ovpos7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
