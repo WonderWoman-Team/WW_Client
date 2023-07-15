@@ -10,9 +10,10 @@
     <string name="chatting">채팅중</string>
     <string name="progressing">진행중</string>
     <string name="complete">완료</string>
-    <string name="request">요 청</string>
-    <string name="dispatch">출동</string>
+    <string name="request_state">요 청</string>
+    <string name="dispatch_state">출동</string>
     <string name="goout">출동하기 -></string>
+    <string name="request">요청하기 -></string>
 
     <!--  게시글 작성  -->
     <string name="write">글쓰기</string>
