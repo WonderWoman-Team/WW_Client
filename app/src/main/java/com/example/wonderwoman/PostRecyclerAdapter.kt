@@ -1,15 +1,15 @@
 package com.example.wonderwoman
 
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+
 
 class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
 
@@ -47,6 +47,11 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<P
         }
         else if(holder.chat_state.text.equals("채팅중") || holder.chat_state.text.equals("진행중")){
                 holder.chat_state_img.setBackgroundResource(R.drawable.loader)
+        }
+
+        //리스트 클릭 이벤트
+        holder.go_to_chat_btn.setOnClickListener {
+
         }
     }
 

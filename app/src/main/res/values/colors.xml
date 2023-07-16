@@ -23,4 +23,7 @@
     <color name="tab_indicator">#F9DCCE</color>
     <color name="selectedTab">#F9395F</color>
 
+    <color name="size_selected_btn">#33FFB6AC</color>
+
+
 </resources>
