@@ -52,8 +52,9 @@ class DispatchTab : Fragment(){
                 postList.clear() //초기화
                 for (data in snapshot.children){ //데이터리스트 추출
                     var listItem = data.getValue(Post::class.java)
-                    if (listItem != null) {
-                        postList.add(listItem) //담은 데이터를 리사이클러뷰로 보낼 준비
+
+                    if (listItem!!.post_state == "출동글") {
+                        postList.add(listItem)
                     }
                 }
                 recyclerAdapter.notifyDataSetChanged() //리스트 저장 및 새로고침
@@ -65,7 +66,8 @@ class DispatchTab : Fragment(){
             }
         })
         recyclerAdapter = PostRecyclerAdapter(postList)
-        recyclerView.adapter = recyclerAdapter //recyclervie에 어댑터 연결
+        recyclerView.adapter = recyclerAdapter //recyclerview에 어댑터 연결
+
 
         return dispatchTabBinding.root
     }

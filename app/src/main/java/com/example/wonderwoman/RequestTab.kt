@@ -48,7 +48,8 @@ class RequestTab : Fragment(){
                 postList.clear()
                 for (data in snapshot.children){
                     var listItem = data.getValue(Post::class.java)
-                    if (listItem != null) {
+
+                    if (listItem!!.post_state == "요청글") {
                         postList.add(listItem)
                     }
                 }

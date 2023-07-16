@@ -1,9 +1,14 @@
 package com.example.wonderwoman
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
@@ -25,6 +30,24 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<P
         holder.nickname.text = PostList.get(position).nickname
         holder.chat_state.text = PostList.get(position).chat_state
         holder.post_state.text = PostList.get(position).post_state
+
+        if(holder.post_state.text.equals("요청글")) {
+            holder.go_to_chat_btn.text = "요청하기 ->"
+        }
+        else if(holder.post_state.text.equals("출동글")){
+            holder.go_to_chat_btn.text = "출동하기 ->"
+        }
+
+        if(holder.chat_state.text.equals("완료")){
+            holder.chat_state_img.setBackgroundResource(R.drawable.complete)
+            holder.post_state_img.setBackgroundResource(R.drawable.complete_delivery)
+            holder.chat_state.setTextColor(Color.parseColor("#CCCCCC"))
+            holder.post_state.setTextColor(Color.parseColor("#CCCCCC"))
+            holder.go_to_chat_btn.setBackgroundResource(R.drawable.complete_go_out_btn)
+        }
+        else if(holder.chat_state.text.equals("채팅중") || holder.chat_state.text.equals("진행중")){
+                holder.chat_state_img.setBackgroundResource(R.drawable.loader)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -41,5 +64,9 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<P
         var nickname = itemView.findViewById<TextView>(R.id.post_writer_nickname)
         var chat_state = itemView.findViewById<TextView>(R.id.post_chat_state)
         var post_state = itemView.findViewById<TextView>(R.id.post_state)
+        var chat_state_img = itemView.findViewById<ImageView>(R.id.post_chat_state_img)
+        var post_state_img = itemView.findViewById<ImageView>(R.id.post_state_img)
+        var go_to_chat_btn = itemView.findViewById<Button>(R.id.go_to_chat_btn)
+
     }
 }

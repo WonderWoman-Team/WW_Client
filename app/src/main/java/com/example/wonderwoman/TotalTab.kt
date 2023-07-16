@@ -64,6 +64,7 @@ class TotalTab : Fragment(){
         recyclerAdapter = PostRecyclerAdapter(postList)
         recyclerView.adapter = recyclerAdapter
 
+
         return totalTabBinding.root
     }
 }
