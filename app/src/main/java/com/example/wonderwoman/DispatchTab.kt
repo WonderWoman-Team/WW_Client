@@ -31,7 +31,6 @@ class DispatchTab : Fragment(){
     private lateinit var overnight_btn: CheckBox
     private lateinit var newPostList: ArrayList<Post>
 
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: PostRecyclerAdapter
     private lateinit var postList: ArrayList<Post>
@@ -87,12 +86,10 @@ class DispatchTab : Fragment(){
         recyclerView.adapter = recyclerAdapter //recyclerview에 어댑터 연결
 
         //버튼 이벤트
-
         newPostList = ArrayList()
         var listener = CompoundButton.OnCheckedChangeListener{
-            buttonView, isChecked ->
-            if(newPostList == postList){newPostList = ArrayList()
-            }
+                buttonView, isChecked ->
+            if(newPostList == postList){newPostList = ArrayList()}
             if(isChecked){
                 for (post in postList){
                     when(buttonView.id){
@@ -113,18 +110,18 @@ class DispatchTab : Fragment(){
                         R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.remove(post)}}
                     }
                 }
-                if(newPostList.size==0){newPostList=postList}
+                if(!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked){
+                    if(newPostList.size==0){newPostList=postList}
+                }
             }
             recyclerAdapter = PostRecyclerAdapter(newPostList)
             recyclerView.adapter = recyclerAdapter
         }
-
         liner_btn.setOnCheckedChangeListener(listener)
         small_btn.setOnCheckedChangeListener(listener)
         middle_btn.setOnCheckedChangeListener(listener)
         large_btn.setOnCheckedChangeListener(listener)
         overnight_btn.setOnCheckedChangeListener(listener)
-
 
         return dispatchTabBinding.root
     }
