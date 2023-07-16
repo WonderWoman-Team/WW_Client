@@ -17,10 +17,13 @@
     <color name="linecolor">#EBEEF2</color>
 
     <color name="gray0">#EEEEEE</color>
-    <color name="gray1">#D9D9D9</color>
+    <color name="gray1">#CCCCCC</color>
     <color name="gray2">#999999</color>
     <color name="gray3">#666666</color>
     <color name="tab_indicator">#F9DCCE</color>
     <color name="selectedTab">#F9395F</color>
+
+    <color name="size_selected_btn">#33FFB6AC</color>
+
 
 </resources>

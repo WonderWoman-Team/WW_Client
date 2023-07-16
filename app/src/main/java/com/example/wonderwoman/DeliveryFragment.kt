@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.wonderwoman.databinding.FragmentDeliveryBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class DeliveryFragment: Fragment() {
     private lateinit var binding: FragmentDeliveryBinding
     private val tabTitle = listOf("전체","요청","출동")
-
 
     companion object {
         fun newInstance() : DeliveryFragment {
