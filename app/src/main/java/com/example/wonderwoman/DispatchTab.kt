@@ -49,7 +49,8 @@ class DispatchTab : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         dispatchTabBinding = DispatchTabBinding.inflate(inflater,container,false)
-        liner_btn = dispatchTabBinding.linerBtn
+
+      liner_btn = dispatchTabBinding.linerBtn
         small_btn = dispatchTabBinding.smallBtn
         middle_btn = dispatchTabBinding.middleBtn
         large_btn = dispatchTabBinding.largeBtn
@@ -122,7 +123,6 @@ class DispatchTab : Fragment(){
         middle_btn.setOnCheckedChangeListener(listener)
         large_btn.setOnCheckedChangeListener(listener)
         overnight_btn.setOnCheckedChangeListener(listener)
-
         return dispatchTabBinding.root
     }
 }

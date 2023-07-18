@@ -1,6 +1,7 @@
 package com.example.wonderwoman
 
 import android.os.Bundle
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class TotalTab : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         totalTabBinding = TotalTabBinding.inflate(inflater,container,false)
+
         liner_btn = totalTabBinding.linerBtn
         small_btn = totalTabBinding.smallBtn
         middle_btn = totalTabBinding.middleBtn

@@ -12,10 +12,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
+
 class DeliveryFragment: Fragment() {
     private lateinit var binding: FragmentDeliveryBinding
     private val tabTitle = listOf("전체","요청","출동")
-
+    
     companion object {
         fun newInstance() : DeliveryFragment {
             return DeliveryFragment()

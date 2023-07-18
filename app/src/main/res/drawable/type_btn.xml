@@ -4,3 +4,4 @@
     <item android:drawable="@drawable/clicked_type_btn" android:state_checked="true"/>
     <item android:drawable="@drawable/unclicked_type_btn"/>
 </selector>
+

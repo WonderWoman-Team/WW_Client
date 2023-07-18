@@ -31,6 +31,7 @@ class RequestTab : Fragment(){
     private lateinit var postList: ArrayList<Post>
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
+
     companion object{
         fun newInstance() : RequestTab {
             return RequestTab()
