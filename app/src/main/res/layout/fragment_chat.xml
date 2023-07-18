@@ -11,5 +11,4 @@
         android:text="chat fragment"
         android:textColor="@color/black"
         android:textSize="20sp" />
-
 </FrameLayout>

@@ -3,6 +3,7 @@ package com.example.wonderwoman
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+
 class HomeTabAdapter(fragment: DeliveryFragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 3
