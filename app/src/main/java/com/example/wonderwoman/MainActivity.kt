@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.example.wonderwoman.databinding.ActivityMainBinding
+import com.example.wonderwoman.delivery.DeliveryFragment
+import com.example.wonderwoman.delivery.PostActivity
+import com.example.wonderwoman.mypage.MypageFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {

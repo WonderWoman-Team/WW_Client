@@ -1,6 +1,5 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
-import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wonderwoman.R
 
 
 class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {

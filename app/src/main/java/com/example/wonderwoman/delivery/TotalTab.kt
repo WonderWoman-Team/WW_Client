@@ -1,6 +1,7 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
 import android.os.Bundle
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +11,16 @@ import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wonderwoman.databinding.RequestTabBinding
+import com.example.wonderwoman.R
+import com.example.wonderwoman.databinding.TotalTabBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class RequestTab : Fragment(){
-    private lateinit var requestTabBinding: RequestTabBinding
+class TotalTab : Fragment(){
+    private lateinit var totalTabBinding: TotalTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
     private lateinit var middle_btn: CheckBox
@@ -33,8 +35,8 @@ class RequestTab : Fragment(){
     private lateinit var databaseReference: DatabaseReference
 
     companion object{
-        fun newInstance() : RequestTab {
-            return RequestTab()
+        fun newInstance() : TotalTab {
+            return TotalTab()
         }
     }
 
@@ -43,27 +45,28 @@ class RequestTab : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requestTabBinding = RequestTabBinding.inflate(inflater,container,false)
-        liner_btn = requestTabBinding.linerBtn
-        small_btn = requestTabBinding.smallBtn
-        middle_btn = requestTabBinding.middleBtn
-        large_btn = requestTabBinding.largeBtn
-        overnight_btn = requestTabBinding.overnightBtn
+        totalTabBinding = TotalTabBinding.inflate(inflater,container,false)
 
-        recyclerView = requestTabBinding.postRecyclerview
+        liner_btn = totalTabBinding.linerBtn
+        small_btn = totalTabBinding.smallBtn
+        middle_btn = totalTabBinding.middleBtn
+        large_btn = totalTabBinding.largeBtn
+        overnight_btn = totalTabBinding.overnightBtn
+
+        recyclerView = totalTabBinding.postRecyclerview
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
         postList = ArrayList()
 
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Post")
-        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener{
+        databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 postList.clear()
                 for (data in snapshot.children){
                     var listItem = data.getValue(Post::class.java)
-
-                    if (listItem!!.post_state == "요청글") {
+                    if (listItem != null) {
                         postList.add(listItem)
                     }
                 }
@@ -109,12 +112,13 @@ class RequestTab : Fragment(){
             recyclerAdapter = PostRecyclerAdapter(newPostList)
             recyclerView.adapter = recyclerAdapter
         }
+
         liner_btn.setOnCheckedChangeListener(listener)
         small_btn.setOnCheckedChangeListener(listener)
         middle_btn.setOnCheckedChangeListener(listener)
         large_btn.setOnCheckedChangeListener(listener)
         overnight_btn.setOnCheckedChangeListener(listener)
 
-        return requestTabBinding.root
+        return totalTabBinding.root
     }
 }
