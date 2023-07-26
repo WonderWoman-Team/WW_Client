@@ -3,8 +3,9 @@
     <!-- Background -->
     <item>
         <shape>
-            <solid android:color="@color/post_unselected_btn" />
+            <solid android:color="@color/white"/>
             <corners android:radius="8dp" />
+            <stroke android:color="@color/gray1" android:width="1dp"/>
         </shape>
     </item>
 

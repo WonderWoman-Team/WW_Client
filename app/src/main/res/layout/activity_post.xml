@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/postframe"
     android:layout_width="match_parent"
@@ -10,335 +10,411 @@
     <LinearLayout
         android:id="@+id/post_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="190dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/gradient_header"
+        android:paddingRight="20dp"
         android:gravity="center">
         <Button
             android:id="@+id/quitBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/x"/>
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="50dp"
             android:layout_weight="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:text="@string/write"
-            android:textAppearance="@style/regular17"/>
+            android:textAppearance="@style/regular16"/>
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
         <Button
             android:id="@+id/completeBtn"
-            android:layout_width="44dp"
-            android:layout_height="24dp"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/post_complete_btn"
             android:text="@string/complete"
-            android:textAppearance="@style/bold13"/>
+            android:textAppearance="@style/bold14"/>
     </LinearLayout>
-    <View
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/gray0"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/gradient_body_bg"
+        android:layout_marginTop="70dp">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/posttitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:hint="@string/title"
-                android:textColor="@color/darkgray"
-                android:background="@null"
-                android:textColorHint="@color/gray1"
-                android:textAppearance="@style/darkgraybold15" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/linecolor"
-                android:layout_marginBottom="15dp" />
+            android:paddingTop="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/category"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <ScrollView
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/posttitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioGroup
-                        android:id="@+id/category_group"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:id="@+id/request_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="15dp"
-                            android:text="@string/request_state"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/dispatch_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:text="@string/dispatch_state"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                    </RadioGroup>
-                </ScrollView>
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <ScrollView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/title"
+                    android:textColor="@color/darkgray"
+                    android:background="@null"
+                    android:textColorHint="@color/gray2"
+                    android:textAppearance="@style/darkgraybold18" />
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioGroup
-                        android:id="@+id/location_group"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="15dp"
-                            android:text="포스코관"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:text="도서관"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                    </RadioGroup>
-                </ScrollView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/count"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray1"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center_vertical">
-                    <EditText
-                        android:id="@+id/postcount"
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:paddingRight="5dp"
-                        android:maxLines="1"
-                        android:textColor="@color/darkgray"
-                        android:textAlignment="viewEnd"
-                        android:textColorHint="@color/gray1"
-                        android:textAppearance="@style/darkgraybold15"
-                        android:background="@drawable/count" />
+                    android:layout_marginBottom="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:text="개"
-                        android:textAppearance="@style/midgray15"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/size"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioGroup
-                        android:id="@+id/size_group"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/category"
+                        android:textAppearance="@style/bold16" />
+
+                    <ScrollView
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/category_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/request_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/request_state"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/dispatch_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/dispatch_state"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+                        </RadioGroup>
+                    </ScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/location"
+                        android:textAppearance="@style/bold16" />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/location_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="포스코관"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="도서관"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+                        </RadioGroup>
+                    </ScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/count"
+                        android:textAppearance="@style/bold16" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:id="@+id/liner_btn"
-                            android:layout_width="70dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="8dp"
-                            android:text="@string/liner"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/small_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="8dp"
-                            android:text="@string/small"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/regular_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="8dp"
-                            android:text="@string/regular"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/large_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="8dp"
-                            android:text="@string/large"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/overnight_btn"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
                             android:layout_width="80dp"
-                            android:layout_height="32dp"
-                            android:text="@string/overnight"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                    </RadioGroup>
-                </HorizontalScrollView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/type"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioGroup
-                        android:id="@+id/type_group"
+                            android:layout_height="35dp"
+                            android:background="@drawable/count">
+
+                            <EditText
+                                android:id="@+id/postcount"
+                                android:layout_width="80dp"
+                                android:layout_height="35dp"
+                                android:background="@null"
+                                android:cursorVisible="false"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:paddingRight="5dp"
+                                android:textAlignment="viewEnd"
+                                android:textAppearance="@style/bold14"
+                                android:textColor="@color/darkgray"
+                                android:textColorHint="@color/gray1" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="개"
+                            android:textAppearance="@style/bold16" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/size"
+                        android:textAppearance="@style/bold16" />
+
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:id="@+id/wing_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="15dp"
-                            android:text="@string/wing"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/absorption_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="15dp"
-                            android:text="@string/absorption"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/cotton_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:layout_marginRight="15dp"
-                            android:text="@string/cotton"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                        <RadioButton
-                            android:id="@+id/organic_btn"
-                            android:layout_width="66dp"
-                            android:layout_height="32dp"
-                            android:text="@string/organic"
-                            android:textColor="@drawable/post_select_btn_text"
-                            android:outlineProvider="none"
-                            android:background="@drawable/post_select_btn"
-                            android:textAlignment="center"
-                            android:button="@null"/>
-                    </RadioGroup>
-                </HorizontalScrollView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/significant"
-                    android:layout_marginTop="5dp"
-                    android:textAppearance="@style/darkgraybold15"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center_vertical">
-                    <EditText
-                        android:id="@+id/postsignificant"
+                        android:layout_marginBottom="10dp"
+                        android:scrollIndicators="none">
+
+                        <RadioGroup
+                            android:id="@+id/size_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/liner_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/liner"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/small_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/small"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/regular_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/regular"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/large_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/large"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/overnight_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/overnight"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+                        </RadioGroup>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/type"
+                        android:textAppearance="@style/bold16" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/type_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/wing_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/wing"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/absorption_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/absorption"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/cotton_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/post_select_btn"
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/cotton"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+
+                            <RadioButton
+                                android:id="@+id/organic_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:background="@drawable/post_select_btn"
+
+                                android:button="@null"
+                                android:outlineProvider="none"
+                                android:paddingHorizontal="15dp"
+                                android:text="@string/organic"
+                                android:textAlignment="center"
+                                android:textColor="@drawable/post_select_btn_text" />
+                        </RadioGroup>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/significant"
+                        android:textAppearance="@style/bold16" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="내용을 입력하세요"
-                        android:background="@null"
-                        android:textColorHint="@color/gray1"
-                        android:textColor="@color/darkgray"
-                        android:textAppearance="@style/bold13"
-                        android:maxLines="5"
-                        android:scrollbars="vertical"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/count"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/postsignificant"
+                            android:layout_width="match_parent"
+                            android:layout_height="95dp"
+                            android:background="@null"
+                            android:cursorVisible="false"
+                            android:gravity="top"
+                            android:longClickable="false"
+                            android:hint="내용을 입력하세요"
+                            android:inputType="textMultiLine|textNoSuggestions"
+                            android:maxLines="5"
+                            android:padding="10dp"
+                            android:scrollbars="vertical"
+                            android:textAppearance="@style/bold14"
+                            android:textColor="@color/darkgray"
+                            android:textColorHint="@color/gray1" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

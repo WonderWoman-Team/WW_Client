@@ -3,7 +3,7 @@
     <!-- Background -->
     <item>
         <shape>
-            <solid android:color="@color/post_btn_bg" />
+            <solid android:color="@color/selectedTab" />
             <corners android:radius="12dp" />
         </shape>
     </item>
