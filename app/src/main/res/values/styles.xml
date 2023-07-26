@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="bold20" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#666666</item>
+        <item name="fontFamily">@font/noto_sans_bold</item>
+    </style>
     <style name="bold16" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#666666</item>
@@ -36,10 +41,24 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/noto_sans_bold</item>
     </style>
-
+    <style name="bold13" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#666666</item>
+        <item name="fontFamily">@font/noto_sans_bold</item>
+    </style>
     <style name="mid13" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">#D9D9D9</item>
+        <item name="fontFamily">@font/noto_sans</item>
+    </style>
+    <style name="regular15" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#666666</item>
+        <item name="fontFamily">@font/noto_sans</item>
+    </style>
+    <style name="regular13" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#999999</item>
         <item name="fontFamily">@font/noto_sans</item>
     </style>
 </resources>

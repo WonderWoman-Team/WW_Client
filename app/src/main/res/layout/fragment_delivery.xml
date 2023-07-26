@@ -72,14 +72,11 @@
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="15sp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:textColor="@color/black"
-                android:hint="포스코관"
-                android:textColorHint="@color/black"/>
+                android:textAppearance="@style/regular15"
+                android:text="포스코관" />
             <ImageButton
                 android:layout_width="14dp"
                 android:layout_height="10dp"
