@@ -1,16 +1,13 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.wonderwoman.HomeTabAdapter
 import com.example.wonderwoman.databinding.FragmentDeliveryBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 
 class DeliveryFragment: Fragment() {

@@ -1,29 +1,25 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.example.wonderwoman.databinding.DispatchTabBinding
+import com.example.wonderwoman.R
+import com.example.wonderwoman.databinding.RequestTabBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class DispatchTab : Fragment(){
-    private lateinit var dispatchTabBinding: DispatchTabBinding
+class RequestTab : Fragment(){
+    private lateinit var requestTabBinding: RequestTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
     private lateinit var middle_btn: CheckBox
@@ -38,8 +34,8 @@ class DispatchTab : Fragment(){
     private lateinit var databaseReference: DatabaseReference
 
     companion object{
-        fun newInstance() : DispatchTab {
-            return DispatchTab()
+        fun newInstance() : RequestTab {
+            return RequestTab()
         }
     }
 
@@ -48,43 +44,39 @@ class DispatchTab : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dispatchTabBinding = DispatchTabBinding.inflate(inflater,container,false)
+        requestTabBinding = RequestTabBinding.inflate(inflater,container,false)
+        liner_btn = requestTabBinding.linerBtn
+        small_btn = requestTabBinding.smallBtn
+        middle_btn = requestTabBinding.middleBtn
+        large_btn = requestTabBinding.largeBtn
+        overnight_btn = requestTabBinding.overnightBtn
 
-      liner_btn = dispatchTabBinding.linerBtn
-        small_btn = dispatchTabBinding.smallBtn
-        middle_btn = dispatchTabBinding.middleBtn
-        large_btn = dispatchTabBinding.largeBtn
-        overnight_btn = dispatchTabBinding.overnightBtn
-
-        recyclerView = dispatchTabBinding.postRecyclerview //리사이클러뷰 연결
-        recyclerView.setHasFixedSize(true) //recyclerview 성능 강화
+        recyclerView = requestTabBinding.postRecyclerview
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        postList = ArrayList() //Post 객체를 담을 어레이리스트 (어댑터쪽으로)
+        postList = ArrayList()
 
-        //firebase
-        database = FirebaseDatabase.getInstance() //firebase의 기능을 database에 연동
-        databaseReference = database.getReference("Post") //DB테이블 연결
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference("Post")
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                //firebase의 database 받아오는 곳
-                postList.clear() //초기화
-                for (data in snapshot.children){ //데이터리스트 추출
+                postList.clear()
+                for (data in snapshot.children){
                     var listItem = data.getValue(Post::class.java)
 
-                    if (listItem!!.post_state == "출동글") {
+                    if (listItem!!.post_state == "요청글") {
                         postList.add(listItem)
                     }
                 }
-                recyclerAdapter.notifyDataSetChanged() //리스트 저장 및 새로고침
+                recyclerAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //db를 가져오던 중 에러가 발생 시
                 Log.d("POST","${error.toException()}") //에러문 출력
             }
         })
         recyclerAdapter = PostRecyclerAdapter(postList)
-        recyclerView.adapter = recyclerAdapter //recyclerview에 어댑터 연결
+        recyclerView.adapter = recyclerAdapter
 
         //버튼 이벤트
         newPostList = ArrayList()
@@ -123,6 +115,7 @@ class DispatchTab : Fragment(){
         middle_btn.setOnCheckedChangeListener(listener)
         large_btn.setOnCheckedChangeListener(listener)
         overnight_btn.setOnCheckedChangeListener(listener)
-        return dispatchTabBinding.root
+
+        return requestTabBinding.root
     }
 }

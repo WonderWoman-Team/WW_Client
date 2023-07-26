@@ -1,14 +1,18 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
+import android.R
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
+import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.databinding.ActivityPostBinding
+
 
 class PostActivity : AppCompatActivity() {
 
@@ -42,6 +46,27 @@ class PostActivity : AppCompatActivity() {
         postTitle = binding.posttitle
         postCount = binding.postcount
         postSignificant = binding.postsignificant
+        //edittext 스크롤 기능
+        postCount.setOnTouchListener { v, event ->
+            if (v.id === postCount.id) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_UP -> v.parent
+                        .requestDisallowInterceptTouchEvent(false)
+                }
+            }
+            false
+        }
+        postSignificant.setOnTouchListener { v, event ->
+            if (v.id === postSignificant.id) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_UP -> v.parent
+                        .requestDisallowInterceptTouchEvent(false)
+                }
+            }
+            false
+        }
 
     }
 

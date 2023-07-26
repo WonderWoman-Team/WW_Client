@@ -1,4 +1,4 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
 class Post(
     var location: String = "",
