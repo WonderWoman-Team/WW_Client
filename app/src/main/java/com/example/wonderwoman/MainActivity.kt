@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.fragment.app.FragmentResultListener
+import androidx.fragment.app.FragmentTransaction
 import com.example.wonderwoman.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 
@@ -12,9 +14,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var deliveryFragment: DeliveryFragment
-    private lateinit var chatFragment: ChatFragment
+    private lateinit var chatFragment: UserList
     private lateinit var mypageFragment: MypageFragment
     private lateinit var writeBtn: Button
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +47,10 @@ class MainActivity : AppCompatActivity() {
                 writeBtn.visibility = View.VISIBLE
             }
             R.id.chat_menu -> {
-                chatFragment = ChatFragment.newInstance()
+                val intent = Intent(this, UserList.newInstance()::class.java)
+//                startActivity(intent)
+//                writeBtn.visibility = View.INVISIBLE
+                chatFragment = UserList.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment,chatFragment).commit()
                 writeBtn.visibility = View.INVISIBLE
             }
@@ -58,3 +64,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
