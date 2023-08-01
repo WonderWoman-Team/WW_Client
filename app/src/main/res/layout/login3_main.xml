@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PasswordActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:orientation="horizontal"
+        android:background="@drawable/gradient">
+
+        <ImageView
+            android:id="@+id/back3"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/left" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:fontFamily="@font/notofont"
+            android:shadowRadius="3.0"
+            android:shadowDy="1.0"
+            android:shadowColor="#666666"
+            android:text="비밀번호 입력"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerInParent="true"
+        android:background="#D9D9D9"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="4dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="200dp"
+        android:background="#FFFFFF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom"
+        android:layout_marginTop="128dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notofont"
+                android:textColor="#666666"
+                android:textSize="20dp"
+                android:text="비밀번호를\n입력해주세요."/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editID"
+                android:layout_width="328dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_blue"
+                android:ems="10"
+                android:hint="비밀번호를 입력해주세요."
+                android:inputType="textPersonName"
+                android:text=""
+                android:textColorHint="#CCCCCC" />
+
+            <EditText
+                android:id="@+id/ediPassword"
+                android:layout_width="328dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_blue"
+                android:ems="10"
+                android:hint="비밀번호를 한번 더 입력해주세요."
+                android:textColorHint="#CCCCCC"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영문, 숫자를 포함한 8~16자리 조합으로 입력해주세요."
+                android:fontFamily="@font/notofont"
+                android:textSize="11dp"
+                android:textColor="#F9395F"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="vertical"
+        android:layout_marginTop="220dp">
+
+        <ImageView
+            android:id="@+id/next_btn3"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_next" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+</FrameLayout>
