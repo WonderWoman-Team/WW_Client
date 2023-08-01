@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:background="@drawable/gradient"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/location_x"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/x_white" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="70dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/notofont"
+                android:gravity="center"
+                android:shadowColor="#666666"
+                android:shadowDy="1.0"
+                android:shadowRadius="3.0"
+                android:text="건물 설정"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:fontFamily="@font/notofont"
+                android:shadowColor="#666666"
+                android:shadowDy="1.0"
+                android:shadowRadius="3.0"
+                android:text="이화여자대학교"
+                android:textColor="#FFFFFF" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="158dp"
+            android:background="@drawable/scroll"
+            android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/list1"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_centerInParent="true"
+                        android:background="#F9DCCE"/>
+
+                    <ListView
+                        android:id="@+id/list2"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="230dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_centerInParent="true"
+                        android:background="#F9DCCE"/>
+
+                    <ListView
+                        android:id="@+id/list3"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_centerInParent="true"
+                        android:background="#F9DCCE"/>
+
+                    <ListView
+                        android:id="@+id/list4"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="480dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_centerInParent="true"
+                        android:background="#F9DCCE"/>
+
+                    <ListView
+                        android:id="@+id/list5"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_centerInParent="true"
+                        android:background="#F9DCCE"/>
+                    <ListView
+                        android:id="@+id/list6"
+                        android:dividerHeight="0px"
+                        android:divider="#FFFFFF"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"/>
+
+                </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
