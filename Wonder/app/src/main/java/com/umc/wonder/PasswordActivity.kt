@@ -13,6 +13,10 @@ class PasswordActivity :AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = Login3MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //다음페이지
         val intent = Intent(this, NameActivity::class.java)
         binding.nextBtn3.setOnClickListener{startActivity(intent) }
+        //이전페이지
+        val intent2 = Intent(this, EmailActivity::class.java)
+        binding.back3.setOnClickListener{startActivity(intent2) }
     }}

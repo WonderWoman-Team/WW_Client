@@ -15,21 +15,25 @@
         android:background="@drawable/gradient">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/back3"
             android:layout_width="50dp"
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
-            tools:srcCompat="@drawable/left" />
+            android:src="@drawable/left" />
 
         <TextView
             android:id="@+id/login"
             android:layout_width="50dp"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
+            android:fontFamily="@font/notofont"
+            android:shadowRadius="3.0"
+            android:shadowDy="1.0"
+            android:shadowColor="#666666"
             android:text="비밀번호 입력"
             android:textColor="#FFFFFF"
             android:textSize="17sp"/>
@@ -61,7 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="30dp"
             android:orientation="horizontal">
 
@@ -69,9 +73,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notofont"
                 android:textColor="#666666"
                 android:textSize="20dp"
-                android:text="비밀번호를 입력해주세요."/>
+                android:text="비밀번호를\n입력해주세요."/>
 
         </LinearLayout>
 
@@ -83,30 +88,34 @@
 
             <EditText
                 android:id="@+id/editID"
-                android:layout_width="wrap_content"
+                android:layout_width="328dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
-                android:background="@drawable/box_login"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 입력해주세요."
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text=""
+                android:textColorHint="#CCCCCC" />
 
             <EditText
                 android:id="@+id/ediPassword"
-                android:layout_width="wrap_content"
+                android:layout_width="328dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:background="@drawable/box_login"
+                android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 한번 더 입력해주세요."
+                android:textColorHint="#CCCCCC"
                 android:inputType="textPassword" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="영문, 숫자를 포함한 8~16자리 조합으로 입력해주세요."
+                android:fontFamily="@font/notofont"
+                android:textSize="11dp"
                 android:textColor="#F9395F"/>
 
         </LinearLayout>
@@ -121,7 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:orientation="vertical"
-        android:layout_marginTop="250dp">
+        android:layout_marginTop="220dp">
 
         <ImageView
             android:id="@+id/next_btn3"

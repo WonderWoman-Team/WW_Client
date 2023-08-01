@@ -14,6 +14,12 @@ class CheckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = Login5MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //다음페이지
         val intent = Intent(this, CheckActivity::class.java)
         binding.nextBtn5.setOnClickListener{startActivity(intent) }
+
+        //이전페이지
+        val intent2 = Intent(this, NameActivity::class.java)
+        binding.back5.setOnClickListener{startActivity(intent2) }
     }}

@@ -6,11 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="."
+    tools:context=".LoginActivity" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/touch"
+        android:background="@drawable/maingredient">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sbaggro"
+            android:text="Wonder Woman"
+            android:textAlignment="center"
+            android:textColor="#F9395F"
+            android:textSize="24dp" />
+    </LinearLayout>
+</LinearLayout>
 
-    />
 
 
 

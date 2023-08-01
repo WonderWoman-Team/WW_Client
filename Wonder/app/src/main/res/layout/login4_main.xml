@@ -15,7 +15,7 @@
         android:background="@drawable/gradient">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/back4"
             android:layout_width="50dp"
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
@@ -25,13 +25,17 @@
         <TextView
             android:id="@+id/login"
             android:layout_width="50dp"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="닉네임 입력"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/notofont"
+            android:shadowRadius="3.0"
+            android:shadowDy="1.0"
+            android:shadowColor="#666666"
             android:textSize="17sp"/>
 
     </LinearLayout>
@@ -63,7 +67,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="30dp"
             android:orientation="horizontal">
 
@@ -73,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#666666"
                 android:textSize="20dp"
-                android:text="wonderwoman"/>
+                android:fontFamily="@font/notofont"
+                android:text="사용하실 닉네임을\n입력해주세요."/>
 
         </LinearLayout>
 
@@ -85,18 +90,21 @@
 
             <EditText
                 android:id="@+id/editID"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
-                android:background="@drawable/box_login"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="닉네임을 입력해주세요."
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text=""
+                android:textColorHint="#CCCCCC" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notofont"
+                android:textSize="11dp"
                 android:text="한글, 영문, 숫자만 입력해주세요. (10자)"
                 android:textColor="#F9395F"/>
 
@@ -105,7 +113,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="72dp"
-            android:layout_marginTop="290dp"
+            android:layout_marginTop="260dp"
             android:orientation="vertical">
 
             <ImageView

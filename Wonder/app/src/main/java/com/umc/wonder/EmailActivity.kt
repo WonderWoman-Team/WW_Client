@@ -13,6 +13,12 @@ class EmailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = Login22MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //다음페이지
         val intent = Intent(this, PasswordActivity::class.java)
         binding.nextBtn2.setOnClickListener{startActivity(intent) }
+
+        //이전페이지
+        val intent2 = Intent(this, SchoolActivity::class.java)
+        binding.back2.setOnClickListener{startActivity(intent2) }
     }}
