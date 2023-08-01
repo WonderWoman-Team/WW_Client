@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wonderwoman.MainActivity
@@ -22,7 +23,9 @@ class PostActivity : AppCompatActivity() {
     private lateinit var postTitle: EditText
     private lateinit var postCount: EditText
     private lateinit var postSignificant: EditText
-    private lateinit var categotyGroup: RadioGroup
+    private lateinit var categoryGroup: RadioGroup
+    private lateinit var requestBtn: RadioButton
+    private lateinit var dispatchBtn: RadioButton
     private lateinit var sizeGroup: RadioGroup
     private lateinit var typeGroup: RadioGroup
 
@@ -68,6 +71,19 @@ class PostActivity : AppCompatActivity() {
             false
         }
 
+        categoryGroup = binding.categoryGroup
+        requestBtn = binding.requestBtn
+        dispatchBtn = binding.dispatchBtn
+        categoryGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener{
+            override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+                if(checkedId == requestBtn.id){
+                    requestBtn.text
+                }else if(checkedId == dispatchBtn.id){
+
+                }
+            }
+
+        })
     }
 
     //외부 클릭 시 키보드 내리게
