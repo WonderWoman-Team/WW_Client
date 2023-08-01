@@ -10,7 +10,7 @@
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="#25999999" />
+            <solid android:color="#10999999" />
 
             <corners android:radius="20dp" />
         </shape>
@@ -23,7 +23,7 @@
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="#40999999" />
+            <solid android:color="#30999999" />
 
             <corners android:radius="20dp" />
         </shape>
@@ -36,7 +36,7 @@
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="#70999999" />
+            <solid android:color="#50999999" />
 
             <corners android:radius="20dp" />
         </shape>
