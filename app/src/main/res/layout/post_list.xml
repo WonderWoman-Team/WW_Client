@@ -148,9 +148,13 @@
             android:id="@+id/go_to_chat_btn"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="10dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/go_out_btn"
             android:fontFamily="@font/noto_sans"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            android:drawableRight="@drawable/arrow_right"
+            />
     </LinearLayout>
 </LinearLayout>
