@@ -16,7 +16,7 @@ class Login : AppCompatActivity() {
 
     private lateinit var mDbRef: DatabaseReference
 
-    val name = "somin333"
+    val name = "익명3"
     val email = "somin455@nate.com"
     val password = "somin455"
 
@@ -48,7 +48,7 @@ class Login : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent2: Intent = Intent(this,UserList::class.java)
+                    val intent2: Intent = Intent(this,Main1Activity::class.java)
                     startActivity(intent2)
                     finish()
                     Toast.makeText(this,"로그인성공", Toast.LENGTH_SHORT).show()
