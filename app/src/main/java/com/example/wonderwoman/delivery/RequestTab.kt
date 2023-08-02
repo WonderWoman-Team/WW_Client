@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class RequestTab : Fragment(){
+class RequestTab() : Fragment(){
     private lateinit var requestTabBinding: RequestTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox

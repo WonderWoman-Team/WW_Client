@@ -65,7 +65,6 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>): RecyclerView.Adapter<P
 
         //리스트 클릭 이벤트
         holder.go_to_chat_btn.setOnClickListener {
-
         }
     }
 

@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class DispatchTab : Fragment(){
+class DispatchTab() : Fragment(){
     private lateinit var dispatchTabBinding: DispatchTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
@@ -43,10 +43,10 @@ class DispatchTab : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dispatchTabBinding = DispatchTabBinding.inflate(inflater,container,false)
 
-      liner_btn = dispatchTabBinding.linerBtn
+        this.liner_btn = dispatchTabBinding.linerBtn
         small_btn = dispatchTabBinding.smallBtn
         middle_btn = dispatchTabBinding.middleBtn
         large_btn = dispatchTabBinding.largeBtn
@@ -84,7 +84,7 @@ class DispatchTab : Fragment(){
 
         //버튼 이벤트
         newPostList = ArrayList()
-        var listener = CompoundButton.OnCheckedChangeListener{
+        val listener = CompoundButton.OnCheckedChangeListener{
                 buttonView, isChecked ->
             if(newPostList == postList){newPostList = ArrayList()}
             if(isChecked){
@@ -93,7 +93,7 @@ class DispatchTab : Fragment(){
                         R.id.liner_btn -> {if (post.size == "라이너") {newPostList.add(post) }}
                         R.id.small_btn -> {if(post.size=="소형") { newPostList.add(post)}}
                         R.id.middle_btn -> {if(post.size=="중형") { newPostList.add(post)}}
-                        R.id.liner_btn -> {if(post.size=="대형") { newPostList.add(post)}}
+                        R.id.large_btn -> {if(post.size=="대형") { newPostList.add(post)}}
                         R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.add(post)}}
                     }
                 }
@@ -103,7 +103,7 @@ class DispatchTab : Fragment(){
                         R.id.liner_btn -> {if (post.size == "라이너") {newPostList.remove(post)}}
                         R.id.small_btn -> {if(post.size=="소형") { newPostList.remove(post)}}
                         R.id.middle_btn -> {if(post.size=="중형") { newPostList.remove(post)}}
-                        R.id.liner_btn -> {if(post.size=="대형") { newPostList.remove(post)}}
+                        R.id.large_btn -> {if(post.size=="대형") { newPostList.remove(post)}}
                         R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.remove(post)}}
                     }
                 }

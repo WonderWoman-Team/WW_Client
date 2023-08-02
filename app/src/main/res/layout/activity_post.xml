@@ -245,7 +245,7 @@
                             <RadioButton
                                 android:id="@+id/liner_btn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="32dp"
+                                android:layout_height="33dp"
                                 android:layout_marginRight="10dp"
                                 android:background="@drawable/post_select_btn"
                                 android:button="@null"
@@ -253,7 +253,9 @@
                                 android:paddingHorizontal="15dp"
                                 android:text="@string/liner"
                                 android:textAlignment="center"
-                                android:textColor="@drawable/post_select_btn_text" />
+                                android:textColor="@drawable/post_select_btn_text"
+                                android:textAppearance="@style/post_selected_btn"
+                                />
 
                             <RadioButton
                                 android:id="@+id/small_btn"
