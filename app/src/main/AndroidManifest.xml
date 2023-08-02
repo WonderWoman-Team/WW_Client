@@ -27,6 +27,14 @@
         <activity android:name=".PasswordActivity" android:exported="true"/>
         <activity android:name=".NameActivity" android:exported="true"/>
         <activity android:name=".CheckActivity" android:exported="true"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity android:name=".delivery.PostActivity"/>
         <meta-data
             android:name="preloaded_fonts"

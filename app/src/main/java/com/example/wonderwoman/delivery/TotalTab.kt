@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class TotalTab : Fragment(){
+class TotalTab() : Fragment(){
     private lateinit var totalTabBinding: TotalTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
@@ -35,7 +35,7 @@ class TotalTab : Fragment(){
     private lateinit var databaseReference: DatabaseReference
 
     companion object{
-        fun newInstance() : TotalTab {
+        fun newInstance(): TotalTab {
             return TotalTab()
         }
     }
@@ -77,8 +77,10 @@ class TotalTab : Fragment(){
                 Log.d("POST","${error.toException()}") //에러문 출력
             }
         })
+
         recyclerAdapter = PostRecyclerAdapter(postList)
         recyclerView.adapter = recyclerAdapter
+
 
         //버튼 이벤트
         newPostList = ArrayList()

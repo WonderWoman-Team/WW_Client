@@ -61,4 +61,14 @@
         <item name="android:textColor">#999999</item>
         <item name="fontFamily">@font/noto_sans</item>
     </style>
+    <style name="post_unselected_btn" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#CCCCCC</item>
+        <item name="fontFamily">@font/noto_sans</item>
+    </style>
+    <style name="post_selected_btn" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#F9395F</item>
+        <item name="fontFamily">@font/noto_sans_regular</item>
+    </style>
 </resources>

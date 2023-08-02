@@ -1,9 +1,9 @@
 package com.example.wonderwoman.delivery
 
-class Post(
+class Post (
     var location: String = "",
     var size: String = "",
-    var count: Int = 0,
+    var count: String = "",
     var type: String = "",
     var time: String = "",
     var nickname: String = "",
