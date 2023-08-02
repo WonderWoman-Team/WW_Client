@@ -4,18 +4,21 @@ package com.example.wonderwoman
 import android.os.Bundle
 import android.os.Binder
 import android.os.PersistableBundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wonderwoman.databinding.ActivityChatBinding
+import com.example.wonderwoman.databinding.ActivityChatGuiBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var receiverName: String
     private lateinit var receiverUid: String
 
     //바인딩 객체
-    private lateinit var binding: ActivityChatBinding
+    private lateinit var binding: ActivityChatGuiBinding
 
     lateinit var mAuth: FirebaseAuth
     lateinit var mDbRef: DatabaseReference
@@ -27,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityChatBinding.inflate(layoutInflater)
+        binding= ActivityChatGuiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //초기화
@@ -55,7 +58,15 @@ class ChatActivity : AppCompatActivity() {
         receiverRoom=senderUid+receiverUid
 
         //액션바에 상대방 이름 보여주기
-        supportActionBar?.title=receiverName
+        //supportActionBar?.title=receiverName
+
+
+        val supportaction = findViewById<TextView>(R.id.receive_name_id)
+        supportaction.text=receiverName
+
+        val supportaction2= findViewById<TextView>(R.id.receive_name_text)
+        supportaction2.text=receiverName
+
 
         //메세지전송
         binding.sendBtn.setOnClickListener{
