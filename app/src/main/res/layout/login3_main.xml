@@ -96,7 +96,8 @@
                 android:hint="비밀번호를 입력해주세요."
                 android:inputType="textPersonName"
                 android:text=""
-                android:textColorHint="#CCCCCC" />
+                android:textColorHint="#CCCCCC"
+                android:textColor="#000000"/>
 
             <EditText
                 android:id="@+id/ediPassword"
@@ -107,6 +108,7 @@
                 android:ems="10"
                 android:hint="비밀번호를 한번 더 입력해주세요."
                 android:textColorHint="#CCCCCC"
+                android:textColor="#000000"
                 android:inputType="textPassword" />
 
             <TextView
