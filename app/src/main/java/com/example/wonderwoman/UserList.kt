@@ -1,10 +1,15 @@
 package com.example.wonderwoman
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wonderwoman.databinding.ActivityUserlistBinding
+import com.example.wonderwoman.databinding.ActivityUserlistGuiBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -14,9 +19,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class UserList :AppCompatActivity() {
+class UserList :Fragment() {
 
-    lateinit var binding: ActivityUserlistBinding
+    lateinit var binding: ActivityUserlistGuiBinding
     lateinit var adapter: UserAdapter
 
     lateinit var mAuth: FirebaseAuth
@@ -24,11 +29,20 @@ class UserList :AppCompatActivity() {
 
     lateinit var userList: ArrayList<User>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding=ActivityUserlistBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    companion object {
+        fun newInstance() : UserList {
+            return UserList()
+        }
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityUserlistGuiBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //인증초기화
         mAuth= Firebase.auth
 
@@ -39,9 +53,9 @@ class UserList :AppCompatActivity() {
         userList=ArrayList()
 
         //
-        adapter=UserAdapter(this,userList)
+        adapter=UserAdapter(context = requireContext(), userList = userList)
 
-        binding.userRecyclerview.layoutManager=LinearLayoutManager(this)
+        binding.userRecyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.userRecyclerview.adapter=adapter
 
         //사용자정보가져오기

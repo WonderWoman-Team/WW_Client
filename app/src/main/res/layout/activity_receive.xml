@@ -11,7 +11,8 @@
         android:layout_margin="5dp"
         android:background="@drawable/ic_receive"
         android:padding="10dp"
-        android:text="보내는 메세지"
+        android:text="받는 메세지"
+        android:textColor="@color/gray3"
         android:textSize="18sp"/>
 
 
