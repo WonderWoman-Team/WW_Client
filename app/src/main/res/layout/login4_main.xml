@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="닉네임 입력"
             android:textColor="#FFFFFF"
-            android:fontFamily="@font/notofont"
+            android:fontFamily="@font/noto_sans_regular"
             android:shadowRadius="3.0"
             android:shadowDy="1.0"
             android:shadowColor="#666666"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#666666"
                 android:textSize="20dp"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:text="사용하실 닉네임을\n입력해주세요."/>
 
         </LinearLayout>
@@ -98,11 +98,12 @@
                 android:hint="닉네임을 입력해주세요."
                 android:inputType="textPersonName"
                 android:text=""
-                android:textColorHint="#CCCCCC" />
+                android:textColorHint="#CCCCCC"
+                android:textColor="#000000"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:textSize="11dp"
                 android:text="한글, 영문, 숫자만 입력해주세요. (10자)"
                 android:textColor="#F9395F"/>
