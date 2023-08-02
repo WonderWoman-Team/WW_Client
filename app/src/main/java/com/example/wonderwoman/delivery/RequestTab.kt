@@ -1,4 +1,4 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.RequestTabBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,7 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class RequestTab : Fragment(){
+class RequestTab() : Fragment(){
     private lateinit var requestTabBinding: RequestTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox

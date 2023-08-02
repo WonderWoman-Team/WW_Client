@@ -1,4 +1,4 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.delivery
 
 import android.os.Bundle
 
@@ -11,6 +11,7 @@ import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.TotalTabBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,7 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class TotalTab : Fragment(){
+class TotalTab() : Fragment(){
     private lateinit var totalTabBinding: TotalTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
@@ -34,7 +35,7 @@ class TotalTab : Fragment(){
     private lateinit var databaseReference: DatabaseReference
 
     companion object{
-        fun newInstance() : TotalTab {
+        fun newInstance(): TotalTab {
             return TotalTab()
         }
     }
@@ -76,8 +77,10 @@ class TotalTab : Fragment(){
                 Log.d("POST","${error.toException()}") //에러문 출력
             }
         })
+
         recyclerAdapter = PostRecyclerAdapter(postList)
         recyclerView.adapter = recyclerAdapter
+
 
         //버튼 이벤트
         newPostList = ArrayList()

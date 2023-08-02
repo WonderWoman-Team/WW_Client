@@ -10,12 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class UserAdapter (val context: Context, private val userList:ArrayList<User>):
-RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
+    RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
     //화면설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View = LayoutInflater.from(context).
-        inflate(R.layout.activity_userlist_item,parent,false)
+        inflate(R.layout.activity_userlist_item_gui,parent,false)
 
         return UserViewHolder(view)
     }

@@ -51,6 +51,9 @@ class LoginActivity : AppCompatActivity() {
         if(type.equals("success")){
             dialog.setTitle("로그인 성공")
             dialog.setMessage("로그인 성공!")
+            val intent: Intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         else if(type.equals("fail")){
             dialog.setTitle("로그인 실패")

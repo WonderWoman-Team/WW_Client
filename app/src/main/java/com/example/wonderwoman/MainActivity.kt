@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.example.wonderwoman.databinding.ActivityMainBinding
+import com.example.wonderwoman.delivery.DeliveryFragment
+import com.example.wonderwoman.delivery.PostActivity
+import com.example.wonderwoman.mypage.MypageFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
@@ -44,8 +47,11 @@ class MainActivity : AppCompatActivity() {
                 writeBtn.visibility = View.VISIBLE
             }
             R.id.chat_menu -> {
-                chatFragment = ChatFragment.newInstance()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment,chatFragment).commit()
+                val intent = Intent(this, UserList.newInstance()::class.java)
+//                startActivity(intent)
+//                writeBtn.visibility = View.INVISIBLE
+//                chatFragment = UserList.newInstance()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment,UserList.newInstance()).commit()
                 writeBtn.visibility = View.INVISIBLE
             }
             R.id.mypage_menu -> {

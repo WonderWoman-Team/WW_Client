@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/noto_sans_bold"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:text="@string/mypage"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -47,44 +47,46 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:gravity="center">
-            <View
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/profile" />
+                    android:layout_gravity="center_horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/profile" />
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="end"
+                        android:gravity="right">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/change_profile_btn"
+                            android:layout_gravity="bottom" />
+                    </LinearLayout>
+                </FrameLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:hint="닉네임"
-                    android:fontFamily="@font/noto_sans_bold"
-                    android:textSize="20sp"
+                    android:textAppearance="@style/bold20"
                     android:textColorHint="@color/gray3"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="0000@ewhain.net"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/noto_sans_bold"
-                    android:textSize="15sp"
+                    android:textAppearance="@style/regular13"
                     android:textColorHint="@color/gray2"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/write_btn"
-                    android:layout_marginLeft="7dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -104,27 +106,24 @@
                 android:background="@color/white"
                 android:text="@string/myrequest"
                 android:elevation="0dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:textSize="15sp"
-                android:textColor="@color/gray2"
+                android:textAppearance="@style/bold13"
+                android:gravity="center"
                 android:stateListAnimator="@null"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="@string/mydispatch"
-                android:fontFamily="@font/noto_sans_bold"
-                android:textSize="15sp"
-                android:textColor="@color/gray2"
+                android:textAppearance="@style/bold13"
+                android:gravity="center"
                 android:stateListAnimator="@null"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="@string/scrap"
-                android:fontFamily="@font/noto_sans_bold"
-                android:textSize="15sp"
-                android:textColor="@color/gray2"
+                android:textAppearance="@style/bold13"
+                android:gravity="center"
                 android:stateListAnimator="@null"/>
             <Button
                 android:layout_width="wrap_content"
@@ -132,9 +131,8 @@
                 android:background="@color/white"
                 android:text="@string/mypost"
                 android:elevation="0dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:textSize="15sp"
-                android:textColor="@color/gray2"
+                android:textAppearance="@style/bold13"
+                android:gravity="center"
                 android:stateListAnimator="@null"/>
         </LinearLayout>
 
@@ -156,9 +154,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="@string/mydelivery"
-                    android:textColor="@color/gray3"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/noto_sans_bold"/>
+                    android:textAppearance="@style/bold16"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -174,9 +170,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/myrequest"
-                            android:textColor="@color/gray3"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/noto_sans"
+                            android:textAppearance="@style/regular15"
                             />
                         <TextView
                             android:layout_width="match_parent"
@@ -184,9 +178,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/mydispatch"
-                            android:textColor="@color/gray3"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/noto_sans"
+                            android:textAppearance="@style/regular15"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -213,9 +205,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="@string/guide"
-                    android:textColor="@color/gray3"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/noto_sans_bold"/>
+                    android:textAppearance="@style/bold16"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -232,9 +222,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/terms"
-                            android:textColor="@color/gray3"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/noto_sans"
+                            android:textAppearance="@style/regular15"
                             />
                         <TextView
                             android:layout_width="match_parent"
@@ -242,19 +230,15 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/privacypolicy"
-                            android:textColor="@color/gray3"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/noto_sans"
+                            android:textAppearance="@style/regular15"
                             />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:fontFamily="@font/noto_sans"
                             android:text="@string/faq"
-                            android:textColor="@color/gray3"
-                            android:textSize="15sp" />
+                            android:textAppearance="@style/regular15" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

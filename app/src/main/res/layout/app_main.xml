@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="115dp"
                 android:textColor="#999999"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:text="이미 회원이신가요?"/>
             <TextView
                 android:id="@+id/logingo"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:textColor="#999999"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:text="로그인"/>
 
         </LinearLayout>
@@ -63,14 +63,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120dp"
                 android:textColor="#999999"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:text="아이디 찾기"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:textColor="#999999"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:text="비밀번호 찾기"/>
 
         </LinearLayout>
