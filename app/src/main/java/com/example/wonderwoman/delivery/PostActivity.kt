@@ -48,6 +48,8 @@ class PostActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
+    var index = 11
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,14 +124,13 @@ class PostActivity : AppCompatActivity() {
         //완료 버튼 감지
         completeBtn.setOnClickListener {
             var dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-
             newPost.time = dateTime
             newPost.nickname = "본인"
 
             database = FirebaseDatabase.getInstance()
             databaseReference = database.getReference("Post")
-            databaseReference.push().setValue(newPost)
-
+            databaseReference.child("Post_${index}").setValue(newPost)
+            index++
             //mainactivity로 전환
             var intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
