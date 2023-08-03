@@ -94,10 +94,11 @@
                 android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 입력해주세요."
+                android:textSize="14dp"
+                android:padding="10.00dp"
                 android:inputType="textPersonName"
                 android:text=""
-                android:textColorHint="#CCCCCC"
-                android:textColor="#000000"/>
+                android:textColorHint="#CCCCCC" />
 
             <EditText
                 android:id="@+id/ediPassword"
@@ -107,8 +108,9 @@
                 android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 한번 더 입력해주세요."
+                android:textSize="14dp"
+                android:padding="10.00dp"
                 android:textColorHint="#CCCCCC"
-                android:textColor="#000000"
                 android:inputType="textPassword" />
 
             <TextView
@@ -127,20 +129,24 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:orientation="vertical"
-        android:layout_marginTop="220dp">
-
-        <ImageView
-            android:id="@+id/next_btn3"
-            android:layout_margin="10dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_next" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/next_btn3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_next" />
+
+        </LinearLayout>
     </LinearLayout>
 
 
