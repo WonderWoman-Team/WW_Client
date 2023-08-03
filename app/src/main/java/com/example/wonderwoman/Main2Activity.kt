@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wonderwoman.databinding.AppMainBinding
-import com.example.wonderwoman.databinding.Login21MainBinding
+import com.example.wonderwoman.databinding.Login2MainBinding
 
 
 class Main2Activity : AppCompatActivity() {
