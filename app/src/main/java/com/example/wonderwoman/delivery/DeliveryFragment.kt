@@ -1,10 +1,12 @@
 package com.example.wonderwoman.delivery
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.wonderwoman.EwhaActivity
 import com.example.wonderwoman.HomeTabAdapter
 import com.example.wonderwoman.databinding.FragmentDeliveryBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -31,5 +33,13 @@ class DeliveryFragment: Fragment() {
         }.attach()
         return binding.root
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = FragmentDeliveryBinding.inflate(layoutInflater)
+        binding.scrollbtn.setOnClickListener{
+            activity?.let{
+                val intent = Intent(context, EwhaActivity::class.java)
+                startActivity(intent)
+            }}}
 }
 

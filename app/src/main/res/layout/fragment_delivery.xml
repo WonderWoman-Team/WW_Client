@@ -78,6 +78,7 @@
                 android:textAppearance="@style/regular15"
                 android:text="포스코관" />
             <ImageButton
+                android:id="@+id/scrollbtn"
                 android:layout_width="14dp"
                 android:layout_height="10dp"
                 android:background="@drawable/toggle_btn"
