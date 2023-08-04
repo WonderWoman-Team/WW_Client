@@ -43,7 +43,7 @@ class PostActivity : AppCompatActivity() {
     private lateinit var cottonBtn: Button
     private lateinit var organicBtn: Button
 
-    var newPost = Post("","","","","","","","")
+    var newPost = Post("", "", "", "", "", "", "", "")
 
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
@@ -76,12 +76,15 @@ class PostActivity : AppCompatActivity() {
         organicBtn = binding.organicBtn
         postSignificant = binding.postsignificant
 
+//        supportFragmentManager.beginTransaction().add(com.example.wonderwoman.R.id.fragment,UserList.newInstance()).commit()
+
         //제목 입력 감지
-        postTitle.addTextChangedListener(object : TextWatcher{
+        postTitle.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 newPost.location = postTitle.text.toString()
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -92,17 +95,18 @@ class PostActivity : AppCompatActivity() {
         }
 
         //개수 입력 감지
-        postCount.addTextChangedListener(object : TextWatcher{
+        postCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 newPost.count = postCount.text.toString()
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
         //크기 선택 감지
         sizeGroup.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId) {
+            when (checkedId) {
                 linerBtn.id -> newPost.size = linerBtn.text.toString()
                 smallBtn.id -> newPost.size = smallBtn.text.toString()
                 regularBtn.id -> newPost.size = regularBtn.text.toString()
@@ -113,7 +117,7 @@ class PostActivity : AppCompatActivity() {
 
         //종류 선택 감지
         typeGroup.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId) {
+            when (checkedId) {
                 wingBtn.id -> newPost.type = wingBtn.text.toString()
                 absorptionBtn.id -> newPost.type = absorptionBtn.text.toString()
                 cottonBtn.id -> newPost.type = cottonBtn.text.toString()
@@ -173,5 +177,4 @@ class PostActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return super.dispatchTouchEvent(ev)
     }
-
 }

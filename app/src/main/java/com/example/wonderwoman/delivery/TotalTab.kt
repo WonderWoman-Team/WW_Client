@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class TotalTab() : Fragment(){
+class TotalTab() : Fragment() {
     private lateinit var totalTabBinding: TotalTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
@@ -34,7 +34,7 @@ class TotalTab() : Fragment(){
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-    companion object{
+    companion object {
         fun newInstance(): TotalTab {
             return TotalTab()
         }
@@ -45,7 +45,7 @@ class TotalTab() : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        totalTabBinding = TotalTabBinding.inflate(inflater,container,false)
+        totalTabBinding = TotalTabBinding.inflate(inflater, container, false)
 
         liner_btn = totalTabBinding.linerBtn
         small_btn = totalTabBinding.smallBtn
@@ -61,10 +61,10 @@ class TotalTab() : Fragment(){
 
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Post")
-        databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
+        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 postList.clear()
-                for (data in snapshot.children){
+                for (data in snapshot.children) {
                     var listItem = data.getValue(Post::class.java)
                     if (listItem != null) {
                         postList.add(listItem)
@@ -74,44 +74,95 @@ class TotalTab() : Fragment(){
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("POST","${error.toException()}") //에러문 출력
+                Log.d("POST", "${error.toException()}") //에러문 출력
             }
         })
 
-        recyclerAdapter = PostRecyclerAdapter(postList)
+        recyclerAdapter = PostRecyclerAdapter(postList, requireContext())
         recyclerView.adapter = recyclerAdapter
 
 
         //버튼 이벤트
         newPostList = ArrayList()
-        var listener = CompoundButton.OnCheckedChangeListener{
-                buttonView, isChecked ->
-            if(newPostList == postList){newPostList = ArrayList()}
-            if(isChecked){
-                for (post in postList){
-                    when(buttonView.id){
-                        R.id.liner_btn -> {if (post.size == "라이너") {newPostList.add(post) }}
-                        R.id.small_btn -> {if(post.size=="소형") { newPostList.add(post)}}
-                        R.id.middle_btn -> {if(post.size=="중형") { newPostList.add(post)}}
-                        R.id.liner_btn -> {if(post.size=="대형") { newPostList.add(post)}}
-                        R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.add(post)}}
+        var listener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (newPostList == postList) {
+                newPostList = ArrayList()
+            }
+            if (isChecked) {
+                for (post in postList) {
+                    when (buttonView.id) {
+                        R.id.liner_btn -> {
+                            if (post.size == "라이너") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.small_btn -> {
+                            if (post.size == "소형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.middle_btn -> {
+                            if (post.size == "중형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.liner_btn -> {
+                            if (post.size == "대형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.overnight_btn -> {
+                            if (post.size == "오버나이트") {
+                                newPostList.add(post)
+                            }
+                        }
                     }
                 }
-            }else {
-                for (post in postList){
-                    when(buttonView.id){
-                        R.id.liner_btn -> {if (post.size == "라이너") {newPostList.remove(post)}}
-                        R.id.small_btn -> {if(post.size=="소형") { newPostList.remove(post)}}
-                        R.id.middle_btn -> {if(post.size=="중형") { newPostList.remove(post)}}
-                        R.id.liner_btn -> {if(post.size=="대형") { newPostList.remove(post)}}
-                        R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.remove(post)}}
+            } else {
+                for (post in postList) {
+                    when (buttonView.id) {
+                        R.id.liner_btn -> {
+                            if (post.size == "라이너") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.small_btn -> {
+                            if (post.size == "소형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.middle_btn -> {
+                            if (post.size == "중형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.liner_btn -> {
+                            if (post.size == "대형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.overnight_btn -> {
+                            if (post.size == "오버나이트") {
+                                newPostList.remove(post)
+                            }
+                        }
                     }
                 }
-                if(!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked){
-                    if(newPostList.size==0){newPostList=postList}
+                if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
+                    if (newPostList.size == 0) {
+                        newPostList = postList
+                    }
                 }
             }
-            recyclerAdapter = PostRecyclerAdapter(newPostList)
+            recyclerAdapter = PostRecyclerAdapter(newPostList, requireContext())
             recyclerView.adapter = recyclerAdapter
         }
 
