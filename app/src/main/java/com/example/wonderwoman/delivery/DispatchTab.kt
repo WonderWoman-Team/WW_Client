@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class DispatchTab() : Fragment(){
+class DispatchTab() : Fragment() {
     private lateinit var dispatchTabBinding: DispatchTabBinding
     private lateinit var liner_btn: CheckBox
     private lateinit var small_btn: CheckBox
@@ -33,8 +33,8 @@ class DispatchTab() : Fragment(){
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-    companion object{
-        fun newInstance() : DispatchTab {
+    companion object {
+        fun newInstance(): DispatchTab {
             return DispatchTab()
         }
     }
@@ -44,7 +44,7 @@ class DispatchTab() : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dispatchTabBinding = DispatchTabBinding.inflate(inflater,container,false)
+        dispatchTabBinding = DispatchTabBinding.inflate(inflater, container, false)
 
         this.liner_btn = dispatchTabBinding.linerBtn
         small_btn = dispatchTabBinding.smallBtn
@@ -60,11 +60,11 @@ class DispatchTab() : Fragment(){
         //firebase
         database = FirebaseDatabase.getInstance() //firebase의 기능을 database에 연동
         databaseReference = database.getReference("Post") //DB테이블 연결
-        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener{
+        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //firebase의 database 받아오는 곳
                 postList.clear() //초기화
-                for (data in snapshot.children){ //데이터리스트 추출
+                for (data in snapshot.children) { //데이터리스트 추출
                     var listItem = data.getValue(Post::class.java)
 
                     if (listItem!!.post_state == "출동글") {
@@ -76,42 +76,93 @@ class DispatchTab() : Fragment(){
 
             override fun onCancelled(error: DatabaseError) {
                 //db를 가져오던 중 에러가 발생 시
-                Log.d("POST","${error.toException()}") //에러문 출력
+                Log.d("POST", "${error.toException()}") //에러문 출력
             }
         })
-        recyclerAdapter = PostRecyclerAdapter(postList)
+        recyclerAdapter = PostRecyclerAdapter(postList, requireContext())
         recyclerView.adapter = recyclerAdapter //recyclerview에 어댑터 연결
 
         //버튼 이벤트
         newPostList = ArrayList()
-        val listener = CompoundButton.OnCheckedChangeListener{
-                buttonView, isChecked ->
-            if(newPostList == postList){newPostList = ArrayList()}
-            if(isChecked){
-                for (post in postList){
-                    when(buttonView.id){
-                        R.id.liner_btn -> {if (post.size == "라이너") {newPostList.add(post) }}
-                        R.id.small_btn -> {if(post.size=="소형") { newPostList.add(post)}}
-                        R.id.middle_btn -> {if(post.size=="중형") { newPostList.add(post)}}
-                        R.id.large_btn -> {if(post.size=="대형") { newPostList.add(post)}}
-                        R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.add(post)}}
+        val listener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (newPostList == postList) {
+                newPostList = ArrayList()
+            }
+            if (isChecked) {
+                for (post in postList) {
+                    when (buttonView.id) {
+                        R.id.liner_btn -> {
+                            if (post.size == "라이너") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.small_btn -> {
+                            if (post.size == "소형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.middle_btn -> {
+                            if (post.size == "중형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.large_btn -> {
+                            if (post.size == "대형") {
+                                newPostList.add(post)
+                            }
+                        }
+
+                        R.id.overnight_btn -> {
+                            if (post.size == "오버나이트") {
+                                newPostList.add(post)
+                            }
+                        }
                     }
                 }
-            }else {
-                for (post in postList){
-                    when(buttonView.id){
-                        R.id.liner_btn -> {if (post.size == "라이너") {newPostList.remove(post)}}
-                        R.id.small_btn -> {if(post.size=="소형") { newPostList.remove(post)}}
-                        R.id.middle_btn -> {if(post.size=="중형") { newPostList.remove(post)}}
-                        R.id.large_btn -> {if(post.size=="대형") { newPostList.remove(post)}}
-                        R.id.overnight_btn -> {if(post.size=="오버나이트") { newPostList.remove(post)}}
+            } else {
+                for (post in postList) {
+                    when (buttonView.id) {
+                        R.id.liner_btn -> {
+                            if (post.size == "라이너") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.small_btn -> {
+                            if (post.size == "소형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.middle_btn -> {
+                            if (post.size == "중형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.large_btn -> {
+                            if (post.size == "대형") {
+                                newPostList.remove(post)
+                            }
+                        }
+
+                        R.id.overnight_btn -> {
+                            if (post.size == "오버나이트") {
+                                newPostList.remove(post)
+                            }
+                        }
                     }
                 }
-                if(!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked){
-                    if(newPostList.size==0){newPostList=postList}
+                if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
+                    if (newPostList.size == 0) {
+                        newPostList = postList
+                    }
                 }
             }
-            recyclerAdapter = PostRecyclerAdapter(newPostList)
+            recyclerAdapter = PostRecyclerAdapter(newPostList, requireContext())
             recyclerView.adapter = recyclerAdapter
         }
         liner_btn.setOnCheckedChangeListener(listener)

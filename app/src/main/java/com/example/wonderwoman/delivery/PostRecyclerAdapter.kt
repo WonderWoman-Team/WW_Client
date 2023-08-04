@@ -1,19 +1,25 @@
 package com.example.wonderwoman.delivery
 
+import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
+import com.example.wonderwoman.UserList
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class PostRecyclerAdapter(val PostList: ArrayList<Post>) :
+
+class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
     RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
@@ -22,7 +28,6 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>) :
     //recyclerView가 Adapter에 연결된 후 최초로 실행되는 부분.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         //뷰홀더에 전달
-
         val view = LayoutInflater.from(parent.context).inflate(R.layout.post_list, parent, false)
         return CustomViewHolder(view)
     }
@@ -77,11 +82,26 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>) :
                     notifyItemRemoved(position)
                     notifyItemRangeRemoved(position, PostList.size - position)
                 }
-            } else {
+            } else if (holder.go_to_chat_btn.text.contains("하기")) {
+                val fragment = UserList.newInstance()
 
+                val fragmentManager: FragmentManager =
+                    (it.context as FragmentActivity).supportFragmentManager // instantiate your view context
+
+                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(
+                    R.id.fragment,
+                    fragment
+                ) // your container and your fragment
+
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+                Log.d("press", "press")
             }
         }
     }
+
 
     override fun getItemCount(): Int {
         return PostList.size
@@ -100,6 +120,5 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>) :
         var chat_state_img = itemView.findViewById<ImageView>(R.id.post_chat_state_img)
         var post_state_img = itemView.findViewById<ImageView>(R.id.post_state_img)
         var go_to_chat_btn = itemView.findViewById<Button>(R.id.go_to_chat_btn)
-
     }
 }

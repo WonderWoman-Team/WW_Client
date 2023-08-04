@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var deliveryFragment: DeliveryFragment
-    private lateinit var chatFragment: ChatFragment
     private lateinit var mypageFragment: MypageFragment
     private lateinit var writeBtn: Button
 
@@ -62,5 +61,4 @@ class MainActivity : AppCompatActivity() {
         }
         true
     }
-
 }
