@@ -15,7 +15,7 @@ class CheckActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //다음페이지
-        val intent = Intent(this, CheckActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         binding.nextBtn5.setOnClickListener{startActivity(intent) }
 
         //이전페이지

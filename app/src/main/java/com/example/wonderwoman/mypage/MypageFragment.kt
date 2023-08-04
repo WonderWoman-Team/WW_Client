@@ -1,10 +1,11 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.wonderwoman.R
 
 class MypageFragment: Fragment() {
     companion object {

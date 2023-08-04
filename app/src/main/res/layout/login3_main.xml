@@ -29,7 +29,7 @@
             android:layout_marginRight="70dp"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:fontFamily="@font/notofont"
+            android:fontFamily="@font/noto_sans_regular"
             android:shadowRadius="3.0"
             android:shadowDy="1.0"
             android:shadowColor="#666666"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:textColor="#666666"
                 android:textSize="20dp"
                 android:text="비밀번호를\n입력해주세요."/>
@@ -94,6 +94,8 @@
                 android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 입력해주세요."
+                android:textSize="14dp"
+                android:padding="10.00dp"
                 android:inputType="textPersonName"
                 android:text=""
                 android:textColorHint="#CCCCCC" />
@@ -106,6 +108,8 @@
                 android:background="@drawable/edittext_blue"
                 android:ems="10"
                 android:hint="비밀번호를 한번 더 입력해주세요."
+                android:textSize="14dp"
+                android:padding="10.00dp"
                 android:textColorHint="#CCCCCC"
                 android:inputType="textPassword" />
 
@@ -113,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="영문, 숫자를 포함한 8~16자리 조합으로 입력해주세요."
-                android:fontFamily="@font/notofont"
+                android:fontFamily="@font/noto_sans_regular"
                 android:textSize="11dp"
                 android:textColor="#F9395F"/>
 
@@ -125,20 +129,24 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:orientation="vertical"
-        android:layout_marginTop="220dp">
-
-        <ImageView
-            android:id="@+id/next_btn3"
-            android:layout_margin="10dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_next" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/next_btn3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_next" />
+
+        </LinearLayout>
     </LinearLayout>
 
 
