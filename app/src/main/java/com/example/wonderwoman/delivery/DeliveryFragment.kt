@@ -32,18 +32,10 @@ class DeliveryFragment : Fragment() {
         TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+        val intent = Intent(getActivity(), EwhaActivity::class.java)
+        binding.scrollbtn.setOnClickListener{startActivity(intent)}
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentDeliveryBinding.inflate(layoutInflater)
-        binding.scrollbtn.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, EwhaActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
 }
 
