@@ -81,7 +81,7 @@
                 android:hint="포스코관"
                 android:textColorHint="@color/black"/>
             <ImageButton
-                android:id="@+id/scrollbtn"
+                android:id="@+id/locationbtn"
                 android:layout_width="14dp"
                 android:layout_height="10dp"
                 android:background="@drawable/toggle_btn"

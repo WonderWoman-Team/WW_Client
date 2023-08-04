@@ -34,10 +34,8 @@ class DeliveryFragment: Fragment() {
         TabLayoutMediator(binding.tablayout, binding.viewpager){
             tab, position -> tab.text = tabTitle[position]
         }.attach()
-
         val intent = Intent(getActivity(), EwhaActivity::class.java)
-        binding.scrollbtn.setOnClickListener{startActivity(intent)}
-
+        binding.locationbtn.setOnClickListener{startActivity(intent)}
         return binding.root
     }
 }

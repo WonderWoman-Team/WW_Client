@@ -12,7 +12,6 @@
         android:layout_margin="10dp"
         android:id="@+id/location_icon"
         android:src="@drawable/list_icon" />
-
     <TextView
         android:id="@+id/list_text"
         android:textColor="#000000"
