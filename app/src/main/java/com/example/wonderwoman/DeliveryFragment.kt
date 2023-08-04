@@ -1,5 +1,6 @@
 package com.example.wonderwoman
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,9 @@ class DeliveryFragment: Fragment() {
         TabLayoutMediator(binding.tablayout, binding.viewpager){
             tab, position -> tab.text = tabTitle[position]
         }.attach()
+
+        val intent = Intent(getActivity(), EwhaActivity::class.java)
+        binding.scrollbtn.setOnClickListener{startActivity(intent)}
 
         return binding.root
     }
