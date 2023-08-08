@@ -2,6 +2,7 @@ package com.example.wonderwoman
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -18,17 +19,15 @@ class SchoolActivity : AppCompatActivity() {
         mBinding = Login2MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //다음페이지
-        val intent = Intent(this, PasswordActivity::class.java)
-        binding.nextBtn1.setOnClickListener{startActivity(intent) }
-
-        //이전페이지
-        val intent2 = Intent(this, Main2Activity::class.java)
-        binding.back1.setOnClickListener{startActivity(intent2) }
-
-        val btnSend = findViewById<ImageView>(R.id.btnSend)
-
-        btnSend.setOnClickListener() {
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .permitDiskReads()
+                .permitDiskWrites()
+                .permitNetwork().build()
+        )
+        binding.btnSend!!.setOnClickListener {
+            val mailServer = SendMail()
+            mailServer.sendSecurityCode(applicationContext, binding.editEmail!!.text.toString())
             binding.seeText.visibility= View.GONE
             binding.seeEdit.visibility= View.VISIBLE
 
@@ -37,13 +36,17 @@ class SchoolActivity : AppCompatActivity() {
             toast.view = view1
             toast.setGravity(Gravity.TOP, 0, 0)
             toast.show()
-
         }
+        //다음페이지
+        val intent = Intent(this, PasswordActivity::class.java)
+        binding.nextBtn1.setOnClickListener{startActivity(intent) }
 
+        //이전페이지
+        val intent2 = Intent(this, Main2Activity::class.java)
+        binding.back1.setOnClickListener{startActivity(intent2) }
+        }
     }
 
-
-}
 
 
 
