@@ -30,7 +30,6 @@ class SchoolActivity : AppCompatActivity() {
             mailServer.sendSecurityCode(applicationContext, binding.editEmail!!.text.toString())
             binding.seeText.visibility= View.GONE
             binding.seeEdit.visibility= View.VISIBLE
-
             val view1 = layoutInflater.inflate(R.layout.message, null)
             var toast = Toast(this)
             toast.view = view1
