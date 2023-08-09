@@ -20,13 +20,33 @@
             android:layout_height="45dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             >
 
+            <TextView
+                android:id="@+id/wonder_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:text="WonderWoman"
+                android:textAppearance="@style/wonder_woman"
+                android:fontFamily="@font/sb_aggro_otf"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end">
+
+
+                <ImageButton
+                    android:id="@+id/search_img"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search" />
                 <ImageButton
                     android:id="@+id/alarm_img"
                     android:layout_width="25dp"
@@ -38,9 +58,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/noto_sans_bold"
-            android:textSize="21sp"
+            android:textSize="20sp"
             android:text="채팅"
             android:textColor="@color/white" />
     </LinearLayout>
