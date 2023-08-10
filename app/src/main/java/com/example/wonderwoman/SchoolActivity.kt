@@ -37,8 +37,11 @@ class SchoolActivity : AppCompatActivity() {
             toast.show()
         }
         //다음페이지
-        val intent = Intent(this, PasswordActivity::class.java)
-        binding.nextBtn1.setOnClickListener{startActivity(intent) }
+        binding.nextBtn1.setOnClickListener{
+            val email=binding.editEmail.getText().toString()
+            val intent = Intent(this, PasswordActivity::class.java)
+            intent.putExtra("Email", email)
+            startActivity(intent) }
 
         //이전페이지
         val intent2 = Intent(this, Main2Activity::class.java)
