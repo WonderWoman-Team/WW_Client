@@ -6,71 +6,39 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.wonderwoman.databinding.LoginMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private var mBinding: LoginMainBinding? = null
     private val binding get() = mBinding!!
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mBinding = LoginMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
 
         // 로그인 버튼
         binding.login.setOnClickListener {
+            val email = binding.editID.text.toString().trim()
+            val password = binding.editPassword.text.toString().trim()
 
-            //editText로부터 입력된 값을 받아온다
-            var id = binding.editID.text.toString()
-            var pw = binding.editPassword.text.toString()
+            auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        Toast.makeText(this,"로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
 
-            // 쉐어드로부터 저장된 id, pw 가져오기
-            val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
-            val savedId = sharedPreference.getString("id", "")
-            val savedPw = sharedPreference.getString("pw", "")
-            // 유저가 입력한 id, pw값과 쉐어드로 불러온 id, pw값 비교
-            if(id == savedId && pw == savedPw){
-                // 로그인 성공 다이얼로그 보여주기
-                dialog("success")
-            }
-            else{
-                // 로그인 실패 다이얼로그 보여주기
-                dialog("fail")
-            }
-
-        }
-
-        //회원가입
-
-    }
-    // 로그인 성공/실패 시 다이얼로그를 띄워주는 메소드
-    fun dialog(type: String){
-        var dialog = AlertDialog.Builder(this)
-
-        if(type.equals("success")){
-            dialog.setTitle("로그인 성공")
-            dialog.setMessage("로그인 성공!")
-            val intent: Intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        else if(type.equals("fail")){
-            dialog.setTitle("로그인 실패")
-            dialog.setMessage("아이디와 비밀번호를 확인해주세요")
-        }
-
-        var dialog_listener = object: DialogInterface.OnClickListener{
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-                when(which){
-                    DialogInterface.BUTTON_POSITIVE ->
-                        Log.d(TAG, "")
+                    }else {
+                        Toast.makeText(this,"아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
         }
-
-        dialog.setPositiveButton("확인",dialog_listener)
-        dialog.show()
     }
 }
 
