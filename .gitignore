@@ -18,3 +18,4 @@
 local.properties
 *.json
 *.pro
+/.idea/misc.xml
