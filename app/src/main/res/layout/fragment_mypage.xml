@@ -103,7 +103,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@android:color/transparent"
                 android:text="@string/myrequest"
                 android:elevation="0dp"
                 android:textAppearance="@style/bold13"
@@ -128,7 +128,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@android:color/transparent"
                 android:text="@string/mypost"
                 android:elevation="0dp"
                 android:textAppearance="@style/bold13"
