@@ -2,16 +2,16 @@ package com.example.wonderwoman
 
 
 import android.os.Bundle
-import android.os.Binder
-import android.os.PersistableBundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wonderwoman.databinding.ActivityChatBinding
 import com.example.wonderwoman.databinding.ActivityChatGuiBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import org.w3c.dom.Text
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var receiverName: String
