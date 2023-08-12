@@ -59,6 +59,7 @@ class DispatchTab() : Fragment() {
         recyclerView = dispatchTabBinding.postRecyclerview //리사이클러뷰 연결
         recyclerView.setHasFixedSize(true) //recyclerview 성능 강화
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        fetchDelivery(sizeList)
 
         //버튼 이벤트
         var listener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
@@ -95,6 +96,15 @@ class DispatchTab() : Fragment() {
         large_btn.setOnCheckedChangeListener(listener)
         overnight_btn.setOnCheckedChangeListener(listener)
         return dispatchTabBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        liner_btn.isChecked = false
+        small_btn.isChecked = false
+        middle_btn.isChecked = false
+        large_btn.isChecked = false
+        overnight_btn.isChecked = false
     }
 
     private fun fetchDelivery(size: List<String>): List<ResponseDelivery.Delivery>? {
