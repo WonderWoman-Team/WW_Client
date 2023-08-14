@@ -6,5 +6,5 @@ object Constants {
     //Delivery API
     const val GET_DELIVERY = "app/delivery/post"
     //Post API
-    const val POST_POST = "app/delivery"
+    const val ADD_POST = "app/delivery"
 }
