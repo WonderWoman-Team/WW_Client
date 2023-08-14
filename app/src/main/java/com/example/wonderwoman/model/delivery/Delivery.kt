@@ -30,7 +30,6 @@ data class ResponseDelivery(
         val postComment: String,     //게시물 내용 및 특이사항
         val written: Boolean         //게시물 조회 시 사용
     )
-
     data class Pageable(
         val sort: Sort,              //
         val offset: Int,             //
@@ -47,11 +46,18 @@ data class ResponseDelivery(
     )
 }
 
+data class RequestAddPost(
+    val building: List<String>,
+    var postTitle: String,
+    var postReqType: String,
+    var sanitaryNum: Int,
+    var sanitarySize: String,
+    var sanitaryType: String,
+    val postComment: String
+)
 
-//
-//data class RequestDelivery(
-//    val reqType: String?,
-//    val building: String?,
-//    val size: List<String>,
-//    val school: String?
-//)
+data class ResponseAddPost(
+    val status: String,
+    val message: String?,
+    val solution: String?
+)

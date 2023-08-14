@@ -18,6 +18,7 @@ import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.awaitResponse
 
 class TotalTab() : Fragment() {
     private lateinit var totalTabBinding: TotalTabBinding
@@ -108,6 +109,8 @@ class TotalTab() : Fragment() {
     private fun fetchDelivery(size: List<String>): List<ResponseDelivery.Delivery>? {
         val callDelivery: Call<ResponseDelivery> =
             RetrofitClass.deliveryAPI.getDeliveryList(null, null, size, null)
+        Log.d("fetchDelivery","${callDelivery==null}")
+
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
                 call: Call<ResponseDelivery>,
@@ -117,7 +120,8 @@ class TotalTab() : Fragment() {
                     data = response.body()
                     Log.d("success", data.toString())
                     deliveryList = it.content
-                } ?: showError(response.errorBody())
+                } ?: {Log.d("error",response.errorBody().toString())}
+//                showError(response.errorBody())
             }
 
             override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
@@ -128,11 +132,11 @@ class TotalTab() : Fragment() {
         return deliveryList
     }
 
-    fun showError(error: ResponseBody?) {
-        val e = error ?: return
-        val ob = JSONObject(e.string())
-        Log.d("error", ob.getString("message"))
-    }
+//    fun showError(error: ResponseBody?) {
+//        val e = error ?: return
+//        val ob = JSONObject(e.string())
+//        Log.d("error", ob.getString("message"))
+//    }
 
     fun setRecyclerAdapter(deliveryList: List<ResponseDelivery.Delivery>) {
         recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())

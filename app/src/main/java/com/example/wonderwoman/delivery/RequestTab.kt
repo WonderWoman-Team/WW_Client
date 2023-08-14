@@ -121,7 +121,9 @@ class RequestTab() : Fragment() {
                     data = response.body()
                     Log.d("success", data.toString())
                     deliveryList = it.content
-                } ?: showError(response.errorBody())
+//                } ?: showError(response.errorBody())
+                } ?: {Log.d("error",response.errorBody().toString())}
+
             }
 
             override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
@@ -132,11 +134,11 @@ class RequestTab() : Fragment() {
         return deliveryList
     }
 
-    fun showError(error: ResponseBody?) {
-        val e = error ?: return
-        val ob = JSONObject(e.string())
-        Log.d("error", ob.getString("message"))
-    }
+//    fun showError(error: ResponseBody?) {
+//        val e = error ?: return
+//        val ob = JSONObject(e.string())
+//        Log.d("error", ob.getString("message"))
+//    }
 
     private fun setRecyclerAdapter(deliveryList: List<ResponseDelivery.Delivery>) {
         recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
