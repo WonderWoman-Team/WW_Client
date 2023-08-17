@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.RequestTabBinding
 import com.example.wonderwoman.model.RetrofitClass
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseDelivery
+import com.example.wonderwoman.util.Constants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -35,7 +37,7 @@ class RequestTab() : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: PostRecyclerAdapter
     var data: ResponseDelivery? = null
-    var deliveryList: List<ResponseDelivery.Delivery>? = null
+    var deliveryList = listOf<Delivery>()
     var sizeList: MutableList<String> = mutableListOf()
 
     companion object {
@@ -88,8 +90,7 @@ class RequestTab() : Fragment() {
             if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
                 sizeList.clear()
             }
-            fetchDelivery(sizeList)?.let { setRecyclerAdapter(it) }
-                ?: setRecyclerAdapter(emptyList())
+            fetchDelivery(sizeList)
         }
         liner_btn.setOnCheckedChangeListener(listener)
         small_btn.setOnCheckedChangeListener(listener)
@@ -109,38 +110,35 @@ class RequestTab() : Fragment() {
         overnight_btn.isChecked = false
     }
 
-    private fun fetchDelivery(size: List<String>): List<ResponseDelivery.Delivery>? {
+    private fun fetchDelivery(size: MutableList<String>) {
         val callDelivery: Call<ResponseDelivery> =
-            RetrofitClass.deliveryAPI.getDeliveryList(null, null, size, null)
+            RetrofitClass.deliveryAPI.getDeliveryList(Constants.ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
-                call: Call<ResponseDelivery>,
-                response: Response<ResponseDelivery>
-            ) {
-                response.takeIf { it.isSuccessful }?.body()?.let { it ->
-                    data = response.body()
-                    Log.d("success", data.toString())
-                    deliveryList = it.content
-//                } ?: showError(response.errorBody())
-                } ?: {Log.d("error",response.errorBody().toString())}
+            call: Call<ResponseDelivery>,
+            response: Response<ResponseDelivery>
+        ) {
+            if(response.isSuccessful){
+                val result: Response<ResponseDelivery> = response
+                Log.d("success", "total + ${result.code()} + ${result.body()} + ${result.raw()}")
+                deliveryList = result.body()?.content ?: mutableListOf()
+                Log.d("content",deliveryList.toString())
+                setRecyclerAdapter(deliveryList)
 
+            }else {
+                val result: Response<ResponseDelivery> = response
+                Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
             }
+        }
 
             override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
                 //통신 실패 로직
-                t.message?.let { Log.d("fail", it) }
+                t.message?.let { Log.d("fail", t.message.toString()) }
             }
         })
-        return deliveryList
     }
 
-//    fun showError(error: ResponseBody?) {
-//        val e = error ?: return
-//        val ob = JSONObject(e.string())
-//        Log.d("error", ob.getString("message"))
-//    }
-
-    private fun setRecyclerAdapter(deliveryList: List<ResponseDelivery.Delivery>) {
+    private fun setRecyclerAdapter(deliveryList: List<Delivery>) {
         recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
