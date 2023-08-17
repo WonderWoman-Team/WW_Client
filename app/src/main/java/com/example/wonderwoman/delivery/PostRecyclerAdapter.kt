@@ -15,11 +15,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.UserList
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
+import com.example.wonderwoman.model.delivery.ResponseDelivery
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
+class PostRecyclerAdapter(private val deliveryList: List<Delivery>, val context: Context) :
     RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
@@ -34,30 +36,31 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
 
     //각 아이템들에 대한 매칭이 이뤄지는 곳
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.location.text = PostList.get(position).location
-        holder.size.text = PostList.get(position).size
-        holder.count.text = PostList.get(position).count.toString()
-        holder.type.text = PostList.get(position).type
-        holder.time.text = PostList.get(position).time
-        holder.nickname.text = PostList.get(position).nickname
-        holder.post_state.text = PostList.get(position).post_state
+        holder.location.text = deliveryList[position].postTitle
+        holder.size.text = deliveryList[position].sanitarySize
+        holder.count.text = deliveryList[position].sanitaryNum.toString()
+        holder.type.text = deliveryList[position].sanitaryType
+        holder.time.text = deliveryList[position].createdAt
+        holder.nickname.text = deliveryList[position].nickname
+        holder.post_state.text = "${deliveryList[position].postReqType}하기"
         if (holder.nickname.text.equals("본인")) {
             holder.go_to_chat_btn.setBackgroundResource(R.drawable.cancel_delivery_btn)
             holder.go_to_chat_btn.setTextColor(Color.rgb(249, 57, 95))
             holder.go_to_chat_btn.setPadding(30, 0, 0, 0)
-            if (holder.post_state.text.equals("요청글")) {
-                holder.go_to_chat_btn.text = "요청취소   x"
-            } else if (holder.post_state.text.equals("출동글")) {
-                holder.go_to_chat_btn.text = "출동취소   x"
-            }
+            holder.post_state.text = "${deliveryList[position].postReqType}   x"
+//            if (holder.post_state.text.equals("요청글")) {
+//                holder.go_to_chat_btn.text = "요청취소   x"
+//            } else if (holder.post_state.text.equals("출동글")) {
+//                holder.go_to_chat_btn.text = "출동취소   x"
+//            }
         } else { //본인이 작성한 게시글이 아니라 다른 사람들의 게시글인 경우
-            holder.chat_state.text = PostList.get(position).chat_state
+            holder.chat_state.text = deliveryList[position].postStatus
 
-            if (holder.post_state.text.equals("요청글")) {
-                holder.go_to_chat_btn.text = "요청하기 "
-            } else if (holder.post_state.text.equals("출동글")) {
-                holder.go_to_chat_btn.text = "출동하기 "
-            }
+//            if (holder.post_state.text.equals("요청글")) {
+//                holder.go_to_chat_btn.text = "요청하기 "
+//            } else if (holder.post_state.text.equals("출동글")) {
+//                holder.go_to_chat_btn.text = "출동하기 "
+//            }
 
             if (holder.chat_state.text.equals("완료")) {
                 holder.chat_state_img.setBackgroundResource(R.drawable.complete)
@@ -69,6 +72,7 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
             } else if (holder.chat_state.text.equals("채팅중") || holder.chat_state.text.equals("진행중")) {
                 holder.chat_state_img.setBackgroundResource(R.drawable.loader)
             }
+
         }
 
         //리스트 클릭 이벤트
@@ -80,7 +84,7 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
                 if (position in 1..9) index = "0${position}"
                 databaseReference.child("Post_${index}").removeValue().addOnSuccessListener {
                     notifyItemRemoved(position)
-                    notifyItemRangeRemoved(position, PostList.size - position)
+                    notifyItemRangeRemoved(position, deliveryList.size - position)
                 }
             } else if (holder.go_to_chat_btn.text.contains("하기")) {
                 val fragment = UserList.newInstance()
@@ -104,7 +108,7 @@ class PostRecyclerAdapter(val PostList: ArrayList<Post>, val context: Context) :
 
 
     override fun getItemCount(): Int {
-        return PostList.size
+        return deliveryList.size
     }
 
     //리사이클러뷰로 구현한 아이템을 불러오는 부분

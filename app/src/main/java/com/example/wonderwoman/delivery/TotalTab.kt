@@ -1,7 +1,6 @@
 package com.example.wonderwoman.delivery
 
 import android.os.Bundle
-
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.TotalTabBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.example.wonderwoman.model.RetrofitClass
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
+import com.example.wonderwoman.model.delivery.ResponseDelivery
+import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.awaitResponse
 
 class TotalTab() : Fragment() {
     private lateinit var totalTabBinding: TotalTabBinding
@@ -26,13 +29,13 @@ class TotalTab() : Fragment() {
     private lateinit var middle_btn: CheckBox
     private lateinit var large_btn: CheckBox
     private lateinit var overnight_btn: CheckBox
-    private lateinit var newPostList: ArrayList<Post>
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: PostRecyclerAdapter
-    private lateinit var postList: ArrayList<Post>
-    private lateinit var database: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
+    var data: ResponseDelivery? = null
+    var deliveryList = listOf<Delivery>()
+    var sizeList: MutableList<String> = mutableListOf()
+    var value: ResponseDelivery? = null
+
 
     companion object {
         fun newInstance(): TotalTab {
@@ -56,114 +59,35 @@ class TotalTab() : Fragment() {
         recyclerView = totalTabBinding.postRecyclerview
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
-        postList = ArrayList()
-
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("Post")
-        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                postList.clear()
-                for (data in snapshot.children) {
-                    var listItem = data.getValue(Post::class.java)
-                    if (listItem != null) {
-                        postList.add(listItem)
-                    }
-                }
-                recyclerAdapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("POST", "${error.toException()}") //에러문 출력
-            }
-        })
-
-        recyclerAdapter = PostRecyclerAdapter(postList, requireContext())
-        recyclerView.adapter = recyclerAdapter
-
+        fetchDelivery(sizeList)
 
         //버튼 이벤트
-        newPostList = ArrayList()
         var listener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if (newPostList == postList) {
-                newPostList = ArrayList()
-            }
-            if (isChecked) {
-                for (post in postList) {
-                    when (buttonView.id) {
-                        R.id.liner_btn -> {
-                            if (post.size == "라이너") {
-                                newPostList.add(post)
-                            }
-                        }
-
-                        R.id.small_btn -> {
-                            if (post.size == "소형") {
-                                newPostList.add(post)
-                            }
-                        }
-
-                        R.id.middle_btn -> {
-                            if (post.size == "중형") {
-                                newPostList.add(post)
-                            }
-                        }
-
-                        R.id.liner_btn -> {
-                            if (post.size == "대형") {
-                                newPostList.add(post)
-                            }
-                        }
-
-                        R.id.overnight_btn -> {
-                            if (post.size == "오버나이트") {
-                                newPostList.add(post)
-                            }
-                        }
-                    }
+            when (buttonView.id) {
+                R.id.liner_btn -> {
+                    if (isChecked) sizeList.add("라이너") else sizeList.remove("라이너")
                 }
-            } else {
-                for (post in postList) {
-                    when (buttonView.id) {
-                        R.id.liner_btn -> {
-                            if (post.size == "라이너") {
-                                newPostList.remove(post)
-                            }
-                        }
 
-                        R.id.small_btn -> {
-                            if (post.size == "소형") {
-                                newPostList.remove(post)
-                            }
-                        }
-
-                        R.id.middle_btn -> {
-                            if (post.size == "중형") {
-                                newPostList.remove(post)
-                            }
-                        }
-
-                        R.id.liner_btn -> {
-                            if (post.size == "대형") {
-                                newPostList.remove(post)
-                            }
-                        }
-
-                        R.id.overnight_btn -> {
-                            if (post.size == "오버나이트") {
-                                newPostList.remove(post)
-                            }
-                        }
-                    }
+                R.id.small_btn -> {
+                    if (isChecked) sizeList.add("소형") else sizeList.remove("소형")
                 }
-                if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
-                    if (newPostList.size == 0) {
-                        newPostList = postList
-                    }
+
+                R.id.middle_btn -> {
+                    if (isChecked) sizeList.add("중형") else sizeList.remove("중형")
+                }
+
+                R.id.large_btn -> {
+                    if (isChecked) sizeList.add("대형") else sizeList.remove("대형")
+                }
+
+                R.id.overnight_btn -> {
+                    if (isChecked) sizeList.add("오버나이트") else sizeList.remove("오버나이트")
                 }
             }
-            recyclerAdapter = PostRecyclerAdapter(newPostList, requireContext())
-            recyclerView.adapter = recyclerAdapter
+            if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
+                sizeList.clear()
+            }
+            fetchDelivery(sizeList)
         }
 
         liner_btn.setOnCheckedChangeListener(listener)
@@ -173,5 +97,52 @@ class TotalTab() : Fragment() {
         overnight_btn.setOnCheckedChangeListener(listener)
 
         return totalTabBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        liner_btn.isChecked = false
+        small_btn.isChecked = false
+        middle_btn.isChecked = false
+        large_btn.isChecked = false
+        overnight_btn.isChecked = false
+    }
+
+    private fun fetchDelivery(size: MutableList<String>) {
+        //Authorization에 토큰값 넣어주기
+        val callDelivery: Call<ResponseDelivery> =
+            RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+            Log.d("size", size.toString())
+
+        callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
+            override fun onResponse(
+                call: Call<ResponseDelivery>,
+                response: Response<ResponseDelivery>
+            ) {
+                if(response.isSuccessful){
+                    val result: Response<ResponseDelivery> = response
+                    Log.d("success", "total + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    deliveryList = result.body()?.content ?: mutableListOf()
+                    Log.d("content",deliveryList.toString())
+                    setRecyclerAdapter(deliveryList)
+
+                }else {
+                    val result: Response<ResponseDelivery> = response
+                    Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
+                //통신 실패 로직
+                t.message?.let { Log.d("fail", t.message.toString()) }
+            }
+        })
+    }
+
+    fun setRecyclerAdapter(deliveryList: List<Delivery>) {
+        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
+        recyclerView.adapter = recyclerAdapter
+        recyclerAdapter.notifyDataSetChanged()
+        recyclerView.setHasFixedSize(true)
     }
 }

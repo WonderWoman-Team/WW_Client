@@ -22,11 +22,14 @@
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
             >
-            <ImageView
-                android:id="@+id/logo_img"
+            <TextView
+                android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/home_on"
+                android:textSize="19sp"
+                android:text="Wonder Woman"
+                android:textAppearance="@style/wonder_woman"
+                android:fontFamily="@font/sb_aggro_otf"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,8 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/noto_sans_bold"
-            android:textSize="21sp"
+            android:textAppearance="@style/delivery"
             android:text="@string/realtime_delivery"
             android:textColor="@color/white" />
     </LinearLayout>
