@@ -15,12 +15,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.UserList
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseDelivery
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class PostRecyclerAdapter(private val deliveryList: List<ResponseDelivery.Delivery>, val context: Context) :
+class PostRecyclerAdapter(private val deliveryList: List<Delivery>, val context: Context) :
     RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference

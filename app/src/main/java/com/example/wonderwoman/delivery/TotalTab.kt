@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.TotalTabBinding
 import com.example.wonderwoman.model.RetrofitClass
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseDelivery
+import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -30,8 +32,9 @@ class TotalTab() : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: PostRecyclerAdapter
     var data: ResponseDelivery? = null
-    var deliveryList: List<ResponseDelivery.Delivery>? = null
-     var sizeList: MutableList<String> = mutableListOf()
+    var deliveryList = listOf<Delivery>()
+    var sizeList: MutableList<String> = mutableListOf()
+    var value: ResponseDelivery? = null
 
 
     companion object {
@@ -84,8 +87,7 @@ class TotalTab() : Fragment() {
             if (!liner_btn.isChecked && !small_btn.isChecked && !middle_btn.isChecked && !large_btn.isChecked && !overnight_btn.isChecked) {
                 sizeList.clear()
             }
-            fetchDelivery(sizeList)?.let { setRecyclerAdapter(it) }
-                ?: setRecyclerAdapter(emptyList())
+            fetchDelivery(sizeList)
         }
 
         liner_btn.setOnCheckedChangeListener(listener)
@@ -106,39 +108,38 @@ class TotalTab() : Fragment() {
         overnight_btn.isChecked = false
     }
 
-    private fun fetchDelivery(size: List<String>): List<ResponseDelivery.Delivery>? {
+    private fun fetchDelivery(size: MutableList<String>) {
+        //Authorization에 토큰값 넣어주기
         val callDelivery: Call<ResponseDelivery> =
-            RetrofitClass.deliveryAPI.getDeliveryList(null, null, size, null)
-        Log.d("fetchDelivery","${callDelivery==null}")
+            RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+            Log.d("size", size.toString())
 
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
                 call: Call<ResponseDelivery>,
                 response: Response<ResponseDelivery>
             ) {
-                response.takeIf { it.isSuccessful }?.body()?.let { it ->
-                    data = response.body()
-                    Log.d("success", data.toString())
-                    deliveryList = it.content
-                } ?: {Log.d("error",response.errorBody().toString())}
-//                showError(response.errorBody())
+                if(response.isSuccessful){
+                    val result: Response<ResponseDelivery> = response
+                    Log.d("success", "total + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    deliveryList = result.body()?.content ?: mutableListOf()
+                    Log.d("content",deliveryList.toString())
+                    setRecyclerAdapter(deliveryList)
+
+                }else {
+                    val result: Response<ResponseDelivery> = response
+                    Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+                }
             }
 
             override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
                 //통신 실패 로직
-                t.message?.let { Log.d("fail", it) }
+                t.message?.let { Log.d("fail", t.message.toString()) }
             }
         })
-        return deliveryList
     }
 
-//    fun showError(error: ResponseBody?) {
-//        val e = error ?: return
-//        val ob = JSONObject(e.string())
-//        Log.d("error", ob.getString("message"))
-//    }
-
-    fun setRecyclerAdapter(deliveryList: List<ResponseDelivery.Delivery>) {
+    fun setRecyclerAdapter(deliveryList: List<Delivery>) {
         recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
