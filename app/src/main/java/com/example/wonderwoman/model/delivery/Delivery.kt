@@ -35,7 +35,7 @@ data class ResponseDelivery(
 //    @SerializedName("postTitle")
         val postTitle: String,       //게시글 제목
 //    @SerializedName("postReqType")
-        val postReqType: String?,     //게시물 유형
+        val postReqType: String,     //게시물 유형
 //    @SerializedName("sanitaryNum")
         val sanitaryNum: Int,        //생리대 개수
 //    @SerializedName("sanitarySize")

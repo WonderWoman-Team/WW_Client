@@ -22,6 +22,7 @@ interface DeliveryService {
 
     @POST(Constants.ADD_POST)
     fun addDeliveryPost(
+        @Header("Authorization") Authorization: String,
         @Body requestAddPost: RequestAddPost
     ): Call<ResponseAddPost>
 //    fun addDeliveryPost(

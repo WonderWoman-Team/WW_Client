@@ -112,7 +112,7 @@ class RequestTab() : Fragment() {
 
     private fun fetchDelivery(size: MutableList<String>) {
         val callDelivery: Call<ResponseDelivery> =
-            RetrofitClass.deliveryAPI.getDeliveryList(Constants.ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+            RetrofitClass.deliveryAPI.getDeliveryList(Constants.ACCESS_TOKEN, Constants.REQUEST, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
             call: Call<ResponseDelivery>,
