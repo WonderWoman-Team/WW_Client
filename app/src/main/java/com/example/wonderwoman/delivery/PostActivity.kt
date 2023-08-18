@@ -24,10 +24,8 @@ import com.example.wonderwoman.databinding.ToastBinding
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.delivery.RequestAddPost
 import com.example.wonderwoman.model.delivery.ResponseAddPost
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import okhttp3.ResponseBody
-import org.json.JSONObject
+import com.example.wonderwoman.util.Constants
+
 import retrofit2.Call
 import retrofit2.Response
 import java.time.LocalDateTime
@@ -150,15 +148,16 @@ class PostActivity : AppCompatActivity() {
 
         //완료 버튼 감지
         completeBtn.setOnClickListener {
-            status = addPost(requestAddPost)
-            if(status == "SUCCESS") {
-                toastView.text = "게시글이 성공적으로 등록되었습니다!"
-            }else if(status == "400"){
-                toastView.text = "건물이 학교와 매칭되지 않습니다"
-            }
-            else{
-                toastView.text = "error"
-            }
+//            status = addPost(requestAddPost)
+//            if(status == "SUCCESS") {
+//                toastView.text = "게시글이 성공적으로 등록되었습니다!"
+//            }else if(status == "400"){
+//                toastView.text = "건물이 학교와 매칭되지 않습니다"
+//            }
+//            else{
+//                toastView.text = "error"
+//            }
+
             val view1 = layoutInflater.inflate(R.layout.toast, null)
             var toast = Toast(this)
             toast.view = view1
@@ -201,6 +200,7 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
+
     //외부 클릭 시 키보드 내리게
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val imm: InputMethodManager =
@@ -211,23 +211,27 @@ class PostActivity : AppCompatActivity() {
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =
-            RetrofitClass.deliveryAPI.addDeliveryPost(requestAddPost)
-        Log.d("fetchAdd","${callAddPost==null}")
+            RetrofitClass.deliveryAPI.addDeliveryPost(Constants.ACCESS_TOKEN,requestAddPost)
+        Log.d("fetchAdd","${requestAddPost}")
         callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost>{
             override fun onResponse(
                 call: Call<ResponseAddPost>,
                 response: Response<ResponseAddPost>
             ) {
-                response.takeIf { it.isSuccessful }?.body()?.let { it ->
-                    data = response.body()
-                    Log.d("success", data.toString())
-                    status = data!!.status
-                } ?: showError(response.body())
-//                } ?: showError(response.errorBody())
+                if(response.isSuccessful){
+                    val result: Response<ResponseAddPost> = response
+                    Log.d("success", "post + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    status = result.body()?.status
+                    Log.d("status",status.toString())
+                }else {
+                    val result: Response<ResponseAddPost> = response
+                    Log.d("error", "post + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+                }
             }
 
             override fun onFailure(call: Call<ResponseAddPost>, t: Throwable) {
-                t.message?.let { Log.d("fail", it) }
+                //통신 실패 로직
+                t.message?.let { Log.d("fail post", t.message.toString()) }
             }
         })
         return status

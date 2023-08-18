@@ -42,25 +42,29 @@ class PostRecyclerAdapter(private val deliveryList: List<Delivery>, val context:
         holder.type.text = deliveryList[position].sanitaryType
         holder.time.text = deliveryList[position].createdAt
         holder.nickname.text = deliveryList[position].nickname
-        holder.post_state.text = "${deliveryList[position].postReqType}하기"
+        holder.post_state.text = "${deliveryList[position].postReqType}글"
+        holder.chat_state.text = deliveryList[position].postStatus
+        //진행 상태가 없음 일 경우
+        if(holder.chat_state.text.equals("없음")) holder.chat_state.text = ""
+        //본인이 작성한 게시글인 경우
         if (holder.nickname.text.equals("본인")) {
             holder.go_to_chat_btn.setBackgroundResource(R.drawable.cancel_delivery_btn)
             holder.go_to_chat_btn.setTextColor(Color.rgb(249, 57, 95))
             holder.go_to_chat_btn.setPadding(30, 0, 0, 0)
-            holder.post_state.text = "${deliveryList[position].postReqType}   x"
-//            if (holder.post_state.text.equals("요청글")) {
-//                holder.go_to_chat_btn.text = "요청취소   x"
-//            } else if (holder.post_state.text.equals("출동글")) {
-//                holder.go_to_chat_btn.text = "출동취소   x"
-//            }
+//            holder.post_state.text = "${deliveryList[position].postReqType}   x"
+            if (holder.post_state.text.equals("요청글")) {
+                holder.go_to_chat_btn.text = "요청취소   x"
+            } else if (holder.post_state.text.equals("출동글")) {
+                holder.go_to_chat_btn.text = "출동취소   x"
+            }
         } else { //본인이 작성한 게시글이 아니라 다른 사람들의 게시글인 경우
-            holder.chat_state.text = deliveryList[position].postStatus
+//            holder.chat_state.text = deliveryList[position].postStatus
 
-//            if (holder.post_state.text.equals("요청글")) {
-//                holder.go_to_chat_btn.text = "요청하기 "
-//            } else if (holder.post_state.text.equals("출동글")) {
-//                holder.go_to_chat_btn.text = "출동하기 "
-//            }
+            if (holder.post_state.text.equals("요청글")) {
+                holder.go_to_chat_btn.text = "요청하기 "
+            } else if (holder.post_state.text.equals("출동글")) {
+                holder.go_to_chat_btn.text = "출동하기 "
+            }
 
             if (holder.chat_state.text.equals("완료")) {
                 holder.chat_state_img.setBackgroundResource(R.drawable.complete)

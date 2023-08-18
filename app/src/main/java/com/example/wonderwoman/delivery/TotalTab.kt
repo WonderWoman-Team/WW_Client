@@ -110,9 +110,8 @@ class TotalTab() : Fragment() {
 
     private fun fetchDelivery(size: MutableList<String>) {
         //Authorization에 토큰값 넣어주기
-        val callDelivery: Call<ResponseDelivery> =
-            RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
-            Log.d("size", size.toString())
+        val callDelivery: Call<ResponseDelivery> = RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+        Log.d("size", size.toString())
 
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
@@ -125,7 +124,6 @@ class TotalTab() : Fragment() {
                     deliveryList = result.body()?.content ?: mutableListOf()
                     Log.d("content",deliveryList.toString())
                     setRecyclerAdapter(deliveryList)
-
                 }else {
                     val result: Response<ResponseDelivery> = response
                     Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
