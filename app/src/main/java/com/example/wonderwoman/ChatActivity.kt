@@ -67,6 +67,10 @@ class ChatActivity : AppCompatActivity() {
         val supportaction2= findViewById<TextView>(R.id.receive_name_text)
         supportaction2.text=receiverName
 
+        findViewById<TextView>(R.id.place_chat).text=intent.getStringExtra("place").toString()
+        findViewById<TextView>(R.id.size_chat).text=intent.getStringExtra("size").toString()
+        findViewById<TextView>(R.id.num_chat).text= intent.getStringExtra("num").toString()
+        findViewById<TextView>(R.id.date_chat).text=intent.getStringExtra("date").toString()
 
         //메세지전송
         binding.sendBtn.setOnClickListener{
