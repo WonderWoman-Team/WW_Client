@@ -14,7 +14,7 @@ class HomeTabAdapter(fragment: DeliveryFragment) : FragmentStateAdapter(fragment
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> TotalTab.newInstance()
             1 -> RequestTab.newInstance()
             else -> DispatchTab.newInstance()

@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -22,16 +22,14 @@ import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.ActivityPostBinding
 import com.example.wonderwoman.databinding.ToastBinding
 import com.example.wonderwoman.model.RetrofitClass
-import com.example.wonderwoman.model.delivery.RequestAddPost
-import com.example.wonderwoman.model.delivery.ResponseAddPost
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.example.wonderwoman.model.post.RequestAddPost
+import com.example.wonderwoman.model.post.ResponseAddPost
+import com.example.wonderwoman.util.Constants
+import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 class PostActivity : AppCompatActivity() {
@@ -41,6 +39,7 @@ class PostActivity : AppCompatActivity() {
     private lateinit var completeBtn: Button
     private lateinit var quitBtn: Button
     private lateinit var postTitle: EditText
+    private lateinit var locationGroup: RadioGroup
     private lateinit var postCount: EditText
     private lateinit var postSignificant: EditText
     private lateinit var categoryGroup: RadioGroup
@@ -57,20 +56,15 @@ class PostActivity : AppCompatActivity() {
     private lateinit var absorptionBtn: Button
     private lateinit var cottonBtn: Button
     private lateinit var organicBtn: Button
-
-//    var newPost = Post("", "", "", "", "", "", "", "")
-//
-//    private lateinit var database: FirebaseDatabase
-//    private lateinit var databaseReference: DatabaseReference
-//
-//    var index = 11
+    private lateinit var view: View
+    private lateinit var toast: Toast
 
     var data: ResponseAddPost? = null
     var status: String? = ""
-    var result: String = ""
-    var errMsg: String? = ""
 
-    var requestAddPost: RequestAddPost = RequestAddPost(mutableListOf(),"","",0,"","","")
+    var requestAddPost: RequestAddPost =
+        RequestAddPost("이화여자대학교", mutableListOf(), "", "", 0, "", "", "")
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +76,7 @@ class PostActivity : AppCompatActivity() {
         completeBtn = binding.completeBtn
         quitBtn = binding.quitBtn
         postTitle = binding.posttitle
+        locationGroup = binding.locationGroup
         categoryGroup = binding.categoryGroup
         requestBtn = binding.requestBtn
         dispatchBtn = binding.dispatchBtn
@@ -99,6 +94,10 @@ class PostActivity : AppCompatActivity() {
         organicBtn = binding.organicBtn
         postSignificant = binding.postsignificant
 
+        view = layoutInflater.inflate(R.layout.toast, null)
+        toast = Toast(this)
+
+
 //        supportFragmentManager.beginTransaction().add(com.example.wonderwoman.R.id.fragment,UserList.newInstance()).commit()
 
         //제목 입력 감지
@@ -113,18 +112,24 @@ class PostActivity : AppCompatActivity() {
 
         //유형 선택 감지
         categoryGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == requestBtn.id) requestAddPost.postReqType = "${requestBtn.text}글"
-            else if (checkedId == dispatchBtn.id) requestAddPost.postReqType = "${dispatchBtn.text}글"
+            if (checkedId == requestBtn.id) requestAddPost.postReqType = "${requestBtn.text}"
+            else if (checkedId == dispatchBtn.id) requestAddPost.postReqType = "${dispatchBtn.text}"
+        }
+
+        //위치 선택 감지
+        locationGroup.setOnCheckedChangeListener { group, checkedId ->
+            requestAddPost.building = listOf(group.findViewById<Button>(checkedId).text.toString())
         }
 
         //개수 입력 감지
         postCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                requestAddPost.sanitaryNum = postCount.text.toString().toInt();
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                requestAddPost.sanitaryNum = postCount.text.toString().toInt();
+            }
         })
 
         //크기 선택 감지
@@ -148,27 +153,29 @@ class PostActivity : AppCompatActivity() {
             }
         }
 
+        //coment 입력 감지
+        postSignificant.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
+
+                requestAddPost.postComment = postSignificant.text.toString();
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
+            }
+        })
+
         //완료 버튼 감지
         completeBtn.setOnClickListener {
-            status = addPost(requestAddPost)
-            if(status == "SUCCESS") {
-                toastView.text = "게시글이 성공적으로 등록되었습니다!"
-            }else if(status == "400"){
-                toastView.text = "건물이 학교와 매칭되지 않습니다"
-            }
-            else{
-                toastView.text = "error"
-            }
-            val view1 = layoutInflater.inflate(R.layout.toast, null)
-            var toast = Toast(this)
-            toast.view = view1
-            toast.setGravity(Gravity.TOP,0,0)
-            toast.duration = Toast.LENGTH_LONG
-            toast.show()
-            Log.d("toast", toastView.text as String)
-            //mainactivity로 전환
-            var intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+            addPost(requestAddPost)
         }
 
         //X 버튼 감지
@@ -201,6 +208,7 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
+
     //외부 클릭 시 키보드 내리게
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val imm: InputMethodManager =
@@ -211,35 +219,37 @@ class PostActivity : AppCompatActivity() {
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =
-            RetrofitClass.deliveryAPI.addDeliveryPost(requestAddPost)
-        Log.d("fetchAdd","${callAddPost==null}")
-        callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost>{
+            RetrofitClass.deliveryAPI.addDeliveryPost(Constants.ACCESS_TOKEN, requestAddPost)
+        Log.d("fetchAdd", "${requestAddPost}")
+        callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost> {
             override fun onResponse(
                 call: Call<ResponseAddPost>,
                 response: Response<ResponseAddPost>
             ) {
-                response.takeIf { it.isSuccessful }?.body()?.let { it ->
-                    data = response.body()
-                    Log.d("success", data.toString())
-                    status = data!!.status
-                } ?: showError(response.body())
-//                } ?: showError(response.errorBody())
+                if (response.isSuccessful) {
+                    val result: Response<ResponseAddPost> = response
+                    Log.d("success", "post + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    status = result.body()?.status
+                    Log.d("status", status.toString())
+                    //mainactivity로 전환
+                    var intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    showError(response.errorBody())
+                }
             }
 
             override fun onFailure(call: Call<ResponseAddPost>, t: Throwable) {
-                t.message?.let { Log.d("fail", it) }
+                //통신 실패 로직
+                t.message?.let { Log.d("fail post", t.message.toString()) }
             }
         })
         return status
     }
-    fun showError(data: ResponseAddPost?) {
-        if (data != null) {
-            errMsg = data.solution
-        }
+
+    fun showError(error: ResponseBody?) {
+        val e = error ?: return
+        val ob = JSONObject(e.string())
+        CustomToast.showToast(this, ob.getString("solution"))
     }
-//    fun showError(error: ResponseBody?) {
-//        val e = error ?: return
-//        val ob = JSONObject(e.string())
-//        Log.d("error", ob.getString("message"))
-//    }
 }

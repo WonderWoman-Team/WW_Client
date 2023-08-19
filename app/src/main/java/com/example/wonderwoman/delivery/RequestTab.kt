@@ -13,16 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.RequestTabBinding
 import com.example.wonderwoman.model.RetrofitClass
-import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseDelivery
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.util.Constants
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
@@ -112,24 +105,38 @@ class RequestTab() : Fragment() {
 
     private fun fetchDelivery(size: MutableList<String>) {
         val callDelivery: Call<ResponseDelivery> =
-            RetrofitClass.deliveryAPI.getDeliveryList(Constants.ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+            RetrofitClass.deliveryAPI.getDeliveryList(
+                Constants.ACCESS_TOKEN,
+                Constants.REQUEST,
+                null,
+                if (size != mutableListOf<String>()) size else mutableListOf(""),
+                null
+            )
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
             override fun onResponse(
-            call: Call<ResponseDelivery>,
-            response: Response<ResponseDelivery>
-        ) {
-            if(response.isSuccessful){
-                val result: Response<ResponseDelivery> = response
-                Log.d("success", "total + ${result.code()} + ${result.body()} + ${result.raw()}")
-                deliveryList = result.body()?.content ?: mutableListOf()
-                Log.d("content",deliveryList.toString())
-                setRecyclerAdapter(deliveryList)
+                call: Call<ResponseDelivery>,
+                response: Response<ResponseDelivery>
+            ) {
+                if (response.isSuccessful) {
+                    val result: Response<ResponseDelivery> = response
+                    Log.d(
+                        "success",
+                        "total + ${result.code()} + ${result.body()} + ${result.raw()}"
+                    )
+                    deliveryList = result.body()?.content ?: mutableListOf()
+                    Log.d("content", deliveryList.toString())
+                    setRecyclerAdapter(deliveryList)
 
-            }else {
-                val result: Response<ResponseDelivery> = response
-                Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+                } else {
+                    val result: Response<ResponseDelivery> = response
+                    Log.d(
+                        "fail",
+                        "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${
+                            result.errorBody()?.string()
+                        }"
+                    )
+                }
             }
-        }
 
             override fun onFailure(call: Call<ResponseDelivery>, t: Throwable) {
                 //통신 실패 로직
@@ -139,7 +146,7 @@ class RequestTab() : Fragment() {
     }
 
     private fun setRecyclerAdapter(deliveryList: List<Delivery>) {
-        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
+        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext(), "request")
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
         recyclerView.setHasFixedSize(true)
