@@ -23,9 +23,6 @@ import com.google.firebase.database.FirebaseDatabase
 
 class PostRecyclerAdapter(private val deliveryList: List<Delivery>, val context: Context) :
     RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
-    private lateinit var database: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
-    private var index: String = ""
 
     //recyclerView가 Adapter에 연결된 후 최초로 실행되는 부분.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -44,52 +41,56 @@ class PostRecyclerAdapter(private val deliveryList: List<Delivery>, val context:
         holder.nickname.text = deliveryList[position].nickname
         holder.post_state.text = "${deliveryList[position].postReqType}글"
         holder.chat_state.text = deliveryList[position].postStatus
-        //진행 상태가 없음 일 경우
-        if(holder.chat_state.text.equals("없음")) holder.chat_state.text = ""
+
         //본인이 작성한 게시글인 경우
-        if (holder.nickname.text.equals("본인")) {
+        if (deliveryList[position].written) {
             holder.go_to_chat_btn.setBackgroundResource(R.drawable.cancel_delivery_btn)
             holder.go_to_chat_btn.setTextColor(Color.rgb(249, 57, 95))
-            holder.go_to_chat_btn.setPadding(30, 0, 0, 0)
-//            holder.post_state.text = "${deliveryList[position].postReqType}   x"
             if (holder.post_state.text.equals("요청글")) {
                 holder.go_to_chat_btn.text = "요청취소   x"
             } else if (holder.post_state.text.equals("출동글")) {
                 holder.go_to_chat_btn.text = "출동취소   x"
             }
+
         } else { //본인이 작성한 게시글이 아니라 다른 사람들의 게시글인 경우
-//            holder.chat_state.text = deliveryList[position].postStatus
-
+            holder.go_to_chat_btn.setBackgroundResource(R.drawable.go_out_btn)
+            holder.go_to_chat_btn.setTextColor(Color.WHITE)
             if (holder.post_state.text.equals("요청글")) {
-                holder.go_to_chat_btn.text = "요청하기 "
+                holder.go_to_chat_btn.text = "요청하기   →"
             } else if (holder.post_state.text.equals("출동글")) {
-                holder.go_to_chat_btn.text = "출동하기 "
+                holder.go_to_chat_btn.text = "출동하기   →"
             }
-
-            if (holder.chat_state.text.equals("완료")) {
+        }
+        //진행 상태가 없음 일 경우
+        if(holder.chat_state.text.equals("없음")){
+            holder.chat_state.text = ""
+            holder.chat_state_img.setBackgroundResource(0)
+            holder.post_state.setTextColor(Color.parseColor("#F9395F"))
+            holder.chat_state.setTextColor(Color.parseColor("#F9395F"))
+            holder.post_state_img.setBackgroundResource(R.drawable.connect)
+        }
+        else if (holder.chat_state.text.equals("완료") || holder.chat_state.text.equals("취소")) {
+            if(holder.chat_state.text.equals("완료")){
                 holder.chat_state_img.setBackgroundResource(R.drawable.complete)
-                holder.post_state_img.setBackgroundResource(R.drawable.complete_delivery)
-                holder.chat_state.setTextColor(Color.parseColor("#CCCCCC"))
-                holder.post_state.setTextColor(Color.parseColor("#CCCCCC"))
-                holder.go_to_chat_btn.setBackgroundResource(R.drawable.complete_go_out_btn)
-                holder.go_to_chat_btn.setPadding(20, 0, 30, 0)
-            } else if (holder.chat_state.text.equals("채팅중") || holder.chat_state.text.equals("진행중")) {
-                holder.chat_state_img.setBackgroundResource(R.drawable.loader)
+            }else{
+                holder.chat_state_img.setBackgroundResource(R.drawable.cancel)
             }
-
+            holder.post_state_img.setBackgroundResource(R.drawable.complete_delivery)
+            holder.chat_state.setTextColor(Color.parseColor("#CCCCCC"))
+            holder.post_state.setTextColor(Color.parseColor("#CCCCCC"))
+            holder.go_to_chat_btn.setBackgroundResource(R.drawable.complete_go_out_btn)
+        } else if (holder.chat_state.text.equals("채팅중") || holder.chat_state.text.equals("진행중")) {
+            holder.post_state_img.setBackgroundResource(R.drawable.connect)
+            holder.chat_state_img.setBackgroundResource(R.drawable.loader)
+            holder.post_state.setTextColor(Color.parseColor("#F9395F"))
+            holder.chat_state.setTextColor(Color.parseColor("#F9395F"))
         }
 
         //리스트 클릭 이벤트
         //api로 연결하면 로직 변경 예
         holder.go_to_chat_btn.setOnClickListener {
             if (holder.go_to_chat_btn.text.contains("취소")) {
-                database = FirebaseDatabase.getInstance()
-                databaseReference = database.getReference("Post")
-                if (position in 1..9) index = "0${position}"
-                databaseReference.child("Post_${index}").removeValue().addOnSuccessListener {
-                    notifyItemRemoved(position)
-                    notifyItemRangeRemoved(position, deliveryList.size - position)
-                }
+
             } else if (holder.go_to_chat_btn.text.contains("하기")) {
                 val fragment = UserList.newInstance()
 

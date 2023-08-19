@@ -1,5 +1,7 @@
 package com.example.wonderwoman.model.delivery
 
+import com.example.wonderwoman.model.post.RequestAddPost
+import com.example.wonderwoman.model.post.ResponseAddPost
 import com.example.wonderwoman.util.Constants
 import retrofit2.Call
 import retrofit2.Response
