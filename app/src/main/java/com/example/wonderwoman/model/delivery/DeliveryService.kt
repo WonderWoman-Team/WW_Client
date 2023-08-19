@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 //게시글 목록 관련 API를 정의하는 인터페이스
@@ -36,4 +37,10 @@ interface DeliveryService {
 //        @Query("sanitaryType") sanitaryType: String,
 //        @Query("postComment") postComment: String,
 //    ): Call<ResponseAddPost>
+
+    @POST(Constants.ADD_POST+"/{postId}")
+    fun deleteDeliveryPost(
+        @Header("Authorization") Authorization: String,
+        @Path("postId") postId: Int
+    ): Call<ResponseRemoveDelivery>
 }

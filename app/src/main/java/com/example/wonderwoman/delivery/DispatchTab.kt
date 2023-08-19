@@ -137,7 +137,7 @@ class DispatchTab() : Fragment() {
     }
 
     private fun setRecyclerAdapter(deliveryList: List<Delivery>) {
-        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
+        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext(), "dispatch")
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
         recyclerView.setHasFixedSize(true)

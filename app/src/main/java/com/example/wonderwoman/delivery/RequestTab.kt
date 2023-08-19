@@ -139,7 +139,7 @@ class RequestTab() : Fragment() {
     }
 
     private fun setRecyclerAdapter(deliveryList: List<Delivery>) {
-        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
+        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext(), "request")
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
         recyclerView.setHasFixedSize(true)

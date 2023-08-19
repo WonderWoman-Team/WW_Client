@@ -108,7 +108,7 @@ class TotalTab() : Fragment() {
         overnight_btn.isChecked = false
     }
 
-    private fun fetchDelivery(size: MutableList<String>) {
+    fun fetchDelivery(size: MutableList<String>) {
         //Authorization에 토큰값 넣어주기
         val callDelivery: Call<ResponseDelivery> = RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
         Log.d("size", size.toString())
@@ -138,7 +138,7 @@ class TotalTab() : Fragment() {
     }
 
     fun setRecyclerAdapter(deliveryList: List<Delivery>) {
-        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext())
+        recyclerAdapter = PostRecyclerAdapter(deliveryList, requireContext(), "total")
         recyclerView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
         recyclerView.setHasFixedSize(true)

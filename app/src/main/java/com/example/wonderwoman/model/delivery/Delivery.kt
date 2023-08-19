@@ -49,3 +49,9 @@ data class ResponseDelivery(
         val sorted: Boolean,
     )
 }
+
+data class ResponseRemoveDelivery(
+    val status: String,
+    val message: String?,
+    val solution: String?
+)
