@@ -13,14 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.TotalTabBinding
 import com.example.wonderwoman.model.RetrofitClass
-import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseDelivery
+import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.awaitResponse
 
 class TotalTab() : Fragment() {
     private lateinit var totalTabBinding: TotalTabBinding
@@ -110,7 +107,13 @@ class TotalTab() : Fragment() {
 
     fun fetchDelivery(size: MutableList<String>) {
         //Authorization에 토큰값 넣어주기
-        val callDelivery: Call<ResponseDelivery> = RetrofitClass.deliveryAPI.getDeliveryList(ACCESS_TOKEN, null, null, if(size != mutableListOf<String>()) size else mutableListOf(""), null)
+        val callDelivery: Call<ResponseDelivery> = RetrofitClass.deliveryAPI.getDeliveryList(
+            ACCESS_TOKEN,
+            null,
+            null,
+            if (size != mutableListOf<String>()) size else mutableListOf(""),
+            null
+        )
         Log.d("size", size.toString())
 
         callDelivery.enqueue(object : retrofit2.Callback<ResponseDelivery> {
@@ -118,15 +121,23 @@ class TotalTab() : Fragment() {
                 call: Call<ResponseDelivery>,
                 response: Response<ResponseDelivery>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     val result: Response<ResponseDelivery> = response
-                    Log.d("success", "total + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    Log.d(
+                        "success",
+                        "total + ${result.code()} + ${result.body()} + ${result.raw()}"
+                    )
                     deliveryList = result.body()?.content ?: mutableListOf()
-                    Log.d("content",deliveryList.toString())
+                    Log.d("content", deliveryList.toString())
                     setRecyclerAdapter(deliveryList)
-                }else {
+                } else {
                     val result: Response<ResponseDelivery> = response
-                    Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+                    Log.d(
+                        "fail",
+                        "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${
+                            result.errorBody()?.string()
+                        }"
+                    )
                 }
             }
 
