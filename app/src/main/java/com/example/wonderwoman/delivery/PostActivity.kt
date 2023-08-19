@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -22,20 +21,15 @@ import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.ActivityPostBinding
 import com.example.wonderwoman.databinding.ToastBinding
-
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.post.RequestAddPost
 import com.example.wonderwoman.model.post.ResponseAddPost
 import com.example.wonderwoman.util.Constants
 import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
-import org.json.JSONArray
 import org.json.JSONObject
-
 import retrofit2.Call
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 class PostActivity : AppCompatActivity() {
@@ -68,7 +62,9 @@ class PostActivity : AppCompatActivity() {
     var data: ResponseAddPost? = null
     var status: String? = ""
 
-    var requestAddPost: RequestAddPost = RequestAddPost("이화여자대학교",mutableListOf(),"","",0,"","","")
+    var requestAddPost: RequestAddPost =
+        RequestAddPost("이화여자대학교", mutableListOf(), "", "", 0, "", "", "")
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,16 +156,20 @@ class PostActivity : AppCompatActivity() {
         //coment 입력 감지
         postSignificant.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if(postSignificant.text.toString() == "") requestAddPost.postComment = postSignificant.hint as String
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(postSignificant.text.toString() == "") requestAddPost.postComment = postSignificant.hint as String
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
 
                 requestAddPost.postComment = postSignificant.text.toString();
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(postSignificant.text.toString() == "") requestAddPost.postComment = postSignificant.hint as String
+                if (postSignificant.text.toString() == "") requestAddPost.postComment =
+                    postSignificant.hint as String
             }
         })
 
@@ -219,22 +219,22 @@ class PostActivity : AppCompatActivity() {
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =
-            RetrofitClass.deliveryAPI.addDeliveryPost(Constants.ACCESS_TOKEN,requestAddPost)
-        Log.d("fetchAdd","${requestAddPost}")
-        callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost>{
+            RetrofitClass.deliveryAPI.addDeliveryPost(Constants.ACCESS_TOKEN, requestAddPost)
+        Log.d("fetchAdd", "${requestAddPost}")
+        callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost> {
             override fun onResponse(
                 call: Call<ResponseAddPost>,
                 response: Response<ResponseAddPost>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     val result: Response<ResponseAddPost> = response
                     Log.d("success", "post + ${result.code()} + ${result.body()} + ${result.raw()}")
                     status = result.body()?.status
-                    Log.d("status",status.toString())
+                    Log.d("status", status.toString())
                     //mainactivity로 전환
                     var intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
-                }else {
+                } else {
                     showError(response.errorBody())
                 }
             }
@@ -246,9 +246,10 @@ class PostActivity : AppCompatActivity() {
         })
         return status
     }
+
     fun showError(error: ResponseBody?) {
         val e = error ?: return
         val ob = JSONObject(e.string())
-        CustomToast.showToast(this,ob.getString("solution"))
+        CustomToast.showToast(this, ob.getString("solution"))
     }
 }
