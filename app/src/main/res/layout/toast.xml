@@ -2,15 +2,18 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+    android:layout_height="40dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:gravity="center"
+    android:background="@drawable/edit_background"
     >
     <TextView
         android:id="@+id/toast"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_height="40dp"
+        android:background="@drawable/edit_background"
         android:textAppearance="@style/mid13"
         android:textAlignment="center"/>
 </LinearLayout>

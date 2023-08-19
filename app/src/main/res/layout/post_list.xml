@@ -152,7 +152,6 @@
             android:background="@drawable/go_out_btn"
             android:fontFamily="@font/noto_sans"
             android:textSize="13sp"
-            android:drawableRight="@drawable/arrow_right"
             />
     </LinearLayout>
 </LinearLayout>
