@@ -219,7 +219,7 @@ class PostActivity : AppCompatActivity() {
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =
-            RetrofitClass.deliveryAPI.addDeliveryPost(Constants.ACCESS_TOKEN, requestAddPost)
+            RetrofitClass.postAPI.addDeliveryPost(Constants.ACCESS_TOKEN, requestAddPost)
         Log.d("fetchAdd", "${requestAddPost}")
         callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost> {
             override fun onResponse(
