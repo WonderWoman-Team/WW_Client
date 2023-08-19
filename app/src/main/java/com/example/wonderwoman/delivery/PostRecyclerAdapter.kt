@@ -130,6 +130,7 @@ class PostRecyclerAdapter(
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
+
                 Log.d("press", "press")
             }
         }

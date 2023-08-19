@@ -23,21 +23,6 @@ interface DeliveryService {
         @Query("school") school: String?
         ): Call<ResponseDelivery>
 
-    @POST(Constants.ADD_POST)
-    fun addDeliveryPost(
-        @Header("Authorization") Authorization: String,
-        @Body requestAddPost: RequestAddPost
-    ): Call<ResponseAddPost>
-//    fun addDeliveryPost(
-//        @Query("building") building: List<String>,
-//        @Query("postTitle") postTitle: String,
-//        @Query("postReqType") postReqType: String,
-//        @Query("sanitaryNum") sanitaryNum: String,
-//        @Query("sanitarySize") sanitarySize: String,
-//        @Query("sanitaryType") sanitaryType: String,
-//        @Query("postComment") postComment: String,
-//    ): Call<ResponseAddPost>
-
     @POST(Constants.ADD_POST+"/{postId}")
     fun deleteDeliveryPost(
         @Header("Authorization") Authorization: String,
