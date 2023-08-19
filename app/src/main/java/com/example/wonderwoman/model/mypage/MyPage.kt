@@ -7,3 +7,9 @@ data class ResponseMyInfo(
     var school: String,
     var imgUrl: String?
 )
+
+data class RequestEditMyInfo(
+    var nickname: String,
+    var password: String?,
+    var imgUrl: String?
+)
