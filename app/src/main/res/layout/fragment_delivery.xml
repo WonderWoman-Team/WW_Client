@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/main_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
         android:id="@+id/fragment_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:background="@drawable/gradient_body_bg"
@@ -70,19 +70,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/regular15"
                 android:text="포스코관" />
             <ImageButton
                 android:id="@+id/scrollbtn"
-                android:layout_width="14dp"
-                android:layout_height="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/toggle_btn"
                 android:layout_marginLeft="7dp"/>
         </LinearLayout>
@@ -90,6 +90,7 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             app:tabIndicatorColor="@color/selectedTab"
             app:tabIndicatorHeight="2dp"
             app:tabGravity="start"

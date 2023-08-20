@@ -1,6 +1,7 @@
 package com.example.wonderwoman.mypage
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -32,10 +33,17 @@ class MypageFragment: Fragment() {
     private lateinit var nickname: TextView
     private lateinit var email: TextView
 
+    var mainActivity: MainActivity? = null
+
     companion object {
         fun newInstance() : MypageFragment {
             return MypageFragment()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
     }
 
     override fun onCreateView(
@@ -49,6 +57,10 @@ class MypageFragment: Fragment() {
         email = mypageBinding.email
 
         fetchMyInfo()
+
+        profileImg.setOnClickListener{
+            mainActivity!!.changeFragment(1)
+        }
 
         return mypageBinding.root
     }
