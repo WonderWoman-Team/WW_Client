@@ -50,5 +50,6 @@
     <string name="hintpw">비밀번호를 입력해주세요.</string>
     <string name="hintagainpw">비밀번호를 한번 더 입력해주세요.</string>
     <string name="wrongpw">영문, 숫자를 포함한 8~16자리 조합으로 입력해주세요.</string>
+    <string name="save">저장</string>
 
 </resources>
