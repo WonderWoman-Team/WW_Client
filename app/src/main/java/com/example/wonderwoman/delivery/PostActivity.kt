@@ -17,6 +17,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.ActivityPostBinding
@@ -24,6 +26,7 @@ import com.example.wonderwoman.databinding.ToastBinding
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.post.RequestAddPost
 import com.example.wonderwoman.model.post.ResponseAddPost
+import com.example.wonderwoman.post.BuildingBtnRecyclerAdapter
 import com.example.wonderwoman.util.Constants
 import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
@@ -58,6 +61,10 @@ class PostActivity : AppCompatActivity() {
     private lateinit var organicBtn: Button
     private lateinit var view: View
     private lateinit var toast: Toast
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerAdapter: BuildingBtnRecyclerAdapter
+    var buildingList = mutableListOf<String>()
+    var locationList = mutableListOf<String>()
 
     var data: ResponseAddPost? = null
     var status: String? = ""
@@ -73,10 +80,18 @@ class PostActivity : AppCompatActivity() {
         toastView = toastBinding.toast
         setContentView(binding.root)
 
+        recyclerView = binding.postRecyclerview
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        ///수정
+
+        recyclerAdapter = BuildingBtnRecyclerAdapter(buildingList, this)
+
+
         completeBtn = binding.completeBtn
         quitBtn = binding.quitBtn
         postTitle = binding.posttitle
-        locationGroup = binding.locationGroup
+//        locationGroup = binding.locationGroup
         categoryGroup = binding.categoryGroup
         requestBtn = binding.requestBtn
         dispatchBtn = binding.dispatchBtn

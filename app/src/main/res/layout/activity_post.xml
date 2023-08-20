@@ -142,42 +142,10 @@
                         android:text="@string/location"
                         android:textAppearance="@style/bold16" />
 
-                    <ScrollView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/post_recyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RadioGroup
-                            android:id="@+id/location_group"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="20dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="32dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@drawable/post_select_btn"
-                                android:button="@null"
-                                android:outlineProvider="none"
-                                android:paddingHorizontal="15dp"
-                                android:text="포스코관"
-                                android:textAlignment="center"
-                                android:textColor="@drawable/post_select_btn_text" />
-
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="32dp"
-                                android:background="@drawable/post_select_btn"
-                                android:button="@null"
-                                android:outlineProvider="none"
-                                android:paddingHorizontal="15dp"
-                                android:text="도서관"
-                                android:textAlignment="center"
-                                android:textColor="@drawable/post_select_btn_text" />
-                        </RadioGroup>
-                    </ScrollView>
+                        android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="wrap_content"
