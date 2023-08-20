@@ -224,13 +224,17 @@ class PostActivity : AppCompatActivity() {
     }
 
 
-    //외부 클릭 시 키보드 내리게
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val imm: InputMethodManager =
-            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-        return super.dispatchTouchEvent(ev)
-    }
+//    //외부 클릭 시 키보드 내리게
+//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+//        val imm: InputMethodManager =
+//            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//
+//        if(currentFocus is EditText) {
+//            currentFocus!!.clearFocus()
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =

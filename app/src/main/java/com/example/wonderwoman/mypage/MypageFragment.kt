@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +31,7 @@ class MypageFragment: Fragment() {
     var myInfo: ResponseMyInfo? = null
     private lateinit var mypageBinding: FragmentMypageBinding
     private lateinit var profileImg: ImageView
+    private lateinit var editInfoBtn: ImageButton
     private lateinit var nickname: TextView
     private lateinit var email: TextView
 
@@ -55,10 +57,12 @@ class MypageFragment: Fragment() {
         profileImg = mypageBinding.profileImg
         nickname = mypageBinding.nickname
         email = mypageBinding.email
+        editInfoBtn = mypageBinding.editInfo
 
         fetchMyInfo()
 
-        profileImg.setOnClickListener{
+        editInfoBtn.setOnClickListener{
+            Log.d("mypage","clicked")
             mainActivity!!.changeFragment(1)
         }
 
