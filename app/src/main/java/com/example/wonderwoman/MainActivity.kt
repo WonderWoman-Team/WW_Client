@@ -8,6 +8,7 @@ import android.widget.Button
 import com.example.wonderwoman.databinding.ActivityMainBinding
 import com.example.wonderwoman.delivery.DeliveryFragment
 import com.example.wonderwoman.delivery.PostActivity
+import com.example.wonderwoman.mypage.EditInfoFragment
 import com.example.wonderwoman.mypage.MypageFragment
 import com.google.android.material.navigation.NavigationBarView
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var deliveryFragment: DeliveryFragment
     private lateinit var mypageFragment: MypageFragment
+    private lateinit var editInfoFragment: EditInfoFragment
     private lateinit var writeBtn: Button
 
 
@@ -60,5 +62,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
         true
+    }
+
+    fun changeFragment(index: Int){
+        when(index){
+            1 -> {
+                editInfoFragment = EditInfoFragment.newInstance()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mypage_fragment, editInfoFragment)
+                    .commit()
+            }
+
+//            2 -> {
+//                supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.framelayout, fragment_menu)
+//                    .commit()
+//            }
+        }
     }
 }
