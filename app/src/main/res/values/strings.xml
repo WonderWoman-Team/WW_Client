@@ -10,7 +10,7 @@
     <string name="chatting">채팅중</string>
     <string name="progressing">진행중</string>
     <string name="complete">완료</string>
-    <string name="request_state">요 청</string>
+    <string name="request_state">요청</string>
     <string name="dispatch_state">출동</string>
     <string name="goout">출동하기 -></string>
     <string name="request">요청하기 -></string>
@@ -41,5 +41,15 @@
     <string name="terms">이용약관                </string>
     <string name="privacypolicy">개인정보 처리방침</string>
     <string name="faq">FAQ</string>
+
+    <!--내 정보 변경-->
+    <string name="editprofile">프로필 설정</string>
+    <string name="email">이메일</string>
+    <string name="nickname">닉네임</string>
+    <string name="password">비밀번호</string>
+    <string name="hintpw">비밀번호를 입력해주세요.</string>
+    <string name="hintagainpw">비밀번호를 한번 더 입력해주세요.</string>
+    <string name="wrongpw">영문, 숫자를 포함한 8~16자리 조합으로 입력해주세요.</string>
+    <string name="save">저장</string>
 
 </resources>

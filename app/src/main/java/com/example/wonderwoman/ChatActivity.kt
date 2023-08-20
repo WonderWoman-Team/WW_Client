@@ -2,20 +2,23 @@ package com.example.wonderwoman
 
 
 import android.os.Bundle
-import android.os.Binder
-import android.os.PersistableBundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wonderwoman.databinding.ActivityChatBinding
+import com.example.wonderwoman.databinding.ActivityChatGuiBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var receiverName: String
     private lateinit var receiverUid: String
 
     //바인딩 객체
-    private lateinit var binding: ActivityChatBinding
+    private lateinit var binding: ActivityChatGuiBinding
 
     lateinit var mAuth: FirebaseAuth
     lateinit var mDbRef: DatabaseReference
@@ -27,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityChatBinding.inflate(layoutInflater)
+        binding= ActivityChatGuiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //초기화
@@ -55,7 +58,19 @@ class ChatActivity : AppCompatActivity() {
         receiverRoom=senderUid+receiverUid
 
         //액션바에 상대방 이름 보여주기
-        supportActionBar?.title=receiverName
+        //supportActionBar?.title=receiverName
+
+
+        val supportaction = findViewById<TextView>(R.id.receive_name_id)
+        supportaction.text=receiverName
+
+        val supportaction2= findViewById<TextView>(R.id.receive_name_text)
+        supportaction2.text=receiverName
+
+        findViewById<TextView>(R.id.place_chat).text=intent.getStringExtra("place").toString()
+        findViewById<TextView>(R.id.size_chat).text=intent.getStringExtra("size").toString()
+        findViewById<TextView>(R.id.num_chat).text= intent.getStringExtra("num").toString()
+        findViewById<TextView>(R.id.date_chat).text=intent.getStringExtra("date").toString()
 
         //메세지전송
         binding.sendBtn.setOnClickListener{
