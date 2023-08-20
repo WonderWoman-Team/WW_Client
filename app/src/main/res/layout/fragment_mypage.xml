@@ -80,6 +80,7 @@
                             android:layout_gravity="end"
                             android:gravity="right">
                             <ImageButton
+                                android:id="@+id/edit_info"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/change_profile_btn"
@@ -88,13 +89,14 @@
                     </FrameLayout>
                     <TextView
                         android:id="@+id/nickname"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:hint="닉네임"
                         android:textAppearance="@style/bold20"
                         android:textColorHint="@color/gray3"
                         android:textAllCaps="false"
+                        android:textAlignment="center"
                         />
                     <TextView
                         android:id="@+id/email"
