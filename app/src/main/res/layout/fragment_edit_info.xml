@@ -198,8 +198,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <Button
+                    android:id="@+id/save_editinfo_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/save_editinfo_btn"
+                    android:textAppearance="@style/editInfo"
+                    android:textColor="@color/white"
+                    android:text="@string/save"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     />
             </LinearLayout>
 

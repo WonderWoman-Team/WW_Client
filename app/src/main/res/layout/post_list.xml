@@ -152,6 +152,7 @@
             android:background="@drawable/go_out_btn"
             android:fontFamily="@font/noto_sans"
             android:textSize="13sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
             />
     </LinearLayout>
 </LinearLayout>
