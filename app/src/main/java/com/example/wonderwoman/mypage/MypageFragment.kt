@@ -1,8 +1,6 @@
 package com.example.wonderwoman.mypage
 
-import android.app.Activity.RESULT_OK
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,22 +9,19 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.FragmentMypageBinding
 import com.example.wonderwoman.model.RetrofitClass
-import com.example.wonderwoman.model.delivery.ResponseDelivery
 import com.example.wonderwoman.model.mypage.ResponseMyInfo
 import com.example.wonderwoman.util.Constants
-import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
-class MypageFragment: Fragment() {
+class MypageFragment : Fragment() {
     var data: ResponseMyInfo? = null
     var myInfo: ResponseMyInfo? = null
     private lateinit var mypageBinding: FragmentMypageBinding
@@ -38,7 +33,7 @@ class MypageFragment: Fragment() {
     var mainActivity: MainActivity? = null
 
     companion object {
-        fun newInstance() : MypageFragment {
+        fun newInstance(): MypageFragment {
             return MypageFragment()
         }
     }
@@ -53,7 +48,7 @@ class MypageFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mypageBinding = FragmentMypageBinding.inflate(inflater, container,false)
+        mypageBinding = FragmentMypageBinding.inflate(inflater, container, false)
         profileImg = mypageBinding.profileImg
         nickname = mypageBinding.nickname
         email = mypageBinding.email
@@ -61,8 +56,8 @@ class MypageFragment: Fragment() {
 
         fetchMyInfo()
 
-        editInfoBtn.setOnClickListener{
-            Log.d("mypage","clicked")
+        editInfoBtn.setOnClickListener {
+            Log.d("mypage", "clicked")
             mainActivity!!.changeFragment(1)
         }
 
@@ -70,7 +65,8 @@ class MypageFragment: Fragment() {
     }
 
     private fun fetchMyInfo(): ResponseMyInfo? {
-        val callGetMyInfo: Call<ResponseMyInfo> = RetrofitClass.mypageAPI.getMyInfo(Constants.ACCESS_TOKEN)
+        val callGetMyInfo: Call<ResponseMyInfo> =
+            RetrofitClass.mypageAPI.getMyInfo(Constants.ACCESS_TOKEN)
         callGetMyInfo.enqueue(object : retrofit2.Callback<ResponseMyInfo> {
             override fun onResponse(
                 call: Call<ResponseMyInfo>,
@@ -78,12 +74,16 @@ class MypageFragment: Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val result: Response<ResponseMyInfo> = response
-                    Log.d("success", "myinfo + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    Log.d(
+                        "success",
+                        "myinfo + ${result.code()} + ${result.body()} + ${result.raw()}"
+                    )
                     data = result.body()
                     nickname.text = data?.nickname ?: ""
                     email.text = data?.email ?: ""
                     if (data?.imgUrl == null) profileImg.setImageResource(R.drawable.profile)
-                    else {}
+                    else {
+                    }
                 } else {
                     showError(response.errorBody())
                 }

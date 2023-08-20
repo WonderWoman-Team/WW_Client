@@ -1,7 +1,5 @@
 package com.example.wonderwoman.mypage
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
@@ -32,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditInfoFragment: Fragment() {
+class EditInfoFragment : Fragment() {
     private lateinit var editInfoBinding: FragmentEditInfoBinding
     private lateinit var backBtn: ImageButton
     private lateinit var profileImg: ImageView
@@ -43,12 +38,12 @@ class EditInfoFragment: Fragment() {
     private lateinit var wrongPw: TextView
     private lateinit var saveBtn: ImageButton
     var mainActivity: MainActivity? = null
-    var requestEditMyInfo = RequestEditMyInfo(null,null,null)
+    var requestEditMyInfo = RequestEditMyInfo(null, null, null)
     var pw: String? = null
     var newPw: String? = null
 
     companion object {
-        fun newInstance() : EditInfoFragment {
+        fun newInstance(): EditInfoFragment {
             return EditInfoFragment()
         }
     }
@@ -58,7 +53,7 @@ class EditInfoFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        editInfoBinding = FragmentEditInfoBinding.inflate(inflater,container,false)
+        editInfoBinding = FragmentEditInfoBinding.inflate(inflater, container, false)
         backBtn = editInfoBinding.backBtn
         profileImg = editInfoBinding.profileImg
         editImgBtn = editInfoBinding.editImgBtn
@@ -69,39 +64,41 @@ class EditInfoFragment: Fragment() {
         saveBtn = editInfoBinding.saveEditinfoBtn
         mainActivity = context as MainActivity
 
-        newNickname.addTextChangedListener(object: TextWatcher{
+        newNickname.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 requestEditMyInfo.nickname = newNickname.text.toString()
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        password.addTextChangedListener(object : TextWatcher{
+        password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-               pw = password.text.toString()
-                if(pw == newPw || (password.text.toString() == null && newPassword.text.toString() == null) || pw == null){
+                pw = password.text.toString()
+                if (pw == newPw || (password.text.toString() == null && newPassword.text.toString() == null) || pw == null) {
                     wrongPw.visibility = View.INVISIBLE
                     newPassword.setBackgroundResource(R.drawable.edittext_blue)
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        newPassword.addTextChangedListener(object : TextWatcher{
+        newPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 newPw = newPassword.text.toString()
-                if(pw != newPw) {
+                if (pw != newPw) {
                     wrongPw.visibility = View.VISIBLE
                     newPassword.setBackgroundResource(R.drawable.edittext_red)
-                }
-                else if(pw == newPw || (password.text.toString() == null && newPassword.text.toString() == null) || pw == null){
+                } else if (pw == newPw || (password.text.toString() == null && newPassword.text.toString() == null) || pw == null) {
                     wrongPw.visibility = View.INVISIBLE
                     newPassword.setBackgroundResource(R.drawable.edittext_blue)
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -110,7 +107,7 @@ class EditInfoFragment: Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            if(wrongPw.visibility == View.INVISIBLE){
+            if (wrongPw.visibility == View.INVISIBLE) {
                 if (pw == newPw) requestEditMyInfo.password = newPw
                 fetchEditInfo(requestEditMyInfo)
             }
@@ -125,8 +122,8 @@ class EditInfoFragment: Fragment() {
     }
 
     private val touchListener = View.OnTouchListener { v, event ->
-        if(v.id == newNickname.id || v.id == password.id || v.id == newPassword.id)
-        v.parent.requestDisallowInterceptTouchEvent(true)
+        if (v.id == newNickname.id || v.id == password.id || v.id == newPassword.id)
+            v.parent.requestDisallowInterceptTouchEvent(true)
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_UP -> v.parent
                 .requestDisallowInterceptTouchEvent(false)
@@ -134,20 +131,24 @@ class EditInfoFragment: Fragment() {
         false
     }
 
-    fun fetchEditInfo(requestEditMyInfo: RequestEditMyInfo){
+    fun fetchEditInfo(requestEditMyInfo: RequestEditMyInfo) {
         Log.d("editinfo", requestEditMyInfo.toString())
-        val callEditMyInfo: Call<ResponseMyInfo> = RetrofitClass.mypageAPI.editMyInfo(ACCESS_TOKEN, requestEditMyInfo)
+        val callEditMyInfo: Call<ResponseMyInfo> =
+            RetrofitClass.mypageAPI.editMyInfo(ACCESS_TOKEN, requestEditMyInfo)
         callEditMyInfo.enqueue(object : Callback<ResponseMyInfo> {
             override fun onResponse(
                 call: Call<ResponseMyInfo>,
                 response: Response<ResponseMyInfo>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     val result: Response<ResponseMyInfo> = response
-                    Log.d("success", "editinfo + ${result.code()} + ${result.body()} + ${result.raw()}")
+                    Log.d(
+                        "success",
+                        "editinfo + ${result.code()} + ${result.body()} + ${result.raw()}"
+                    )
                     mainActivity = context as MainActivity
                     mainActivity!!.changeFragment(2)
-                }else{
+                } else {
                     showError(response.errorBody())
                 }
             }
@@ -159,6 +160,7 @@ class EditInfoFragment: Fragment() {
         })
 
     }
+
     fun showError(error: ResponseBody?) {
         val e = error ?: return
         val ob = JSONObject(e.string())
