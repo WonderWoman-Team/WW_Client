@@ -8,7 +8,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -59,7 +58,6 @@ class PostActivity : AppCompatActivity() {
     private lateinit var absorptionBtn: Button
     private lateinit var cottonBtn: Button
     private lateinit var organicBtn: Button
-    private lateinit var view: View
     private lateinit var toast: Toast
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: BuildingBtnRecyclerAdapter
@@ -109,11 +107,6 @@ class PostActivity : AppCompatActivity() {
         organicBtn = binding.organicBtn
         postSignificant = binding.postsignificant
 
-        view = layoutInflater.inflate(R.layout.toast, null)
-        toast = Toast(this)
-
-
-//        supportFragmentManager.beginTransaction().add(com.example.wonderwoman.R.id.fragment,UserList.newInstance()).commit()
 
         //제목 입력 감지
         postTitle.addTextChangedListener(object : TextWatcher {
@@ -121,7 +114,6 @@ class PostActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 requestAddPost.postTitle = postTitle.text.toString()
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -140,11 +132,9 @@ class PostActivity : AppCompatActivity() {
         postCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
                 requestAddPost.sanitaryNum = postCount.text.toString().toInt();
             }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
         //크기 선택 감지
@@ -176,10 +166,10 @@ class PostActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (postSignificant.text.toString() == "") requestAddPost.postComment =
-                    postSignificant.hint as String
-
-                requestAddPost.postComment = postSignificant.text.toString();
+                if (postSignificant.text.toString() == "") {
+                    requestAddPost.postComment =
+                        postSignificant.hint as String
+                } else requestAddPost.postComment = postSignificant.text.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -195,51 +185,38 @@ class PostActivity : AppCompatActivity() {
 
         //X 버튼 감지
         quitBtn.setOnClickListener {
-            var intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
 
 
-        //edittext 스크롤 기능
-        postCount.setOnTouchListener { v, event ->
-            if (v.id === postCount.id) {
-                v.parent.requestDisallowInterceptTouchEvent(true)
-                when (event.action and MotionEvent.ACTION_MASK) {
-                    MotionEvent.ACTION_UP -> v.parent
-                        .requestDisallowInterceptTouchEvent(false)
-                }
-            }
-            false
-        }
-        postSignificant.setOnTouchListener { v, event ->
-            if (v.id === postSignificant.id) {
-                v.parent.requestDisallowInterceptTouchEvent(true)
-                when (event.action and MotionEvent.ACTION_MASK) {
-                    MotionEvent.ACTION_UP -> v.parent
-                        .requestDisallowInterceptTouchEvent(false)
-                }
-            }
-            false
-        }
-    }
-
-
-//    //외부 클릭 시 키보드 내리게
-//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//        val imm: InputMethodManager =
-//            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-//
-//        if(currentFocus is EditText) {
-//            currentFocus!!.clearFocus()
+//        //edittext 스크롤 기능
+//        postCount.setOnTouchListener { v, event ->
+//            if (v.id === postCount.id) {
+//                v.parent.requestDisallowInterceptTouchEvent(true)
+//                when (event.action and MotionEvent.ACTION_MASK) {
+//                    MotionEvent.ACTION_UP -> v.parent
+//                        .requestDisallowInterceptTouchEvent(false)
+//                }
+//            }
+//            false
 //        }
-//        return super.dispatchTouchEvent(ev)
-//    }
+//        postSignificant.setOnTouchListener { v, event ->
+//            if (v.id === postSignificant.id) {
+//                v.parent.requestDisallowInterceptTouchEvent(true)
+//                when (event.action and MotionEvent.ACTION_MASK) {
+//                    MotionEvent.ACTION_UP -> v.parent
+//                        .requestDisallowInterceptTouchEvent(false)
+//                }
+//            }
+//            false
+//        }
+    }
 
     private fun addPost(requestAddPost: RequestAddPost): String? {
         val callAddPost: Call<ResponseAddPost> =
             RetrofitClass.postAPI.addDeliveryPost(Constants.ACCESS_TOKEN, requestAddPost)
-        Log.d("fetchAdd", "${requestAddPost}")
+        Log.d("fetchAdd", "$requestAddPost")
         callAddPost.enqueue(object : retrofit2.Callback<ResponseAddPost> {
             override fun onResponse(
                 call: Call<ResponseAddPost>,
@@ -251,7 +228,7 @@ class PostActivity : AppCompatActivity() {
                     status = result.body()?.status
                     Log.d("status", status.toString())
                     //mainactivity로 전환
-                    var intent = Intent(applicationContext, MainActivity::class.java)
+                    val intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     showError(response.errorBody())
