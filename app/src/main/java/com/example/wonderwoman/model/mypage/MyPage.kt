@@ -9,7 +9,7 @@ data class ResponseMyInfo(
 )
 
 data class RequestEditMyInfo(
-    var nickname: String,
+    var nickname: String?,
     var password: String?,
     var imgUrl: String?
 )

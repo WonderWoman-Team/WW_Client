@@ -3,8 +3,11 @@ package com.example.wonderwoman
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import com.example.wonderwoman.databinding.ActivityMainBinding
 import com.example.wonderwoman.delivery.DeliveryFragment
 import com.example.wonderwoman.delivery.PostActivity
@@ -40,6 +43,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //외부 클릭 시 키보드 내리게
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if(currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
     private val onBottomNavItemSelected =  NavigationBarView.OnItemSelectedListener {item ->
         when(item.itemId) {
             R.id.delivery_menu -> {
@@ -70,16 +85,17 @@ class MainActivity : AppCompatActivity() {
                 editInfoFragment = EditInfoFragment.newInstance()
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.mypage_fragment, editInfoFragment)
+                    .replace(R.id.fragment, editInfoFragment).addToBackStack(null)
                     .commit()
             }
 
-//            2 -> {
-//                supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.framelayout, fragment_menu)
-//                    .commit()
-//            }
+            2 -> {
+                mypageFragment = MypageFragment.newInstance()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment, mypageFragment)
+                    .commit()
+            }
         }
     }
 }
