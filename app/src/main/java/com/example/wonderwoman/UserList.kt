@@ -28,6 +28,7 @@ class UserList :Fragment() {
     var userListApi = listOf<list>()
     lateinit var userList1:ArrayList<DataRooms>
 
+
     companion object {
         fun newInstance() : UserList {
             return UserList()
@@ -38,8 +39,10 @@ class UserList :Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ActivityUserlistGuiBinding.inflate(inflater, container, false)
+
         api()
         return binding.root
+
 
     }
 
@@ -86,7 +89,7 @@ class UserList :Fragment() {
 
 //    }
 
-    fun api(){
+    private fun api(){
         Log.d("success","성공")
         RetrofitClassChat.apiRooms.getUser("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6InN5ZW9uMjVAbWp1LmFjLmtyIiwicm9sZSI6Iu2ajOybkCIsImlhdCI6MTY5MTA5MjY5NywiZXhwIjoxNjkxMTM1ODk3fQ.zYUjSYFp1ekwaziP0P5GoL8MlDUykMCGPO69-VtgT3-2cj_q-KQoStN0jRl2qu5ReOmu13_CpVOlnkHaxq7kyw"
         ).enqueue(object: Callback<DataRooms>{
@@ -104,6 +107,7 @@ class UserList :Fragment() {
 
                     binding.userRecyclerview.layoutManager=LinearLayoutManager(requireContext())
                     binding.userRecyclerview.adapter=adapter
+
 
                 }else{
                     Log.d("error", "total + ${response.code()} + ${response.body()} + ${response.raw()}+ ${response.errorBody()?.string()}")

@@ -10,4 +10,5 @@ object RetrofitClassChat {
         .build()
 
     val apiRooms: ApiRooms=retrofit2.create(ApiRooms::class.java)
+    val apiRoomStatus: ApiRoomStatus= retrofit2.create(ApiRoomStatus::class.java)
 }
