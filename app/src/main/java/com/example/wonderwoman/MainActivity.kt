@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var deliveryFragment: DeliveryFragment
+    private lateinit var userList: UserList
     private lateinit var mypageFragment: MypageFragment
     private lateinit var editInfoFragment: EditInfoFragment
     private lateinit var writeBtn: Button
@@ -65,11 +66,12 @@ class MainActivity : AppCompatActivity() {
                 writeBtn.visibility = View.VISIBLE
             }
             R.id.chat_menu -> {
-                val intent = Intent(this, UserList.newInstance()::class.java)
+//                val intent = Intent(this, UserList.newInstance()::class.java)
 //                startActivity(intent)
 //                writeBtn.visibility = View.INVISIBLE
 //                chatFragment = UserList.newInstance()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment,UserList.newInstance()).commit()
+                userList = UserList.newInstance()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment,userList).commit()
                 writeBtn.visibility = View.INVISIBLE
             }
             R.id.mypage_menu -> {
@@ -97,6 +99,15 @@ class MainActivity : AppCompatActivity() {
                     .beginTransaction()
                     .replace(R.id.fragment, mypageFragment)
                     .commit()
+            }
+            3-> {
+                userList = UserList.newInstance()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment, userList)
+                    .commit()
+                writeBtn.visibility = View.INVISIBLE
+                binding.bottomNavBar.selectedItemId = R.id.chat_menu
             }
         }
     }
