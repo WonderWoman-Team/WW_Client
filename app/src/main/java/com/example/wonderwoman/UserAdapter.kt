@@ -16,6 +16,7 @@ class UserAdapter(val context: Context, private val userList: List<list>):
         val view: View = LayoutInflater.from(context).
         inflate(R.layout.activity_userlist_item_gui,parent,false)
 
+
         return UserViewHolder(view)
     }
 
@@ -27,6 +28,11 @@ class UserAdapter(val context: Context, private val userList: List<list>):
         //화면에 데이터 보여주기
         holder.nameText.text = currentUser.userNickName
         holder.placeText.text=currentUser.building.toString()
+//        holder.messageText.text=currentUser.lastMessage
+
+
+
+
 
         //아이템 클릭 이벤트
         holder.itemView.setOnClickListener{
@@ -39,7 +45,7 @@ class UserAdapter(val context: Context, private val userList: List<list>):
             intent.putExtra("size",currentUser.sanitarySize)
             intent.putExtra("num",currentUser.sanitaryNum.toString())
             intent.putExtra("date",currentUser.createdAt)
-
+            intent.putExtra("status",currentUser.postStatus)
 
             context.startActivity(intent)
         }
@@ -51,6 +57,6 @@ class UserAdapter(val context: Context, private val userList: List<list>):
     class UserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val nameText: TextView = itemView.findViewById(R.id.name_listview_item)
         val placeText: TextView=itemView.findViewById(R.id.place_listview_item)
-
+        val messageText: TextView=itemView.findViewById(R.id.message_userlist_item)
     }
 }

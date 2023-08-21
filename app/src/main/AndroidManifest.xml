@@ -37,7 +37,6 @@
         <activity android:name=".NameActivity" android:exported="true"/>
         <activity android:name=".CheckActivity" android:exported="true"/>
         <activity android:name=".delivery.PostActivity"/>
-        <activity android:name=".UserList"> </activity>
         <activity android:name=".ChatActivity"> </activity>
         <meta-data
             android:name="preloaded_fonts"

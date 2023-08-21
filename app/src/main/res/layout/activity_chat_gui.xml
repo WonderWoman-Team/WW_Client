@@ -21,8 +21,8 @@
             android:layout_marginTop="42dp"
             >
 
-            <ImageView
-                android:id="@+id/logo_img"
+            <Button
+                android:id="@+id/back_to_userlist"
                 android:layout_width="10dp"
                 android:layout_height="16dp"
                 android:background="@drawable/chat_back"
@@ -53,11 +53,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/status_chatting_chatroom"
                     android:layout_width="43dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/chat_ing"
+                    android:background="@drawable/ic_status_chatting_chatroom"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/receive_name_id"
                     app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +65,7 @@
                 </ImageView>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageButton
-                android:id="@+id/alarm_img"
+                android:id="@+id/chat_status_dot3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/chat_dot3"
