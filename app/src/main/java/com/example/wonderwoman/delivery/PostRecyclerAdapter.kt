@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.UserList
 import com.example.wonderwoman.model.RetrofitClass
@@ -33,15 +34,17 @@ class PostRecyclerAdapter(
     val destination: String
 ) :
     RecyclerView.Adapter<PostRecyclerAdapter.CustomViewHolder>() {
-
+    var mainActivity: MainActivity? = null
     var status: String? = ""
     var response: String? = ""
     var cnt = 0
+    private lateinit var writePost: Button
 
     //recyclerView가 Adapter에 연결된 후 최초로 실행되는 부분.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         //뷰홀더에 전달
         val view = LayoutInflater.from(parent.context).inflate(R.layout.post_list, parent, false)
+        mainActivity = context as MainActivity
         return CustomViewHolder(view)
     }
 
@@ -116,20 +119,23 @@ class PostRecyclerAdapter(
                 Log.d("chat", "${holder.chat_state.text}")
 
             } else if (holder.go_to_chat_btn.text.contains("하기")) {
-                val fragment = UserList.newInstance()
+                mainActivity!!.changeFragment(3)
 
-                val fragmentManager: FragmentManager =
-                    (it.context as FragmentActivity).supportFragmentManager // instantiate your view context
+//                val fragment = UserList.newInstance()
+//
+//                val fragmentManager: FragmentManager =
+//                    (it.context as FragmentActivity).supportFragmentManager // instantiate your view context
+//
+//                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+//                fragmentTransaction.replace(
+//                    R.id.fragment,
+//                    fragment
+//                ) // your container and your fragment
+//
+//                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                fragmentTransaction.addToBackStack(null)
+//                fragmentTransaction.commit()
 
-                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(
-                    R.id.fragment,
-                    fragment
-                ) // your container and your fragment
-
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
 
                 Log.d("press", "press")
             }

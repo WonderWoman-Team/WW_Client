@@ -1,5 +1,6 @@
 package com.example.wonderwoman
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class UserList :Fragment() {
 
     lateinit var userList: ArrayList<User>
 
+    lateinit var mContext: Context
 
     var userListApi = listOf<list>()
     lateinit var userList1:ArrayList<DataRooms>
@@ -33,6 +35,11 @@ class UserList :Fragment() {
         fun newInstance() : UserList {
             return UserList()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,9 +110,9 @@ class UserList :Fragment() {
 
                     userListApi=responseData?.list ?: mutableListOf()
 
-                    adapter=UserAdapter(context = requireContext(), userList = userListApi)
+                    adapter=UserAdapter(context = mContext, userList = userListApi)
 
-                    binding.userRecyclerview.layoutManager=LinearLayoutManager(requireContext())
+                    binding.userRecyclerview.layoutManager=LinearLayoutManager(mContext)
                     binding.userRecyclerview.adapter=adapter
 
 
