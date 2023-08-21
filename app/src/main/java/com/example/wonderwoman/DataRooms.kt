@@ -17,6 +17,6 @@ data class list(
     val sanitaryNum: Int,
     val createdAt: String,
     val updateAt: String,
-    val lastMessage: Message,
+    val lastMessage: String,
     val writer: Boolean
 )
