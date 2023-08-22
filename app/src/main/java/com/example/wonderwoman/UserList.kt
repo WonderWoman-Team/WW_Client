@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wonderwoman.databinding.ActivityUserlistGuiBinding
+import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import retrofit2.Call
@@ -98,7 +99,7 @@ class UserList :Fragment() {
 
     private fun api(){
         Log.d("success","성공")
-        RetrofitClassChat.apiRooms.getUser("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6InN5ZW9uMjVAbWp1LmFjLmtyIiwicm9sZSI6Iu2ajOybkCIsImlhdCI6MTY5MTA5MjY5NywiZXhwIjoxNjkxMTM1ODk3fQ.zYUjSYFp1ekwaziP0P5GoL8MlDUykMCGPO69-VtgT3-2cj_q-KQoStN0jRl2qu5ReOmu13_CpVOlnkHaxq7kyw"
+        RetrofitClassChat.apiRooms.getUser(ACCESS_TOKEN
         ).enqueue(object: Callback<DataRooms>{
 
             override fun onResponse(call: Call<DataRooms>, response: Response<DataRooms>) {
