@@ -5,16 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.*
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.databinding.ActivityChatGuiBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.common.collect.ComparisonChain.start
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.gson.Gson
@@ -84,6 +80,12 @@ class ChatActivity : AppCompatActivity() {
         }
 
 
+
+        //채팅방 id넘기기
+        val sharedPreferences2 = getSharedPreferences("ChatRoomId", Context.MODE_PRIVATE)
+        val editor2 = sharedPreferences2.edit()
+        editor2.putString("nickName", intent.getStringExtra("name").toString())
+        editor2.apply()
 
 //        //초기화
 //        messageList=ArrayList()
@@ -186,7 +188,6 @@ class ChatActivity : AppCompatActivity() {
         sendButton.setOnClickListener {
             val message = messageEdit.text.toString()
             if (message.isNotEmpty()) {
-                val chatRoomId = intent.getStringExtra("roomId").toString()
                 if (webSocketClient.isOpen) {
                     sendMessage(message,intent.getStringExtra("uId").toString())
                     messageEdit.text.clear()
@@ -243,17 +244,18 @@ class ChatActivity : AppCompatActivity() {
             messageList.addAll(savedMessages)
             messageAdapter.notifyDataSetChanged()
         }
+
+
     }
     ///
     private fun sendMessage(message: String, roomId: String) {
         webSocketClient.send(message)
         webSocketClient.onMessage(message)
     }
-
     private fun displayMessage(message: String, roomId: String) {
         val messageLayout = layoutInflater.inflate(R.layout.activity_send, null)
         messageLayout.findViewById<TextView>(R.id.send_message_text).text = message
-        val messageObject = Message("TALK", message, roomId)
+        val messageObject = Message("TALK", intent.getStringExtra("name").toString(),message, roomId)
         Log.d("roomId", roomId)
         messageAdapter.addMessage(messageObject)
         messageAdapter.notifyDataSetChanged()
@@ -278,6 +280,8 @@ class ChatActivity : AppCompatActivity() {
         val updatedMessagesJson = Gson().toJson(existingMessages)
         editor.putString(roomId, updatedMessagesJson)
         editor.apply()
+
+
     }
 
     ///

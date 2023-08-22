@@ -19,8 +19,10 @@ object Constants {
 
     //Access Token => 토큰은 깃에 올리지 않기
     const val ACCESS_TOKEN =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6InN5ZW9uMjVAbWp1LmFjLmtyIiwicm9sZSI6Iu2ajOybkCIsImlhdCI6MTY5MTA5MzExNywiZXhwIjoxNjkxMTM2MzE3fQ.y9n7JwBcmCFncmlpVHAZoUWFtH1hIcHXPRzvPu7QJeLziaftZ4tsZsoR8fH-GncK4Tp6vW7ov8q9d77QZT0a7w"
-//"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6ImFobkBzbS5hYy5rciIsInJvbGUiOiLtmozsm5AiLCJpYXQiOjE2OTI2OTIyOTYsImV4cCI6MTY5MjczNTQ5Nn0.CSPws_hV9FhTZhhqegk4RnSY0g9z3Hk2-lH1xPcph1LRetA3d0LhKRnH6usPtJWG2qrpNt5qOqCBvVEVI2o5_g"
+        //sy
+//        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6InN5ZW9uMjVAbWp1LmFjLmtyIiwicm9sZSI6Iu2ajOybkCIsImlhdCI6MTY5MTA5MzExNywiZXhwIjoxNjkxMTM2MzE3fQ.y9n7JwBcmCFncmlpVHAZoUWFtH1hIcHXPRzvPu7QJeLziaftZ4tsZsoR8fH-GncK4Tp6vW7ov8q9d77QZT0a7w"
+//ahn
+"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJlbWFpbCI6ImFobkBzbS5hYy5rciIsInJvbGUiOiLtmozsm5AiLCJpYXQiOjE2OTI2OTIyOTYsImV4cCI6MTY5MjczNTQ5Nn0.CSPws_hV9FhTZhhqegk4RnSY0g9z3Hk2-lH1xPcph1LRetA3d0LhKRnH6usPtJWG2qrpNt5qOqCBvVEVI2o5_g"
 
    const val REFRESH_TOKEN =
        ""
