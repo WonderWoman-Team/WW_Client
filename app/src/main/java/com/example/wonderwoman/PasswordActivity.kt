@@ -20,18 +20,23 @@ class PasswordActivity :AppCompatActivity() {
         mauth = Firebase.auth
         mauth = FirebaseAuth.getInstance()
 
-        //이메일 값 넘겨받기
+        //값 넘겨받기
         val input = intent.getStringExtra("Email")
-        binding.schooldata.setText(input)
-        binding.schooldata.text= Editable.Factory.getInstance().newEditable(input)
+        binding.emaildata.setText(input)
+        binding.emaildata.text= Editable.Factory.getInstance().newEditable(input)
+        val input2 = intent.getStringExtra("School")
+        binding.schooldata.setText(input2)
+        binding.schooldata.text= Editable.Factory.getInstance().newEditable(input2)
 
         //다음페이지
         binding.nextBtn3.setOnClickListener{
-            val emaillogin = binding.schooldata.getText().toString()
+            val emaillogin = binding.emaildata.getText().toString()
             val pwlogin = binding.editpw2.getText().toString()
+            val schoollogin = binding.schooldata.getText().toString()
             val intent = Intent(this, NameActivity::class.java)
             intent.putExtra("Email", emaillogin)
             intent.putExtra("Password", pwlogin)
+            intent.putExtra("School", schoollogin)
             startActivity(intent) }
 
         //이전페이지

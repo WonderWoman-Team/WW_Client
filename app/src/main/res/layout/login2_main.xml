@@ -84,7 +84,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -100,8 +100,16 @@
                 android:textSize="14dp"
                 android:padding="10.00dp"
                 android:entries="@array/university"/>
-
-        </LinearLayout>
+            <TextView
+                android:id="@+id/school_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:fontFamily="@font/noto_sans_regular"
+                android:textColor="#666666"
+                />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
