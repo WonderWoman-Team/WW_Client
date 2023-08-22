@@ -20,20 +20,22 @@ class NameActivity : AppCompatActivity() {
 
         //값 불러오기
         val input = intent.getStringExtra("Email")
-        binding.schooldata2.setText(input)
-        binding.schooldata2.text= Editable.Factory.getInstance().newEditable(input)
-
-
+        binding.emaildata2.setText(input)
+        binding.emaildata2.text= Editable.Factory.getInstance().newEditable(input)
         val input2 = intent.getStringExtra("Password")
         binding.pwdata.setText(input2)
         binding.pwdata.text= Editable.Factory.getInstance().newEditable(input2)
+        val input3 = intent.getStringExtra("School")
+        binding.schooldata2.setText(input3)
+        binding.schooldata2.text= Editable.Factory.getInstance().newEditable(input3)
 
         auth = FirebaseAuth.getInstance()
 
         //다음페이지
         binding.nextBtn4.setOnClickListener {
-            val email = binding.schooldata2.text.toString().trim()
+            val email = binding.emaildata2.text.toString().trim()
             val password = binding.pwdata.text.toString().trim()
+
             // Validate...
             createUser(email, password)
         }
@@ -44,7 +46,9 @@ class NameActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
+                    val school = binding.schooldata2.text.toString() // EditText에서 받아온 학교 값
                     val intent = Intent(this, CheckActivity::class.java)
+                    intent.putExtra("School", school)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()

@@ -3,6 +3,7 @@ package com.example.wonderwoman
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //학교 값 넘겨받기
+        val input = intent.getStringExtra("School")
+        binding.schooldata.setText(input)
+        binding.schooldata.text= Editable.Factory.getInstance().newEditable(input)
 
         binding.bottomNavBar.setOnItemSelectedListener(onBottomNavItemSelected)
         binding.bottomNavBar.itemIconTintList = null

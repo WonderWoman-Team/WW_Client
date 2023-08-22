@@ -100,7 +100,15 @@
                 android:textSize="14dp"
                 android:padding="10.00dp"
                 android:entries="@array/university"/>
-
+            <TextView
+                android:id="@+id/school_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:fontFamily="@font/noto_sans_regular"
+                android:textColor="#666666"
+                />
         </LinearLayout>
 
         <LinearLayout
