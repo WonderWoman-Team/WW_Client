@@ -2,6 +2,7 @@ package com.example.wonderwoman.mypage
 
 import android.app.Activity
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -27,6 +28,7 @@ import com.example.wonderwoman.model.mypage.ResponseMyInfo
 import com.example.wonderwoman.util.BitmapConverter
 import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
 import com.example.wonderwoman.util.CustomToast
+import com.example.wonderwoman.util.GetAccessToken
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -34,7 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class EditInfoFragment : Fragment() {
+class EditInfoFragment : Fragment(){
     private lateinit var editInfoBinding: FragmentEditInfoBinding
     private lateinit var backBtn: ImageButton
     private lateinit var profileImg: ImageView
@@ -50,6 +52,7 @@ class EditInfoFragment : Fragment() {
     var newPw: String? = null
 
     val REQUEST_CODE = 200 //request code
+    private lateinit var accessToken: String
 
 
     companion object {
@@ -58,6 +61,12 @@ class EditInfoFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+//        mainActivity = context as MainActivity
+        accessToken = (activity as MainActivity).getToken().toString()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -156,7 +165,11 @@ class EditInfoFragment : Fragment() {
             }
         }
     }
-
+//        override fun getAccessToken(token: String) {
+//        //토큰 받아옴
+//        accessToken = token
+//
+//    }
     private val touchListener = View.OnTouchListener { v, event ->
         if (v.id == newNickname.id || v.id == password.id || v.id == newPassword.id)
             v.parent.requestDisallowInterceptTouchEvent(true)
@@ -170,7 +183,7 @@ class EditInfoFragment : Fragment() {
     fun fetchEditInfo(requestEditMyInfo: RequestEditMyInfo) {
         Log.d("editinfo", requestEditMyInfo.toString())
         val callEditMyInfo: Call<ResponseMyInfo> =
-            RetrofitClass.mypageAPI.editMyInfo(ACCESS_TOKEN, requestEditMyInfo)
+            RetrofitClass.mypageAPI.editMyInfo(accessToken, requestEditMyInfo)
         callEditMyInfo.enqueue(object : Callback<ResponseMyInfo> {
             override fun onResponse(
                 call: Call<ResponseMyInfo>,

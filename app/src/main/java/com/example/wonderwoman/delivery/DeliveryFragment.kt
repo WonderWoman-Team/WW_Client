@@ -3,6 +3,7 @@ package com.example.wonderwoman.delivery
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,23 @@ import com.example.wonderwoman.HomeTabAdapter
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.SookmyungActivity
 import com.example.wonderwoman.databinding.FragmentDeliveryBinding
+import com.example.wonderwoman.model.delivery.GetBuilding
 import com.example.wonderwoman.util.Constants.EWHA
+import com.example.wonderwoman.util.GetAccessToken
+import com.example.wonderwoman.util.GetSelectedBuilding
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class DeliveryFragment : Fragment() {
+class DeliveryFragment : Fragment(), GetSelectedBuilding {
     private lateinit var binding: FragmentDeliveryBinding
+    private val dbinding get() = binding
     private val tabTitle = listOf("전체", "요청", "출동")
     private lateinit var school: String
+    private lateinit var accessToken: String
     private var building: String = "전체"
+//    private lateinit var totalTab: TotalTab
+//    private lateinit var dispatchTab: DispatchTab
+//    private lateinit var binding: FragmentDeliveryBinding
 
     companion object {
         fun newInstance(): DeliveryFragment {
@@ -28,17 +37,28 @@ class DeliveryFragment : Fragment() {
         }
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        school = (activity as MainActivity).getSchool()
-//    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        school = (activity as MainActivity).getSchool()
+        accessToken = (activity as MainActivity).getToken().toString()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        school = (activity as MainActivity).getSchool()
+//        school = (activity as MainActivity).getSchool()
+        val bundle = Bundle()
+        bundle.putString("token",accessToken)
+        var totalTab = TotalTab.newInstance()
+        var dispatchTab = DispatchTab.newInstance()
+        var requestTab = RequestTab.newInstance()
+
+        totalTab.arguments = bundle
+        dispatchTab.arguments = bundle
+        requestTab.arguments = bundle
 
         binding = FragmentDeliveryBinding.inflate(inflater, container, false)
         binding.viewpager.adapter = HomeTabAdapter(this)
@@ -53,9 +73,19 @@ class DeliveryFragment : Fragment() {
             startActivity(intent)
             binding.buildingName.text = arguments?.getString("selected") ?: "전체"
         }
-
         return binding.root
     }
 
+    override fun getSelectedBuilding(selected: String) {
+        building = selected
+        dbinding.buildingName.text = building
+    }
+
+
+//    override fun getAccessToken(accessToken: String) {
+//        //토큰 받아옴
+//        Log.d("delivery", accessToken)
+//
+//    }
 }
 
