@@ -1,13 +1,15 @@
 package com.example.wonderwoman
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.wonderwoman.databinding.List1ItemBinding
+//import com.example.wonderwoman.databinding.List1ItemBinding
+import com.example.wonderwoman.model.delivery.GetBuilding
 
 
 // 프로필사진(이미지뷰), 이름(텍스트뷰)
@@ -15,9 +17,8 @@ import com.example.wonderwoman.databinding.List1ItemBinding
 class Data(val profile: Int, val name: String)
 
 // 매개변수, 상속
-class CustomAdapter(val context: Context, val DataList: ArrayList<Data>) : BaseAdapter()
+class CustomAdapter(val context: Context, val DataList: ArrayList<Data>, private val getBuilding: GetBuilding) : BaseAdapter()
 {
-
     override fun getCount() = DataList.size
 
     // any
@@ -34,6 +35,11 @@ class CustomAdapter(val context: Context, val DataList: ArrayList<Data>) : BaseA
 
         profile.setImageResource(data.profile)
         name.text = data.name
+
+        name.setOnClickListener{
+            Log.d("name",name.text.toString())
+            getBuilding.getBuilding(name.text.toString())
+        }
         return view
     }
 

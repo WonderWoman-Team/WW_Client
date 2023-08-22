@@ -2,14 +2,22 @@ package com.example.wonderwoman
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.example.wonderwoman.databinding.EwhaLocationBinding
+import com.example.wonderwoman.delivery.DeliveryFragment
+import com.example.wonderwoman.model.delivery.GetBuilding
+import com.example.wonderwoman.mypage.EditInfoFragment
 
-class EwhaActivity : AppCompatActivity() {
+class EwhaActivity : AppCompatActivity(), GetBuilding{
 
     val TAG: String = "로그"
 
     private var vBinding : EwhaLocationBinding? = null
     private val binding get() = vBinding!!
+
+    private var selected = "전체"
+    private lateinit var deliveryFragment: DeliveryFragment
+
 
     var Data1List = arrayListOf(
         Data(R.drawable.list_icon, "전체"))
@@ -51,12 +59,13 @@ class EwhaActivity : AppCompatActivity() {
         vBinding = EwhaLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.list1.adapter = CustomAdapter(this, Data1List)
-        binding.list2.adapter = CustomAdapter(this, Data2List)
-        binding.list3.adapter = CustomAdapter(this, Data3List)
-        binding.list4.adapter = CustomAdapter(this, Data4List)
-        binding.list5.adapter = CustomAdapter(this, Data5List)
-        binding.list6.adapter = CustomAdapter(this, Data6List)
+        binding.list1.adapter = CustomAdapter(this, Data1List, this)
+        binding.list2.adapter = CustomAdapter(this, Data2List, this)
+        binding.list3.adapter = CustomAdapter(this, Data3List, this)
+        binding.list4.adapter = CustomAdapter(this, Data4List, this)
+        binding.list5.adapter = CustomAdapter(this, Data5List,this)
+        binding.list6.adapter = CustomAdapter(this, Data6List,this)
+
     }
 
     override fun onDestroy() {
@@ -64,4 +73,13 @@ class EwhaActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun getBuilding(building: String){
+        selected = building
+        deliveryFragment = DeliveryFragment.newInstance()
+        findViewById<TextView>(R.id.building_name).text = selected
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment, deliveryFragment).addToBackStack(null)
+            .commit()
+    }
 }

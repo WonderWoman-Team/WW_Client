@@ -61,10 +61,11 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
             <TextView
+                android:id="@+id/building_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/regular15"
-                android:text="포스코관" />
+                android:text="전체" />
             <ImageButton
                 android:id="@+id/scrollbtn"
                 android:layout_width="wrap_content"
