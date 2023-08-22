@@ -1,5 +1,10 @@
 package com.example.wonderwoman.mypage
 
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +24,7 @@ import com.example.wonderwoman.databinding.FragmentEditInfoBinding
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.mypage.RequestEditMyInfo
 import com.example.wonderwoman.model.mypage.ResponseMyInfo
+import com.example.wonderwoman.util.BitmapConverter
 import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
 import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
@@ -26,6 +32,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class EditInfoFragment : Fragment() {
     private lateinit var editInfoBinding: FragmentEditInfoBinding
@@ -41,6 +48,9 @@ class EditInfoFragment : Fragment() {
     var requestEditMyInfo = RequestEditMyInfo(null, null, null)
     var pw: String? = null
     var newPw: String? = null
+
+    val REQUEST_CODE = 200 //request code
+
 
     companion object {
         fun newInstance(): EditInfoFragment {
@@ -63,6 +73,14 @@ class EditInfoFragment : Fragment() {
         wrongPw = editInfoBinding.wrongPw
         saveBtn = editInfoBinding.saveEditinfoBtn
         mainActivity = context as MainActivity
+
+        editImgBtn.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
 
         newNickname.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -119,6 +137,24 @@ class EditInfoFragment : Fragment() {
         newPassword.setOnTouchListener(touchListener)
 
         return editInfoBinding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode != Activity.RESULT_OK){return}
+        when(requestCode){
+            REQUEST_CODE -> {
+                data?:return
+                val uri = data.data as Uri
+
+                Log.d("uri", uri.toString())
+                profileImg.setImageURI(uri)
+                requestEditMyInfo.imgUrl = uri.toString()
+            }
+            else -> {
+                context?.let { CustomToast.showToast(it, "사진을 가져오지 못했습니다") }
+            }
+        }
     }
 
     private val touchListener = View.OnTouchListener { v, event ->
