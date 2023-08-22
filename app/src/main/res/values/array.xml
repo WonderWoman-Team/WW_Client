@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <string-array name="university">
+            <item>학교를 선택해주세요.</item>
+            <item>숙명여자대학교</item>
+            <item>이화여자대학교</item>
+        </string-array>
+    </resources>
