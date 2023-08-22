@@ -33,7 +33,7 @@ class DeliveryFragment : Fragment() {
             tab.text = tabTitle[position]
         }.attach()
         val intent = Intent(getActivity(), EwhaActivity::class.java)
-        binding.scrollbtn.setOnClickListener { startActivity(intent) }
+        binding.selectBuilding.setOnClickListener { startActivity(intent) }
         return binding.root
     }
 
