@@ -23,10 +23,14 @@ import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.ActivityPostBinding
 import com.example.wonderwoman.databinding.ToastBinding
 import com.example.wonderwoman.model.RetrofitClass
+import com.example.wonderwoman.model.post.GetSelectedBuilding
 import com.example.wonderwoman.model.post.RequestAddPost
 import com.example.wonderwoman.model.post.ResponseAddPost
 import com.example.wonderwoman.post.BuildingBtnRecyclerAdapter
 import com.example.wonderwoman.util.Constants
+import com.example.wonderwoman.util.Constants.EWHA
+import com.example.wonderwoman.util.Constants.EWHA_BUILDING
+import com.example.wonderwoman.util.Constants.SOOKMYUNG_BUILDING
 import com.example.wonderwoman.util.CustomToast
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -34,7 +38,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 
-class PostActivity : AppCompatActivity() {
+class PostActivity : AppCompatActivity(), GetSelectedBuilding {
     private lateinit var toastBinding: ToastBinding
     private lateinit var toastView: TextView
     private lateinit var binding: ActivityPostBinding
@@ -61,14 +65,14 @@ class PostActivity : AppCompatActivity() {
     private lateinit var toast: Toast
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: BuildingBtnRecyclerAdapter
-    var buildingList = mutableListOf<String>()
+    var buildingList = listOf<String>()
     var locationList = mutableListOf<String>()
 
     var data: ResponseAddPost? = null
     var status: String? = ""
 
     var requestAddPost: RequestAddPost =
-        RequestAddPost("이화여자대학교", mutableListOf(), "", "", 0, "", "", "")
+        RequestAddPost("이화여자대학교", locationList, "", "", 0, "", "", "")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,13 +82,16 @@ class PostActivity : AppCompatActivity() {
         toastView = toastBinding.toast
         setContentView(binding.root)
 
+        //학교에 따른 건물 리스트 설정
+        val school = intent.getStringExtra("school")
+        buildingList = if(school == EWHA) EWHA_BUILDING else SOOKMYUNG_BUILDING
+
+        //postactivity에 학교 별 건물 리스트 넘겨주기
         recyclerView = binding.postRecyclerview
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        ///수정
-
-        recyclerAdapter = BuildingBtnRecyclerAdapter(buildingList, this)
-
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        recyclerAdapter = BuildingBtnRecyclerAdapter(buildingList, this, this)
+        recyclerView.adapter = recyclerAdapter
 
         completeBtn = binding.completeBtn
         quitBtn = binding.quitBtn
@@ -122,11 +129,11 @@ class PostActivity : AppCompatActivity() {
             if (checkedId == requestBtn.id) requestAddPost.postReqType = "${requestBtn.text}"
             else if (checkedId == dispatchBtn.id) requestAddPost.postReqType = "${dispatchBtn.text}"
         }
-
-        //위치 선택 감지
-        locationGroup.setOnCheckedChangeListener { group, checkedId ->
-            requestAddPost.building = listOf(group.findViewById<Button>(checkedId).text.toString())
-        }
+//
+//        //위치 선택 감지
+//        locationGroup.setOnCheckedChangeListener { group, checkedId ->
+//            requestAddPost.building = listOf(group.findViewById<Button>(checkedId).text.toString())
+//        }
 
         //개수 입력 감지
         postCount.addTextChangedListener(object : TextWatcher {
@@ -247,5 +254,11 @@ class PostActivity : AppCompatActivity() {
         val e = error ?: return
         val ob = JSONObject(e.string())
         CustomToast.showToast(this, ob.getString("solution"))
+    }
+
+    override fun selectedBuilding(building: String) {
+        //선택된 빌딩 받아옴
+        Log.d("postactivity", building)
+        locationList.add(building)
     }
 }

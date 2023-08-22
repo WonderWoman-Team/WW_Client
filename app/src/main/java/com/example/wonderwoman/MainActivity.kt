@@ -13,6 +13,7 @@ import com.example.wonderwoman.delivery.DeliveryFragment
 import com.example.wonderwoman.delivery.PostActivity
 import com.example.wonderwoman.mypage.EditInfoFragment
 import com.example.wonderwoman.mypage.MypageFragment
+import com.example.wonderwoman.util.Constants.EWHA
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         writeBtn.visibility = View.VISIBLE
         writeBtn.setOnClickListener {
             var intent = Intent(this, PostActivity::class.java)
+            intent.putExtra("school",EWHA)
             startActivity(intent)
             finish()
         }
