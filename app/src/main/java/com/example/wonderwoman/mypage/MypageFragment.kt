@@ -1,7 +1,14 @@
 package com.example.wonderwoman.mypage
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +16,14 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.FragmentMypageBinding
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.mypage.ResponseMyInfo
+import com.example.wonderwoman.util.BitmapConverter
 import com.example.wonderwoman.util.Constants
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -31,6 +40,7 @@ class MypageFragment : Fragment() {
     private lateinit var email: TextView
 
     var mainActivity: MainActivity? = null
+    var bitmap: Bitmap? = null
 
     companion object {
         fun newInstance(): MypageFragment {
@@ -73,6 +83,7 @@ class MypageFragment : Fragment() {
                 response: Response<ResponseMyInfo>
             ) {
                 if (response.isSuccessful) {
+
                     val result: Response<ResponseMyInfo> = response
                     Log.d(
                         "success",
@@ -83,6 +94,7 @@ class MypageFragment : Fragment() {
                     email.text = data?.email ?: ""
                     if (data?.imgUrl == null) profileImg.setImageResource(R.drawable.profile)
                     else {
+                        profileImg.setImageResource(R.drawable.profile)
                     }
                 } else {
                     showError(response.errorBody())
