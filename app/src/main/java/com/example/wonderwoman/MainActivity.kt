@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,9 +17,10 @@ import com.example.wonderwoman.mypage.EditInfoFragment
 import com.example.wonderwoman.mypage.MypageFragment
 import com.example.wonderwoman.util.Constants.EWHA
 import com.example.wonderwoman.util.Constants.SOOKMYUNG
+import com.example.wonderwoman.util.GetAccessToken
 import com.google.android.material.navigation.NavigationBarView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var deliveryFragment: DeliveryFragment
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var writeBtn: Button
 
 //    private var responseToken: LoginResponse = LoginResponse(null,null)
+private var responseToken: String = ""
+
     private var userSchool = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 //        } else {
 //            responseToken = (intent.getSerializableExtra("token") as LoginResponse?)!!
 //        }
+        responseToken = intent.getStringExtra("token").toString()
+
         userSchool = intent.getStringExtra("school").toString()
 
 
@@ -57,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             if(userSchool == EWHA) intent.putExtra("school",EWHA)
             else intent.putExtra("school",SOOKMYUNG)
 
-//            intent.putExtra("accessToken", responseToken.accessToken)
+            intent.putExtra("accessToken", responseToken)
             startActivity(intent)
             finish()
         }
@@ -133,7 +139,8 @@ class MainActivity : AppCompatActivity() {
         return userSchool
     }
 
-//    fun getToken(): String?{
-//        return responseToken.accessToken
-//    }
+    fun getToken(): String?{
+        return responseToken
+    }
+
 }

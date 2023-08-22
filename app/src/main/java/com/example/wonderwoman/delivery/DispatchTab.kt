@@ -38,6 +38,7 @@ class DispatchTab() : Fragment() {
     var data: ResponseDelivery? = null
     var deliveryList = listOf<Delivery>()
     var sizeList: MutableList<String> = mutableListOf()
+    private lateinit var accessToken: String
 
     companion object {
         fun newInstance(): DispatchTab {
@@ -50,6 +51,8 @@ class DispatchTab() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        accessToken = arguments?.getString("token").toString()
+
         dispatchTabBinding = DispatchTabBinding.inflate(inflater, container, false)
 
         this.liner_btn = dispatchTabBinding.linerBtn

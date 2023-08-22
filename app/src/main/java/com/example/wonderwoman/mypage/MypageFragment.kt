@@ -41,7 +41,7 @@ class MypageFragment : Fragment() {
 
     var mainActivity: MainActivity? = null
     var bitmap: Bitmap? = null
-
+    private lateinit var accessToken: String
     companion object {
         fun newInstance(): MypageFragment {
             return MypageFragment()
@@ -51,6 +51,8 @@ class MypageFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
+//        accessToken = (activity as MainActivity).getToken().toString()
+
     }
 
     override fun onCreateView(
@@ -63,12 +65,15 @@ class MypageFragment : Fragment() {
         nickname = mypageBinding.nickname
         email = mypageBinding.email
         editInfoBtn = mypageBinding.editInfo
+        accessToken = mainActivity?.getToken().toString()
 
         fetchMyInfo()
 
         editInfoBtn.setOnClickListener {
             Log.d("mypage", "clicked")
             mainActivity!!.changeFragment(1)
+//            val fragment = EditInfoFragment.newInstance()
+//            fragment.getAccessToken(accessToken)
         }
 
         return mypageBinding.root
@@ -76,7 +81,8 @@ class MypageFragment : Fragment() {
 
     private fun fetchMyInfo(): ResponseMyInfo? {
         val callGetMyInfo: Call<ResponseMyInfo> =
-            RetrofitClass.mypageAPI.getMyInfo(Constants.ACCESS_TOKEN)
+            RetrofitClass.mypageAPI.getMyInfo(accessToken)
+        Log.d("mypage",accessToken)
         callGetMyInfo.enqueue(object : retrofit2.Callback<ResponseMyInfo> {
             override fun onResponse(
                 call: Call<ResponseMyInfo>,
@@ -97,7 +103,10 @@ class MypageFragment : Fragment() {
                         profileImg.setImageResource(R.drawable.profile)
                     }
                 } else {
-                    showError(response.errorBody())
+                    val result: Response<ResponseMyInfo> = response
+                    Log.d("fail", "total + ${result.code()} + ${result.body()} + ${result.raw()} + ${result.errorBody()?.string()}")
+
+//                    showError(response.errorBody())
                 }
             }
 
@@ -109,10 +118,10 @@ class MypageFragment : Fragment() {
         return data
     }
 
-    fun showError(error: ResponseBody?) {
-        val e = error ?: return
-        val ob = JSONObject(e.string())
-        Log.d("error myinfo", ob.getString("solution"))
-    }
+//    fun showError(error: ResponseBody?) {
+//        val e = error ?: return
+//        val ob = JSONObject(e.string())
+//        Log.d("error myinfo", ob.getString("solution"))
+//    }
 
 }

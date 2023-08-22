@@ -32,6 +32,7 @@ class RequestTab() : Fragment() {
     var data: ResponseDelivery? = null
     var deliveryList = listOf<Delivery>()
     var sizeList: MutableList<String> = mutableListOf()
+    private lateinit var accessToken: String
 
     companion object {
         fun newInstance(): RequestTab {
@@ -44,6 +45,8 @@ class RequestTab() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        accessToken = arguments?.getString("token").toString()
+
         requestTabBinding = RequestTabBinding.inflate(inflater, container, false)
         liner_btn = requestTabBinding.linerBtn
         small_btn = requestTabBinding.smallBtn

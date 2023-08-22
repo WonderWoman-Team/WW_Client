@@ -1,6 +1,7 @@
 package com.example.wonderwoman.delivery
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wonderwoman.ChatActivity
 import com.example.wonderwoman.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.UserList
@@ -77,9 +79,9 @@ class PostRecyclerAdapter(
             holder.go_to_chat_btn.setBackgroundResource(R.drawable.go_out_btn)
             holder.go_to_chat_btn.setTextColor(Color.WHITE)
             if (holder.post_state.text.equals("요청글")) {
-                holder.go_to_chat_btn.text = "요청하기   →"
-            } else if (holder.post_state.text.equals("출동글")) {
                 holder.go_to_chat_btn.text = "출동하기   →"
+            } else if (holder.post_state.text.equals("출동글")) {
+                holder.go_to_chat_btn.text = "요청하기   →"
             }
         }
         //진행 상태가 없음 일 경우
@@ -119,8 +121,18 @@ class PostRecyclerAdapter(
                 Log.d("chat", "${holder.chat_state.text}")
 
             } else if (holder.go_to_chat_btn.text.contains("하기")) {
-                mainActivity!!.changeFragment(3)
+//                mainActivity!!.changeFragment(3)
+val intent = Intent(context, ChatActivity::class.java)
+                //넘길데이터
+                intent.putExtra("name",holder.nickname.text)
+                intent.putExtra("uId", deliveryList[position].id.toString())
+                intent.putExtra("place",holder.location.text)
+                intent.putExtra("size",holder.size.text)
+                intent.putExtra("num",holder.count.text)
+                intent.putExtra("date",holder.time.text)
+                intent.putExtra("status",holder.chat_state.text)
 
+                context.startActivity(intent)
 //                val fragment = UserList.newInstance()
 //
 //                val fragmentManager: FragmentManager =

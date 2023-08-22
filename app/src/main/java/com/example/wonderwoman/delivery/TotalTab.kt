@@ -33,6 +33,8 @@ class TotalTab() : Fragment() {
     var sizeList: MutableList<String> = mutableListOf()
     var value: ResponseDelivery? = null
 
+    private lateinit var accessToken: String
+
 
     companion object {
         fun newInstance(): TotalTab {
@@ -45,6 +47,7 @@ class TotalTab() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        accessToken = arguments?.getString("token").toString()
         totalTabBinding = TotalTabBinding.inflate(inflater, container, false)
 
         liner_btn = totalTabBinding.linerBtn

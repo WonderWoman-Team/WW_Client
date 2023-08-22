@@ -34,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
 
     private var loginRequest: LoginRequest = LoginRequest("","")
     private var responseToken: LoginResponse = LoginResponse(null,null)
-    private lateinit var accessToken: List<String>
-    private var refreshToken = ""
+    private lateinit var refreshToken: List<String>
+    private var accessToken = ""
     private var school = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,17 +66,17 @@ class LoginActivity : AppCompatActivity() {
                         val loginResponse = response.body()
                         val result: Response<Void> = response
 //                        Log.d("success", "login + ${result.code()} + ${result.body()} + ${result.raw()}")
-                        accessToken = result.headers().get("Set-Cookie")!!.split(";")
-                        refreshToken = result.headers().get("Authorization")!!
-                        responseToken.accessToken = accessToken[0]
-                        responseToken.refreshToken = refreshToken
+                        refreshToken = result.headers().get("Set-Cookie")!!.split(";")
+                        accessToken = result.headers().get("Authorization")!!
+                        responseToken.refreshToken = refreshToken[0]
+                        responseToken.accessToken = accessToken
                         Log.d("success", "login + ${accessToken[0]}+ ${refreshToken}")
 
                         if(loginRequest.email.contains("ewha")) school = EWHA
                         else school = SOOKMYUNG
 
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                        intent.putExtra("token",responseToken)
+                        intent.putExtra("token",responseToken.accessToken)
                         intent.putExtra("school",school)
                         startActivity(intent)
                         Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()

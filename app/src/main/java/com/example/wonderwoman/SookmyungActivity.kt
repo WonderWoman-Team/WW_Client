@@ -9,6 +9,7 @@ import com.example.wonderwoman.databinding.FragmentDeliveryBinding
 import com.example.wonderwoman.databinding.SookmyungLocationBinding
 import com.example.wonderwoman.delivery.DeliveryFragment
 import com.example.wonderwoman.model.delivery.GetBuilding
+import com.example.wonderwoman.util.GetAccessToken
 
 class SookmyungActivity : AppCompatActivity(), GetBuilding {
 
@@ -64,20 +65,22 @@ class SookmyungActivity : AppCompatActivity(), GetBuilding {
 
     override fun getBuilding(building: String){
         selected = building
-        val bundle: Bundle = Bundle()
-        bundle.putString("selected",selected)
-
+//        val bundle: Bundle = Bundle()
+//        bundle.putString("selected",selected)
+//
         deliveryFragment = DeliveryFragment.newInstance()
-        deliveryFragment.arguments = bundle
+        deliveryFragment.getSelectedBuilding(selected)
+//        deliveryFragment.arguments = bundle
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment, deliveryFragment).addToBackStack(null)
             .commit()
-        deliveryBinding.buildingName.text = selected
+//        deliveryBinding.buildingName.text = selected
         Log.d("name", deliveryBinding.buildingName.text.toString())
 
     }
     fun getBuilding(): String{
         return selected
     }
+
 }

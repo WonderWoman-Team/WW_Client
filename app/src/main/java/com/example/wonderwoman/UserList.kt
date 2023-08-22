@@ -30,6 +30,7 @@ class UserList :Fragment() {
 
     var userListApi = listOf<list>()
     lateinit var userList1:ArrayList<DataRooms>
+    private lateinit var accessToken: String
 
 
     companion object {
@@ -41,6 +42,8 @@ class UserList :Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+        accessToken = (activity as MainActivity).getToken().toString()
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,14 +102,14 @@ class UserList :Fragment() {
 
     private fun api(){
         Log.d("success","성공")
-        RetrofitClassChat.apiRooms.getUser(ACCESS_TOKEN
+        RetrofitClassChat.apiRooms.getUser(accessToken
         ).enqueue(object: Callback<DataRooms>{
 
             override fun onResponse(call: Call<DataRooms>, response: Response<DataRooms>) {
 
                 if(response.isSuccessful){
                     val responseData=response.body()
-                    Log.d("success", "total + ${response.code()} + ${response.body()} + ${response.raw()}")
+                    Log.d("success", "user + ${response.code()} + ${response.body()} + ${response.raw()}")
 
 
                     userListApi=responseData?.list ?: mutableListOf()
@@ -118,7 +121,7 @@ class UserList :Fragment() {
 
 
                 }else{
-                    Log.d("error", "total + ${response.code()} + ${response.body()} + ${response.raw()}+ ${response.errorBody()?.string()}")
+                    Log.d("error", "user + ${response.code()} + ${response.body()} + ${response.raw()}+ ${response.errorBody()?.string()}")
 
                 }
             }
