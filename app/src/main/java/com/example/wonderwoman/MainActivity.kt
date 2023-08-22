@@ -1,6 +1,7 @@
 package com.example.wonderwoman
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -14,6 +15,7 @@ import com.example.wonderwoman.delivery.PostActivity
 import com.example.wonderwoman.mypage.EditInfoFragment
 import com.example.wonderwoman.mypage.MypageFragment
 import com.example.wonderwoman.util.Constants.EWHA
+import com.example.wonderwoman.util.Constants.SOOKMYUNG
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editInfoFragment: EditInfoFragment
     private lateinit var writeBtn: Button
 
+//    private var responseToken: LoginResponse = LoginResponse(null,null)
+    private var userSchool = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +40,24 @@ class MainActivity : AppCompatActivity() {
         deliveryFragment = DeliveryFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.fragment,deliveryFragment).commit()
 
+        //loginactivity로부터 토큰과 소속학교 받아오기
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            responseToken = intent.getSerializableExtra("token",LoginResponse::class.java)!!
+//        } else {
+//            responseToken = (intent.getSerializableExtra("token") as LoginResponse?)!!
+//        }
+        userSchool = intent.getStringExtra("school").toString()
+
+
         writeBtn = binding.writePost
         writeBtn.visibility = View.VISIBLE
         writeBtn.setOnClickListener {
+            //postactivity로 토큰과 소속학교 보내기
             var intent = Intent(this, PostActivity::class.java)
-            intent.putExtra("school",EWHA)
+            if(userSchool == EWHA) intent.putExtra("school",EWHA)
+            else intent.putExtra("school",SOOKMYUNG)
+
+//            intent.putExtra("accessToken", responseToken.accessToken)
             startActivity(intent)
             finish()
         }
@@ -111,4 +128,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun getSchool(): String{
+        return userSchool
+    }
+
+//    fun getToken(): String?{
+//        return responseToken.accessToken
+//    }
 }

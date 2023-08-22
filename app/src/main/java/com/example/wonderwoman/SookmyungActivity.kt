@@ -1,15 +1,24 @@
 package com.example.wonderwoman
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wonderwoman.databinding.FragmentDeliveryBinding
 import com.example.wonderwoman.databinding.SookmyungLocationBinding
+import com.example.wonderwoman.delivery.DeliveryFragment
+import com.example.wonderwoman.model.delivery.GetBuilding
 
-class SookmyungActivity : AppCompatActivity() {
+class SookmyungActivity : AppCompatActivity(), GetBuilding {
 
     val TAG: String = "로그"
 
     private var vBinding : SookmyungLocationBinding? = null
     private val binding get() = vBinding!!
+    private var selected = "전체"
+    private lateinit var deliveryFragment: DeliveryFragment
+    private lateinit var deliveryBinding: FragmentDeliveryBinding
 
     var Data1List = arrayListOf(
         Data(R.drawable.list_icon, "전체"))
@@ -38,13 +47,14 @@ class SookmyungActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vBinding = SookmyungLocationBinding.inflate(layoutInflater)
+        deliveryBinding = FragmentDeliveryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.list1.adapter = CustomAdapter(this, Data1List)
-        binding.list2.adapter = CustomAdapter(this, Data2List)
-        binding.list3.adapter = CustomAdapter(this, Data3List)
-        binding.list4.adapter = CustomAdapter(this, Data4List)
-        binding.list5.adapter = CustomAdapter(this, Data5List)
+        binding.list1.adapter = CustomAdapter(this, Data1List,this)
+        binding.list2.adapter = CustomAdapter(this, Data2List,this)
+        binding.list3.adapter = CustomAdapter(this, Data3List,this)
+        binding.list4.adapter = CustomAdapter(this, Data4List,this)
+        binding.list5.adapter = CustomAdapter(this, Data5List,this)
     }
 
     override fun onDestroy() {
@@ -52,4 +62,22 @@ class SookmyungActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun getBuilding(building: String){
+        selected = building
+        val bundle: Bundle = Bundle()
+        bundle.putString("selected",selected)
+
+        deliveryFragment = DeliveryFragment.newInstance()
+        deliveryFragment.arguments = bundle
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment, deliveryFragment).addToBackStack(null)
+            .commit()
+        deliveryBinding.buildingName.text = selected
+        Log.d("name", deliveryBinding.buildingName.text.toString())
+
+    }
+    fun getBuilding(): String{
+        return selected
+    }
 }
