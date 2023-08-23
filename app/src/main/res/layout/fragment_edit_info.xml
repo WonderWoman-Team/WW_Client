@@ -166,6 +166,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
                     android:padding="10.00dp"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/editInfo"
                     android:textColorHint="#CCCCCC" />
 
@@ -180,6 +181,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:padding="10.00dp"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/editInfo"
                     android:textColorHint="#CCCCCC" />
 
