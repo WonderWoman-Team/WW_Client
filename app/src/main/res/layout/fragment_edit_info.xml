@@ -168,7 +168,8 @@
                     android:padding="10.00dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/editInfo"
-                    android:textColorHint="#CCCCCC" />
+                    android:textColorHint="#CCCCCC"
+                    android:textColor="@color/black"/>
 
                 <EditText
                     android:id="@+id/editpw2"
@@ -183,7 +184,8 @@
                     android:padding="10.00dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/editInfo"
-                    android:textColorHint="#CCCCCC" />
+                    android:textColor="@color/black"
+                android:textColorHint="#CCCCCC" />
 
                 <TextView
                     android:id="@+id/wrongPw"
