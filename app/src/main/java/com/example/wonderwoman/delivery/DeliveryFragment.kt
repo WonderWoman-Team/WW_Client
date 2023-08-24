@@ -3,19 +3,16 @@ package com.example.wonderwoman.delivery
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.wonderwoman.EwhaActivity
-import com.example.wonderwoman.HomeTabAdapter
-import com.example.wonderwoman.MainActivity
+import com.example.wonderwoman.main.HomeTabAdapter
+import com.example.wonderwoman.main.MainActivity
 import com.example.wonderwoman.SookmyungActivity
 import com.example.wonderwoman.databinding.FragmentDeliveryBinding
-import com.example.wonderwoman.model.delivery.GetBuilding
 import com.example.wonderwoman.util.Constants.EWHA
-import com.example.wonderwoman.util.GetAccessToken
 import com.example.wonderwoman.util.GetSelectedBuilding
 import com.google.android.material.tabs.TabLayoutMediator
 

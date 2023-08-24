@@ -16,9 +16,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonderwoman.ChatActivity
-import com.example.wonderwoman.MainActivity
+import com.example.wonderwoman.main.MainActivity
 import com.example.wonderwoman.R
-import com.example.wonderwoman.UserList
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.delivery.ResponseDelivery.Delivery
 import com.example.wonderwoman.model.delivery.ResponseRemoveDelivery

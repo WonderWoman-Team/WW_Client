@@ -1,10 +1,8 @@
 package com.example.wonderwoman.mypage
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -19,16 +17,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.wonderwoman.MainActivity
+import com.example.wonderwoman.main.MainActivity
 import com.example.wonderwoman.R
 import com.example.wonderwoman.databinding.FragmentEditInfoBinding
 import com.example.wonderwoman.model.RetrofitClass
 import com.example.wonderwoman.model.mypage.RequestEditMyInfo
 import com.example.wonderwoman.model.mypage.ResponseMyInfo
-import com.example.wonderwoman.util.BitmapConverter
-import com.example.wonderwoman.util.Constants.ACCESS_TOKEN
 import com.example.wonderwoman.util.CustomToast
-import com.example.wonderwoman.util.GetAccessToken
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call

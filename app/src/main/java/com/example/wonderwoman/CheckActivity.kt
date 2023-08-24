@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wonderwoman.databinding.Login5MainBinding
+import com.example.wonderwoman.main.MainActivity
 
 class CheckActivity : AppCompatActivity() {
     private var mBinding: Login5MainBinding? = null

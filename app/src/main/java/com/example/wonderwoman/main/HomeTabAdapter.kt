@@ -1,4 +1,4 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.main
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

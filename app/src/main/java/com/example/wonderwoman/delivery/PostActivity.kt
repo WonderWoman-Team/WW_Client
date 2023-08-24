@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -18,8 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wonderwoman.MainActivity
-import com.example.wonderwoman.R
+import com.example.wonderwoman.main.MainActivity
 import com.example.wonderwoman.databinding.ActivityPostBinding
 import com.example.wonderwoman.databinding.ToastBinding
 import com.example.wonderwoman.model.RetrofitClass

@@ -1,15 +1,15 @@
-package com.example.wonderwoman
+package com.example.wonderwoman.main
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import com.example.wonderwoman.R
+import com.example.wonderwoman.UserList
 import com.example.wonderwoman.databinding.ActivityMainBinding
 import com.example.wonderwoman.delivery.DeliveryFragment
 import com.example.wonderwoman.delivery.PostActivity
@@ -17,7 +17,6 @@ import com.example.wonderwoman.mypage.EditInfoFragment
 import com.example.wonderwoman.mypage.MypageFragment
 import com.example.wonderwoman.util.Constants.EWHA
 import com.example.wonderwoman.util.Constants.SOOKMYUNG
-import com.example.wonderwoman.util.GetAccessToken
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity(){
